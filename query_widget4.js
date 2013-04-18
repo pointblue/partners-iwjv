@@ -1,4 +1,4 @@
-         
+		
     function query_map(evt) {
          var output = document.getElementById(this.key + "Output");
          var lonlat = map.getLonLatFromPixel(evt.xy).transform(projSrc, projDisplay);
@@ -12,17 +12,17 @@
      {
                var my_point = point.transform(projSrc, projDisplay); 
                alert(my_point.toString());
-               var my_geom = my_point.transform(projSrc, projDisplay);
+               var geom = my_point.transform(projSrc, projDisplay);
                      var layer = "jan10_dem5_flddeep"; 
                      var schema = "ocof";
                      var type = "polygon";
                      var proj = "26910";
         
-                 my_geom = encodeURIComponent(my_geom.toString()); 
-                 var query_url = "http://localhost/OpenMap_dev/click_query2.php?geom="+my_geom+"&type="+type+"&table="+layer+"&proj="+proj;                 
+                 geom = encodeURIComponent(geom.toString()); 
+                 var query_url = "http://localhost/OpenMap_dev/click_query2.php?geom="+geom+"&type="+type+"&table="+layer+"&proj="+proj;                 
              			   
-               pointControl.deactivate();
-               navControl.activate(); 			   
+               //pointControl.deactivate();
+              // navControl.activate(); 			   
       };
 
 

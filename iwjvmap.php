@@ -35,12 +35,17 @@ function get_my_url (bounds) {
 }   
 
 
-        var projSrc = new OpenLayers.Projection("EPSG:900913");   // openlayers preferred
-        var projData = new OpenLayers.Projection("EPSG:26910");   // WGS84 UTM zone 10N
+        var projSrc = new OpenLayers.Projection("EPSG:3857");   // openlayers preferred
+       // var projData = new OpenLayers.Projection("EPSG:26910");   // WGS84 UTM zone 10N
         var projDisplay = new OpenLayers.Projection("EPSG:4326");  // WGS84 digital lat long
 
-         var navControl =  new OpenLayers.Control.Navigation();     
-         var pointControl =  new OpenLayers.Control.DrawFeature(pointLayer,OpenLayers.Handler.Point, pointDrawFeatureOptions);
+        var navOptions = 
+        {
+             saveState: true,
+             defaultControl : navControl
+        };
+        var navControl =  new OpenLayers.Control.Navigation(navOptions);     
+        var pointControl =  new OpenLayers.Control.DrawFeature(pointLayer,OpenLayers.Handler.Point, pointDrawFeatureOptions);
 
 
                  
@@ -399,7 +404,7 @@ map.addControl(toolbar);
 
     <div id="panel" class="olControlEditingToolbar"></div>
     
-    <div id="bottom_panel" class="olControlEditingToolbar"></div>
+
     
     <?php include("inc/php/martinView.php"); ?>
     
