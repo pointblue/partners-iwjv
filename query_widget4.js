@@ -1,13 +1,3 @@
-// First Cntrols
-            
-    var navControl =  new OpenLayers.Control.Navigation();    
-   //var pointControl =  new OpenLayers.Control.DrawFeature(pointLayer,OpenLayers.Handler.Point, pointDrawFeatureOptions);	
-  //  var pointControl =  new OpenLayers.Control.DrawFeature(pointLayer,OpenLayers.Handler.Point, pointDrawFeatureOptions);
- //   var lineControl = new OpenLayers.Control.DrawFeature(lineLayer,
-  //                      OpenLayers.Handler.Path,  lineDrawFeatureOptions);
-//  var polygonControl = new OpenLayers.Control.DrawFeature(polygonLayer,
-     //                   OpenLayers.Handler.Polygon, polygonDrawFeatureOptions);
-   //  First functions                
          
     function query_map(evt) {
          var output = document.getElementById(this.key + "Output");
@@ -99,4 +89,4 @@
             point: new OpenLayers.Control.DrawFeature(pointLayer,
             OpenLayers.Handler.Point,pointDrawFeatureOptions )
         };
-                
+                              

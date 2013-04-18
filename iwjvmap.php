@@ -35,10 +35,12 @@ function get_my_url (bounds) {
 }   
 
 
-var projSrc = new OpenLayers.Projection("EPSG:900913");   // openlayers preferred
-var projData = new OpenLayers.Projection("EPSG:26910");   // WGS84 UTM zone 10N
-var projDisplay = new OpenLayers.Projection("EPSG:4326");  // WGS84 digital lat long
+        var projSrc = new OpenLayers.Projection("EPSG:900913");   // openlayers preferred
+        var projData = new OpenLayers.Projection("EPSG:26910");   // WGS84 UTM zone 10N
+        var projDisplay = new OpenLayers.Projection("EPSG:4326");  // WGS84 digital lat long
 
+         var navControl =  new OpenLayers.Control.Navigation();     
+         var pointControl =  new OpenLayers.Control.DrawFeature(pointLayer,OpenLayers.Handler.Point, pointDrawFeatureOptions);
 
 
                  
@@ -87,7 +89,7 @@ OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
 	numZoomLevels: 18,
 	maxResolution: 156543.0339,
 	maxExtent: new OpenLayers.Bounds(-20037508.3427892,-20037508.3427892,20037508.3427892,20037508.3427892), 
-	restrictedExtent: bounds
+	//restrictedExtent: bounds
      };
 	
 //new OpenLayers.Bounds(-13927593.910905, 4264691.6644281, -13192575.447046, 4898201.7547421)	
@@ -338,8 +340,8 @@ Ext.onReady(function() {
             map.addLayers([brsp, grsp, lbcu, sath, sgsp]);        
           // map.zoomToExtent(bounds);
             
-        //    var navControl =  new OpenLayers.Control.Navigation();     
-            var pointControl =  new OpenLayers.Control.DrawFeature(pointLayer,OpenLayers.Handler.Point, pointDrawFeatureOptions);
+          //  var navControl =  new OpenLayers.Control.Navigation();     
+         //   var pointControl =  new OpenLayers.Control.DrawFeature(pointLayer,OpenLayers.Handler.Point, pointDrawFeatureOptions);
          //   var lineControl = new OpenLayers.Control.DrawFeature(lineLayer, OpenLayers.Handler.Path,  lineDrawFeatureOptions);
          // var polygonControl = new OpenLayers.Control.DrawFeature(polygonLayer,OpenLayers.Handler.Polygon, polygonDrawFeatureOptions); 
 
@@ -381,7 +383,8 @@ map.addControl(toolbar);
  
 
 
-});
+});        
+
 
 <?php include("inc/php/martinHeader.php"); ?>
 
