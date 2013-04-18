@@ -1,4 +1,4 @@
-body{overflow:hidden;}
+body{/*overflow:hidden;*/}
 
 #layerswitcher img
 {float:right; height:25px; opacity:1; z-index:0;}
