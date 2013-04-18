@@ -2,18 +2,18 @@
 <html>
     <head>
         <title>GeoExt Development</title>
-<!--  all of these links and scripts can go in the core  -->		
-<script type="text/javascript" src="/ext-3.4.0/adapter/ext/ext-base.js"></script>
-<script type="text/javascript" src="/ext-3.4.0/ext-all.js"></script>
-     
-<script src="http://maps.google.com/maps?file=api&amp;v=3&amp;key=AIzaSyDs6QcNHclTKt5HZNacqC6Cfn2f7JGIXjo" type="text/javascript"></script>
-<script src="OpenLayers-2.11/OpenLayers.js"></script>
-<script src="/GeoExt/lib/GeoExt.js" type="text/javascript"></script>
-<script type="text/javascript" src="proj4js-compressed.js"></script>
-      <!-- <script type="text/javascript" src="OpenLayers-2.11/lib/jquery-1.2.1.js"></script>-->
+        <!--  all of these links and scripts can go in the core  -->		
+        <script type="text/javascript" src="inc/js/ext-3.4.0/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="inc/js/ext-3.4.0/ext-all.js"></script>
+
+        <script src="http://maps.google.com/maps?file=api&amp;v=3&amp;key=AIzaSyDs6QcNHclTKt5HZNacqC6Cfn2f7JGIXjo" type="text/javascript"></script>
+        <script src="OpenLayers-2.11/OpenLayers.js"></script>
+        <script src="inc/js/GeoExt/lib/GeoExt.js" type="text/javascript"></script>
+        <script type="text/javascript" src="proj4js-compressed.js"></script>
+        <!-- <script type="text/javascript" src="OpenLayers-2.11/lib/jquery-1.2.1.js"></script>-->
         <script type="text/javascript" src="query_widget4.js"></script>
-<!--<script type="text/javascript" src="map_core.js" ></script>-->
-<link rel="stylesheet" type="text/css" href="core_map.css"/>
+        <!--<script type="text/javascript" src="map_core.js" ></script>-->
+        <link rel="stylesheet" type="text/css" href="core_map.css"/>
 
 
 <script type="text/javascript">
