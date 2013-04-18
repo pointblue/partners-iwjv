@@ -381,7 +381,9 @@ map.addControl(toolbar);
  
 
 
-});        
+});
+
+<?php include("inc/php/martinHeader.php"); ?>
 
 </script>
  
@@ -395,7 +397,8 @@ map.addControl(toolbar);
     <div id="panel" class="olControlEditingToolbar"></div>
     
     <div id="bottom_panel" class="olControlEditingToolbar"></div>
-
+    
+    <?php include("inc/php/martinView.php"); ?>
     
 		
     </body>
