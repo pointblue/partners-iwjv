@@ -1,0 +1,17 @@
+/* 
+    Document   : iwjvmap
+    Created on : Apr 19, 2013, 9:23:23 AM
+    Author     : Martin Magana <magana.web@gmail.com>
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* Column headings of the species table  */
+.speciesTableHeadingRow{
+    font-weight: bold;
+}
+
+/* Single row in the species table */
+.speciesTableRow{
+    
+}
