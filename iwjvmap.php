@@ -11,6 +11,10 @@
         <script src="inc/js/GeoExt/lib/GeoExt.js" type="text/javascript"></script>
         <script type="text/javascript" src="proj4js-compressed.js"></script>
         <!-- <script type="text/javascript" src="OpenLayers-2.11/lib/jquery-1.2.1.js"></script>-->
+<link type="text/css" rel="stylesheet" href="inc/css/iwjvmap.css">
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="inc/js/imjvmap.js"></script>
         <script type="text/javascript" src="query_widget4.js"></script>
         <!--<script type="text/javascript" src="map_core.js" ></script>-->
         <link rel="stylesheet" type="text/css" href="core_map.css"/>
@@ -34,23 +38,20 @@ function get_my_url (bounds) {
 	return path;
 }   
 
-        Proj4js.defs["EPSG:3857"] = "+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD27 +units=m +no_defs";      
+        Proj4js.defs["EPSG:3310"]  = "+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs";      
         Proj4js.defs["EPSG:4326"] = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
 
-
-        var projSrc = new OpenLayers.Projection("EPSG:3857");   // openlayers preferred
-       // var projData = new OpenLayers.Projection("EPSG:26910");   // WGS84 UTM zone 10N
-        var projDisplay = new OpenLayers.Projection("EPSG:4326");  // WGS84 digital lat long
+        var projSrc = new OpenLayers.Projection("EPSG:900913");
+        var projDisplay = new OpenLayers.Projection("EPSG:4326");
 
         var navOptions = 
         {
              saveState: true,
-             defaultControl : navControl
+             defaultControl : navControl        
         };
+        
         var navControl =  new OpenLayers.Control.Navigation(navOptions);     
         var pointControl =  new OpenLayers.Control.DrawFeature(pointLayer,OpenLayers.Handler.Point, pointDrawFeatureOptions);
-
-
                  
      
 // --------
@@ -80,8 +81,8 @@ OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
 
             });
 //-------------------------------------------  
-    var bounds = new OpenLayers.Bounds(-13888308, 3676401.75, -11711090, 6274862.5);                
-                     
+    var bounds = new OpenLayers.Bounds(-14451888.510683998, 5260795.5676214,   -12534236.348121, 3913057.8822958, -11448219.050396, 5219213.8214511, -12974513.630982, 6217175.6626035 );
+    
     var options = {
 	controls: [
 			new OpenLayers.Control.Navigation(),
@@ -96,11 +97,10 @@ OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
 	units: "m",
 	numZoomLevels: 18,
 	maxResolution: 156543.0339,
-	maxExtent: new OpenLayers.Bounds(-20037508.3427892,-20037508.3427892,20037508.3427892,20037508.3427892), 
+	maxExtent: new OpenLayers.Bounds(-20037508.3427892,-20037508.3427892,20037508.3427892,20037508.3427892) 
 	//restrictedExtent: bounds
      };
 	
-//new OpenLayers.Bounds(-13927593.910905, 4264691.6644281, -13192575.447046, 4898201.7547421)	
 
 // define style for vector drawing
 
@@ -113,13 +113,6 @@ OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
 			pointerEvents: "visiblePainted",
 			fillOpacity: 0.0
                 });
- 
- 
-//------------------
-
-		var untiled;
-		var tiled;
-		var pureCoverage = false; 
             
 //  need to define controls variable to activate the overrided  default click handler
 		var map, controls;
@@ -128,8 +121,7 @@ OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
 
 
 Ext.onReady(function() {         
-                 
-    
+              
      map = new OpenLayers.Map("gxmap",options);
  // base layers
  
@@ -151,8 +143,6 @@ Ext.onReady(function() {
 	   
 		map.addLayers([ghyb,sat]);
 
-
-		 // setup  tiled layer
                 states = new OpenLayers.Layer.WMS(
                     "States", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                     {
@@ -204,7 +194,7 @@ Ext.onReady(function() {
                         buffer: 0,
                         displayOutsideMaxExtent: true,
                         isBaseLayer: false,
-			visibility: true,
+			visibility: false,
 			opacity: 0.6
                     }
                 );	
@@ -223,7 +213,7 @@ Ext.onReady(function() {
                         buffer: 0,
                         displayOutsideMaxExtent: true,
                         isBaseLayer: false,
-			visibility: true,
+			visibility: false,
 			opacity: 0.6
                     }
                 );	
@@ -242,14 +232,12 @@ Ext.onReady(function() {
                         buffer: 0,
                         displayOutsideMaxExtent: true,
                         isBaseLayer: false,
-			visibility: true,
+			visibility: false,
 			opacity: 0.6
                     }
                 );				
 		
                 map.addLayers([stategons,states,BCR_9,BCR_10,BCR_16]);
-               // map.addLayer(BCR_9);
-	
                 
    // bird layers
    		brsp = new OpenLayers.Layer.WMS(
@@ -344,9 +332,10 @@ Ext.onReady(function() {
 			opacity: 0.6
                     }
                 );
-           
+    //add the bird layers       
             map.addLayers([brsp, grsp, lbcu, sath, sgsp]);        
-          // map.zoomToExtent(bounds);
+     //add the sitemarker layer       
+            map.addLayer(siteMarker);
             
           //  var navControl =  new OpenLayers.Control.Navigation();     
          //   var pointControl =  new OpenLayers.Control.DrawFeature(pointLayer,OpenLayers.Handler.Point, pointDrawFeatureOptions);
@@ -365,36 +354,28 @@ var toolbar = new OpenLayers.Control.Panel({
 });
 toolbar.addControls(panelControls);
 map.addControl(toolbar);
-
-     
+   // map.setCenter(new OpenLayers.LonLat(-12455964.826984994, 4988068.2521324),10);
+   //center = new OpenLayers.LonLat(-14451888.510683998, 5260795.5676214);
+  // map.setCenter(center, 10) ;   
  // register the click handler while in navigate mode            
 // map.events.register("click", map, query_map );
             
 				 
 
  mapPanel = new GeoExt.MapPanel({
-        title: "GeoExt MapPanel",
+        title: "InterMountain West Joint Venture Exploration Tool",
         renderTo: "gxmap",
      //   stateId: "mappanel",
-        height: 600,
-        width: 1000,
-        map: map
-
-        
-        
-    
+        height: 500,
+        width: 700,
+        map: map,
+        center: [-12698270.216376, 5183288.4348961],
+        zoom: 5
+            
  }); 
  
-
-
-        map.zoomToExtent(bounds);
- 
-
-
+     // map.zoomToExtent(bounds);
 });        
-
-
-
 
 </script>
  
@@ -403,10 +384,10 @@ map.addControl(toolbar);
 
         
         <body>
- <div id="gxmap"></div>  
-
+     
+    <div id="gxmap"></div>  
     <div id="panel" class="olControlEditingToolbar"></div>
-    
+    <div id="stategoninfotable" ></div>
 
     
     <?php include("inc/php/martinView.php"); ?>

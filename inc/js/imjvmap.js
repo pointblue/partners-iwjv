@@ -32,7 +32,7 @@ function ImjvView(){
         //TODO: SHERIE - Use the data variable to add stuff to your stageon section
         console.log("populateStategons fired");    //debug
         
-        //$("#myExampleDiv").html(data.stategon.habitats);
+        $("#stategoninfotable").html(data.stategon.habitats.formated);
     };
     
     this.populateSpeciesTable = function(data){

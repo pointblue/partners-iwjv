@@ -76,8 +76,8 @@ opacity:.70;
     display:block;
     position:relative;
     top:10px;
-    width: 1000px;
-    height: 600px;
+    width: 700px;
+    height: 500px;
     border: 5px solid black;
     z-index:1;   
 }
@@ -88,17 +88,17 @@ opacity:.70;
     display:block;
     position:relative;
     top:10px;
-    width: 1000px;
-    height: 600px;
+    width: 700px;
+    height: 500px;
     border: 1px solid black;
     z-index:1;  
 }
 
 #title {
     display:block;
-        top:0px;
+    top:0px;
     position:absolute;
-    width: 1100px;
+    width: 700px;
     height: auto;
     border: 5px solid black;
     z-index:1;  
@@ -109,7 +109,7 @@ opacity:.70;
     position:absolute;
     top:80px;
     right:10px;
-    width: 600px;
+    width: 700px;
     height: auto;
     border: 5px solid black;
     z-index:1;  
@@ -168,4 +168,20 @@ textarea.output {
     height: 800px;
     border: 5px solid black;
     z-index:1;  
+}
+/*Ifo and Worksheet Tables */
+.birdInfoContainer{
+    font-weight: bold;
+}
+
+.stategonTableContainer{
+    
+}
+.stategonTableHeadingRow{
+    font-weight: bold;
+}
+
+/* Single row in the species table */
+.stategonTableRow{
+    
 }
