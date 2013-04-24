@@ -63,4 +63,39 @@
             //deactivate point control and activate navigation
                 pointControl.deactivate();
                 navControl.activate();
-	};                     
+    };   
+
+    function birdInfoClick(spp)
+    {
+       var sppInfo = '';
+       sppInfo += '<table><tr><td>';
+      // sppInfo += '   <img src="http://data.prbo.org/apps/ocof/uploads/images/OCOF-logo.png" width="100px" />';
+       sppInfo += '</td><td>';
+       sppInfo += '   <h3>InterMountain West Joint Venture</h3>';
+       sppInfo += '</td></tr></table>';
+       sppInfo += '<br />';
+       sppInfo += '<table>';
+       sppInfo += '  <tr><td><img src="http://localhost/partners/iwjv/uploads/img/'+spp+'Info.png"  style="vertical-align:middle"/></td></tr>';
+       sppInfo += '</table>';
+       sppInfo += '<br />';
+    
+        myWindow=window.open('','','location=no, width=950,height=800');
+        myWindow.document.write(sppInfo);
+        myWindow.focus();
+     /*  
+      birdPopup = new GeoExt.Popup({
+                title: 'IWJV Species Info',
+                anchored: false,
+                width:500,
+                height: 420,
+                map: gxmap,
+                html: sppInfo,
+                bodyCssClass: 'mapPopup',
+                maximizable: true,
+                draggable: true,
+                collapsible: true,
+                unpinnable: false,
+                closeAction: 'hide'
+        }); 
+      */  
+    }

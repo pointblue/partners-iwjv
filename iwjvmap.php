@@ -383,15 +383,38 @@ map.addControl(toolbar);
     </head>
 
         
-        <body>
-     
-    <div id="gxmap"></div>  
-    <div id="panel" class="olControlEditingToolbar"></div>
-    <div id="stategoninfotable" ></div>
-
-    
-    <?php include("inc/php/martinView.php"); ?>
-    
-		
-    </body>
+  <body>
+    <div id="iwjvContainer">   
+        <div id="siteTitle">Title for the site:  Inter-Mountain West Joint Venture</div>
+      <table>
+          <tr><td>
+        <div id="gxmap"></div>  
+        <div id="panel" class="olControlEditingToolbar"></div>
+              </td>
+              <td>
+         <div id="stategonTableContainer"></div>
+        <div id="stategoninfoheader"></div>
+        <div id="stategoninfotable" ></div>
+              </td>
+          </tr>
+      </table>
+        <div id="mapIntro"></div>
+        <table >
+        <tr>
+          <div class="birdinfoButtons" >
+            <td><button type="button" id="brsp_button" value="brsp" onclick="birdInfoClick('brsp');">Brewer's Sparrow</button></td>
+            <td><button type="button" id="grsp_button" value="grsp" onclick="birdInfoClick('grsp');">Grasshopper Sparrow</button></td>
+            <td><button type="button" id="lbcu_button" value="lbcu" onclick="birdInfoClick('lbcu');">Long-billed Curlew</button></td>
+            <td><button type="button" id="sasp_button" value="sasp" onclick="birdInfoClick('sasp');">Sage Sparrow</button></td>
+            <td><button type="button" id="sath_button" value="sath" onclick="birdInfoClick('sath');">Sage Thrasher</button></td>
+          </div>
+        </tr>
+      </table>
+   <div class="birdinfoPopup"  style="margin-top: 10px;"></div>
+       <?php   // include("inc/php/martinView.php"); ?>
+            <div id="speciesTableContainer"></div>
+            <div id="worksheetContainer"></div>
+            
+    </div>	
+  </body>
 </html>
