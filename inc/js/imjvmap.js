@@ -16,7 +16,7 @@ function initApp(){
     appModel.addListener("load", appView.populateStategon);
     appModel.addListener("load", appView.populateSpeciesTable);
     appModel.addListener("load", appView.populateWorksheet);
-    appModel.addListener("change", appView.populateSpeciesTableBeforeAfter);
+    appModel.addListener("change", appView.handleEstimateRefresh);
     
     //listen for worksheet changed
     appController.addListener("worksheetChange", appModel.refreshEstimate);
@@ -43,10 +43,31 @@ function ImjvView(){
         $("#stategoninfotable").html(data.stategon.habitats.formated);
         
     };
-    
-    this.populateSpeciesTableBeforeAfter = function(data){
-        console.log("populateSpeciesTableBeforeAfter triggered");
+    //populate the before after section
+    this.handleEstimateRefresh = function(data){
+        //for each before, then each after
+        //if your species exists in the current species table
+        //set the before/after value
+//        for(var key in data.estimate[0].before){
+//            if($("#speciesTable tr." + key).length > 0){
+//                $("#speciesTable tr." + key + " td.before").text(data.estimate[0].before[key]);
+//            }
+//        }
+        for(var conditionTime in data.estimate[0]){
+            populateSpeciesTableEstimate(conditionTime, data);
+        }
+        
     };
+    
+    function populateSpeciesTableEstimate(conditionTime, data){
+        for(var key in data.estimate[0][conditionTime]){
+            if($("#speciesTable tr." + key).length > 0){
+                $("#speciesTable tr." + key + " td." + conditionTime).text(data.estimate[0][conditionTime][key]);
+            }
+        }
+    }
+    
+    
     
     this.populateWorksheet = function(data){
         
