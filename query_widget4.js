@@ -68,16 +68,16 @@
     function birdInfoClick(spp)
     {
        var sppInfo = '';
-       sppInfo += '<table><tr><td>';
-      // sppInfo += '   <img src="http://data.prbo.org/apps/ocof/uploads/images/OCOF-logo.png" width="100px" />';
-       sppInfo += '</td><td>';
+       sppInfo += '<div class="birdinfoPopup"><table><tr>';
+      // sppInfo += '  <td> <img src="" width="100px" /></td>';
+       sppInfo += '<td>';
        sppInfo += '   <h3>InterMountain West Joint Venture</h3>';
        sppInfo += '</td></tr></table>';
        sppInfo += '<br />';
        sppInfo += '<table>';
-       sppInfo += '  <tr><td><img src="http://localhost/partners/iwjv/uploads/img/'+spp+'Info.png"  style="vertical-align:middle"/></td></tr>';
+       sppInfo += '  <tr><td><img src="http://'+__BASEHOST+'/partners/iwjv/uploads/img/'+spp+'Info.png"  style="vertical-align:middle"/></td></tr>';
        sppInfo += '</table>';
-       sppInfo += '<br />';
+       sppInfo += '<div />';
     
         myWindow=window.open('','','location=no, width=950,height=800');
         myWindow.document.write(sppInfo);

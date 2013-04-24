@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>GeoExt Development</title>
-        <script type="text/javascript">var __BASEHOST = "";</script>
+        <script type="text/javascript">var __BASEHOST = "localhost";</script>
         <?php if($_SERVER["HTTP_HOST"] !== "localhost") : ?>
             <script type="text/javascript">__BASEHOST = "data.prbo.org";</script>
         <?php endif;?>
@@ -396,9 +396,10 @@ map.addControl(toolbar);
         <div id="panel" class="olControlEditingToolbar"></div>
               </td>
               <td>
-         <div id="stategonTableContainer"></div>
-        <div id="stategoninfoheader"></div>
-        <div id="stategoninfotable" ></div>
+         <div class="stategonTableContainer">    
+            <div id="stategoninfoheader"></div>
+            <div id="stategoninfotable" ></div>   
+        </div>
               </td>
           </tr>
       </table>
@@ -414,7 +415,7 @@ map.addControl(toolbar);
           </div>
         </tr>
       </table>
-   <div class="birdinfoPopup"  style="margin-top: 10px;"></div>
+
        <?php   // include("inc/php/martinView.php"); ?>
             <div id="speciesTableContainer"></div>
             <div id="worksheetContainer"></div>

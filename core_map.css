@@ -1,11 +1,16 @@
-body{/*overflow:hidden;*/}
+body{
+    /*overflow:hidden;*/
+      font-family: "Myriad Pro",Myriad,"Trebuchet MS",Arial,Helvetica,sans-serif;
+      background-color:#EAE0C1; 
+}
 
 #iwjvContainer {
     display:block;
     position:relative;
     width: auto;
     height: auto;
-    z-index:1;  
+    z-index:1; 
+    background-color:#F3EDDA; 
 }
 
 /*The map and the location bar 
@@ -53,14 +58,16 @@ body{/*overflow:hidden;*/}
 
 #siteTitle {
     display:block;
-    top:5px;
+    top:0px;
     position:relative;
     text-align: center;
     width: auto;
-    height: auto;
+    height: 100px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 22px;
     z-index:1;  
+    background-color: #EAE0C1;
+    color:#787836;/*none;*/
 }
 
 /*Introduction to map and app  next to map and replaced by stategon info after ma click*/
@@ -70,23 +77,42 @@ body{/*overflow:hidden;*/}
 
 /*Info  for bird popup*/
 .birdinfoPopup{
+    display:block;
+    top:0px;
+    position:relative;
+    text-align: center;
+    width: auto;
+    height: 100px;
     font-weight: bold;
+    font-size: 22px;
+    background-color: #EAE0C1;
+    color:#787836;/*none;*/
 }
 
 #brsp_button{
-    display: block;    /*none;*/
+    display: block; 
+    color:#FFFFFF;/*none;*/
+    background-color: #C26D16;
 }
 #grsp_button{
     display:block;
+    color:#FFFFFF;/*none;*/
+    background-color: #BCBE71;
 }
 #lbcu_button{
     display:block;
+    color:#FFFFFF;/*none;*/
+    background-color: #C26D16;
 }
 #sasp_button{
     display:block;
+    color:#FFFFFF;/*none;*/
+    background-color: #C26D16;    
 }
 #sath_button{
     display:block;
+    color:#FFFFFF;/*none;*/
+    background-color: #C26D16;    
 }
  
 .birdInfoButtons {
@@ -98,22 +124,22 @@ body{/*overflow:hidden;*/}
 
 .stategonTableContainer {
     display:block;
+    background-color:#F3EDDA;
     position:relative;
-    top:10px;
-    width: 600px;
+    top:0px;
+    width: 800px;
     height: 500px;
     z-index:1;  
-}
-#stategonTableContainer{
-    font-weight: bold;
-}
-#stategonTableHeadingRow{
-    font-weight: bold;
+
 }
 
-/* Single row in the species table */
-#stategonTableRow{
-    
+#stategoninfoheader{
+
+         width: 1000px;
+}
+#stategoninfotable{
+        background-color:#F3EDDA; /*   #F7F5ED;*/
+        width: 1000px;
 }
 
 /* Single row in the species table */
