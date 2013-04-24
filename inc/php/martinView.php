@@ -1,6 +1,4 @@
-
-<div style="margin-top: 10px;">
-    <button type="button" onclick="pointDoneHandlerClick('somepoint');">Fake Map Marker Drop</button>
-</div>
+<h2>Species Table</h2>
 <div id="speciesTableContainer"></div>
+<h2>Worksheet</h2>
 <div id="worksheetContainer"></div>
