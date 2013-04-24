@@ -140,7 +140,7 @@ function ImjvView(){
         submitButton.attr('type', 'button');
         submitButton.text("Submit");
         
-        $("#" + containerId).append(submitButton);
+        $("#" + containerId).html(submitButton);
         
         $("#" + containerId).append(worksheetTable);
         
