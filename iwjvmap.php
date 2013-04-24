@@ -2,6 +2,10 @@
 <html>
     <head>
         <title>GeoExt Development</title>
+        <script type="text/javascript">var __BASEHOST = "";</script>
+        <?php if($_SERVER["HTTP_HOST"] !== "localhost") : ?>
+            <script type="text/javascript">__BASEHOST = "data.prbo.org";</script>
+        <?php endif;?>
         <!--  all of these links and scripts can go in the core  -->		
         <script type="text/javascript" src="inc/js/ext-3.4.0/adapter/ext/ext-base.js"></script>
         <script type="text/javascript" src="inc/js/ext-3.4.0/ext-all.js"></script>
