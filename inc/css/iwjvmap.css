@@ -15,3 +15,28 @@
 .speciesTableRow{
     
 }
+
+/* td elements that hold the stategon image */
+td.stategonImage{
+    
+}
+
+/* table element that hold stategon info*/
+#stategoninfotable{
+    
+}
+
+/* table elements with worksheet info */
+#worksheetTable{
+    
+}
+
+/* a single row in the worksheet table with habitat data*/
+.worksheetHabitatRow{
+    
+}
+
+/* td element containing habitat name in worksheet table */
+.worksheetHabitatName{
+    
+}
