@@ -387,20 +387,18 @@ map.addControl(toolbar);
     </head>
 
         
-  <body>
+  <body  onload="load()">
     <div id="iwjvContainer">   
         <div id="siteTitle">Title for the site:  Inter-Mountain West Joint Venture</div>
       <table>
           <tr><td>
         <div id="gxmap"></div>  
         <div id="panel" class="olControlEditingToolbar"></div>
-              </td>
-              <td>
-         <div class="stategonTableContainer">    
-            <div id="stategoninfoheader"></div>
-            <div id="stategoninfotable" ></div>   
-        </div>
-              </td>
+          </td>
+          <td>
+              <div id="birdInfoContainer"></div>
+          </td>
+  
           </tr>
       </table>
         <div id="mapIntro"></div>
@@ -415,6 +413,15 @@ map.addControl(toolbar);
           </div>
         </tr>
       </table>
+        
+        <table>
+             <tr><td>
+                <div class="stategonTableContainer">    
+                    <div id="stategoninfoheader"></div>
+                    <div id="stategoninfotable" ></div>   
+                </div>
+             </td></tr>         
+        </table>
 
        <?php   // include("inc/php/martinView.php"); ?>
             <div id="speciesTableContainer"></div>

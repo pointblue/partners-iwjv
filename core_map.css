@@ -75,6 +75,28 @@ body{
     font-weight: bold;
 }
 
+/*Info  for bird div*/
+#birdInfoContainer {
+    display:block;
+    top:5px;
+    width: 800px;
+    height: 500px;
+    position:relative;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+    background-color:  #F3EDDA ; /*#EAE0C1;*/
+    color:#787836;
+
+    left:50px;
+}
+img.birdInfo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto ;
+    width: 650px;
+   /* height: 200px;*/
+}
 /*Info  for bird popup*/
 .birdinfoPopup{
     display:block;
@@ -127,21 +149,27 @@ body{
     background-color:#F3EDDA;
     position:relative;
     top:0px;
-    width: 800px;
+    width: auto;   /*800px;*/
     height: 500px;
     z-index:1;  
 
 }
 
-#stategoninfoheader{
+#stategonInfoHeader{
 
-         width: 1000px;
+         width: auto;  /*1000px;*/
 }
-#stategoninfotable{
+#stategonInfoTable{
+        border:1px ;
+        padding:1px;
         background-color:#F3EDDA; /*   #F7F5ED;*/
-        width: 1000px;
+        width: auto;  /*1000px;*/
 }
 
+.stategonInfoTableRow{
+
+         
+}
 /* Single row in the species table */
 #mapPopup{
     

@@ -67,35 +67,21 @@
 
     function birdInfoClick(spp)
     {
+       // hide any previous bird info ?
        var sppInfo = '';
-       sppInfo += '<div class="birdinfoPopup"><table><tr>';
-      // sppInfo += '  <td> <img src="" width="100px" /></td>';
-       sppInfo += '<td>';
-       sppInfo += '   <h3>InterMountain West Joint Venture</h3>';
-       sppInfo += '</td></tr></table>';
-       sppInfo += '<br />';
-       sppInfo += '<table>';
-       sppInfo += '  <tr><td><img src="http://'+__BASEHOST+'/partners/iwjv/uploads/img/'+spp+'Info.png"  style="vertical-align:middle"/></td></tr>';
-       sppInfo += '</table>';
-       sppInfo += '<div />';
-    
-        myWindow=window.open('','','location=no, width=950,height=800');
-        myWindow.document.write(sppInfo);
-        myWindow.focus();
-     /*  
-      birdPopup = new GeoExt.Popup({
-                title: 'IWJV Species Info',
-                anchored: false,
-                width:500,
-                height: 420,
-                map: gxmap,
-                html: sppInfo,
-                bodyCssClass: 'mapPopup',
-                maximizable: true,
-                draggable: true,
-                collapsible: true,
-                unpinnable: false,
-                closeAction: 'hide'
-        }); 
-      */  
+   
+       sppInfo += '<img class="birdInfo" src="http://'+__BASEHOST+'/partners/iwjv/uploads/img/'+spp+'Info.png"  />';
+     
+       $('div#birdInfoContainer').html(sppInfo);  
     }
+    
+    function load()
+    {
+        // load in general introduction and instructions here?
+        var intro = '';
+        intro += '<p> Some html here </p>';
+        $('div#birdInfoContainer').html(intro); 
+       // alert("got to load");
+    }
+    
+    
