@@ -25,7 +25,11 @@ td.stategonImage{
 #stategoninfotable{
     
 }
-
+/* div element that contains the worksheetTable*/
+#worksheetContainer{
+    margin-bottom: 150px;
+    
+}
 /* table elements with worksheet info */
 #worksheetTable{
     

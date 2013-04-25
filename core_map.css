@@ -75,8 +75,8 @@ body{
     font-weight: bold;
 }
 
-/*Info  for bird div*/
-#birdInfoContainer {
+/*Text for intro, bird info, and error messages*/
+#mapSidebarRightContainer {
     display:block;
     top:5px;
     width: 800px;

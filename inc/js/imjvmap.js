@@ -13,9 +13,7 @@ function initApp(){
     appModel.setBaseHost(__BASEHOST);
     
     //listen for when the stategon is finished loading
-    appModel.addListener("load", appView.populateStategon);
-    appModel.addListener("load", appView.populateSpeciesTable);
-    appModel.addListener("load", appView.populateWorksheet);
+    appModel.addListener("load", appView.handleStategonLoad);
     appModel.addListener("change", appView.handleEstimateRefresh);
     
     //listen for worksheet changed
@@ -28,6 +26,8 @@ function initApp(){
 
 function ImjvView(){
     
+    var that = this;
+    
     var caller = [];
     caller["worksheetLoaded"] = $.Callbacks();
     
@@ -38,21 +38,35 @@ function ImjvView(){
         }
     };
     
-    this.populateStategon = function(data){
+    //allows returned stategon to be checked for errors before populating view
+    this.handleStategonLoad = function(data){
+        var errorMessageText = "No data found for the selected area. Please try a different area.";
+        //TODO: show no data alert box
+        //reset error message if there is one
+        if( $("#mapSidebarRightContainer").text() === errorMessageText){
+            $("#mapSidebarRightContainer").html("");
+        }
         
-        $("#stategoninfotable").html(data.stategon.habitats.formated);
+        that.populateStategon(data);
+        that.populateSpeciesTable(data);
+        that.populateWorksheet(data);
+        
+        if(data.stategon.code === ""){
+            //report error
+            var errorMessageElement = $("<p></p>");
+            errorMessageElement.text(errorMessageText);
+            $("#mapSidebarRightContainer").html(errorMessageElement);
+        }
+    };
+    
+    this.populateStategon = function(data){
+        if(data.stategon.code !== ""){
+            $("#stategoninfotable").html(data.stategon.habitats.formated);
+        } else $("#stategoninfotable").html("");    //if no stategon, reset the info inside
         
     };
     //populate the before after section
     this.handleEstimateRefresh = function(data){
-        //for each before, then each after
-        //if your species exists in the current species table
-        //set the before/after value
-//        for(var key in data.estimate[0].before){
-//            if($("#speciesTable tr." + key).length > 0){
-//                $("#speciesTable tr." + key + " td.before").text(data.estimate[0].before[key]);
-//            }
-//        }
         for(var conditionTime in data.estimate[0]){
             populateSpeciesTableEstimate(conditionTime, data);
         }
@@ -70,10 +84,22 @@ function ImjvView(){
     
     
     this.populateWorksheet = function(data){
+        //todo: right align numbers
+        //decread in red
+        //immediately change colors on worksheet submit, and fade back to original color
+        //on submit, disable submit button
+        
+        var containerId = "worksheetContainer";
+        
+        //set container element to blank and return if no stategon code
+        if(data.stategon.code === "") {
+            $("#" + containerId).html("");
+            return false;
+        }
         
         var habitats = data.stategon.habitats.data;
         
-        var containerId = "worksheetContainer";
+        
         
         var worksheetTable = $("<table></table>");
         worksheetTable.attr('id', 'worksheetTable');
@@ -118,7 +144,7 @@ function ImjvView(){
             
             for(var j=0;j<conditionTimes.length;j++){
                 for(var k=0;k<conditions.length;k++){
-                    var singleHabitatCondition = $("<td></td>")
+                    var singleHabitatCondition = $("<td></td>");
                     singleHabitatCondition.attr('class', conditionTimes[j]);
                     singleHabitatCondition.addClass(conditions[k]);
                     var singleMastercode = "MCC-" + habitats[i]['MASTERCODE'] + "-" + (k+1).toString();
@@ -150,7 +176,16 @@ function ImjvView(){
     };
     
     this.populateSpeciesTable = function(data){
+        
         var containerId = "speciesTableContainer";
+        
+        //set container element to blank and return if no stategon code
+        if(data.stategon.code === "") {
+            $("#" + containerId).html("");
+            return false;
+        }
+        
+        
         var columnDisplayNames = ["Species Name","Occupied Acres", "Population Estimate", "Population Objective", "Objective Increase", "Before", "After"];
         var columnNames = ["SpeciesName", "OccupiedAcres", "PopEstimate", "PopObjective", "ObjectiveIncrease"];
         
