@@ -283,7 +283,7 @@ function ImjvController(){
 
 
 function ImjvModel(){
-    var baseHost = "localhost";
+    var baseHost =   __BASEHOST;          //"data.prbo.org";   //"localhost";
     var baseUrl = "http://" + baseHost + "/api/v1/";
     var restBaseUrl = "habpop/";
     var stategonUrl = baseUrl + restBaseUrl + "stategons/";
