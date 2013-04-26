@@ -75,9 +75,10 @@
        sppInfoElement.attr('src', "http://" + __BASEHOST + "/partners/iwjv/uploads/img/" + spp + "Info.png");   //give it a src attribute
        sppInfoElement.addClass(spp);
        $("#birdInfo").html(sppInfoElement);  //set the bird container element with the image element
-       $('#mapInstructionContainer').hide();
+       $('#mapInstructionContainer').hide();  
        $("#birdInfoContainer").show();
-       $("#instructionsButtonContainer").show();       
+       $("#instructionsButtonContainer").show(); 
+       
     }
     
      function showInstructionInfo(){

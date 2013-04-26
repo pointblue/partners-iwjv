@@ -88,15 +88,17 @@
                 });
     //-------------------------------------------  
         var bounds = new OpenLayers.Bounds(-14451888.510683998, 5260795.5676214,   -12534236.348121, 3913057.8822958, -11448219.050396, 5219213.8214511, -12974513.630982, 6217175.6626035 );
+        var navigationControl= new OpenLayers.Control.Navigation({zoomWheelEnabled: false});
+        var ls = new OpenLayers.Control.LayerSwitcher({'ascending':false});
 
         var options = {
             controls: [
-                            new OpenLayers.Control.Navigation(),
+                            navigationControl,
                             new OpenLayers.Control.PanZoomBar(),
                             new OpenLayers.Control.ScaleLine(),
                             new OpenLayers.Control.MousePosition(),
                             new OpenLayers.Control.KeyboardDefaults(),
-                            new OpenLayers.Control.LayerSwitcher({'ascending':false}),
+                            ls,
                        ],
             projection: projSrc,
             displayProjection: projDisplay,
@@ -164,7 +166,7 @@
                             displayOutsideMaxExtent: true,
                             isBaseLayer: false,
                             visibility: false,
-                            opacity: 0.6
+                            opacity: 0.4
                         }
                     );
 
@@ -220,7 +222,7 @@
                             displayOutsideMaxExtent: true,
                             isBaseLayer: false,
                             visibility: false,
-                            opacity: 0.6
+                            opacity: 0.5
                         }
                     );	
 
@@ -239,15 +241,15 @@
                             displayOutsideMaxExtent: true,
                             isBaseLayer: false,
                             visibility: false,
-                            opacity: 0.6
+                            opacity: 0.5
                         }
                     );				
 
-                    map.addLayers([stategons,states,BCR_9,BCR_10,BCR_16]);
+                    map.addLayers([stategons,BCR_9,BCR_10,BCR_16]);
 
        // bird layers
                     brsp = new OpenLayers.Layer.WMS(
-                        "Brewer Sparrow", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
+                        "Brewer Sparrow Range", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
                             LAYERS: 'spatial2:brsp_breeding_3857',
                             STYLES: '',
@@ -261,12 +263,12 @@
                             displayOutsideMaxExtent: true,
                             isBaseLayer: false,
                             visibility: false,
-                            opacity: 0.6
+                            opacity: 0.5
                         }
                     );
 
                     grsp = new OpenLayers.Layer.WMS(
-                        "Grasshopper Sparrow", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
+                        "Grasshopper Sparrow Range", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
                             LAYERS: 'spatial2:grsp_breeding_3857',
                             STYLES: '',
@@ -280,11 +282,11 @@
                             displayOutsideMaxExtent: true,
                             isBaseLayer: false,
                             visibility: false,
-                            opacity: 0.6
+                            opacity: 0.5
                         }
                     );
                     lbcu = new OpenLayers.Layer.WMS(
-                        "Long-billed Curlew", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
+                        "Long-billed Curlew Range", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
                             LAYERS: 'spatial2:lbcu_breeding_3857',
                             STYLES: '',
@@ -298,12 +300,12 @@
                             displayOutsideMaxExtent: true,
                             isBaseLayer: false,
                             visibility: false,
-                            opacity: 0.6
+                            opacity: 0.5
                         }
                     );
 
                     sath = new OpenLayers.Layer.WMS(
-                        "Sage Thrasher", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
+                        "Sage Thrasher Range", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
                             LAYERS: 'spatial2:sath_breeding_3857',
                             STYLES: '',
@@ -317,11 +319,11 @@
                             displayOutsideMaxExtent: true,
                             isBaseLayer: false,
                             visibility: false,
-                            opacity: 0.6
+                            opacity: 0.5
                         }
                     );
                     sgsp = new OpenLayers.Layer.WMS(
-                        "Sage Sparrow", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
+                        "Sage Sparrow Range", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
                             LAYERS: 'spatial2:sgsp_breeding_3857',
                             STYLES: '',
@@ -335,18 +337,13 @@
                             displayOutsideMaxExtent: true,
                             isBaseLayer: false,
                             visibility: false,
-                            opacity: 0.6
+                            opacity: 0.5
                         }
                     );
         //add the bird layers       
                 map.addLayers([brsp, grsp, lbcu, sath, sgsp]);        
          //add the sitemarker layer       
                 map.addLayer(siteMarker);
-
-              //  var navControl =  new OpenLayers.Control.Navigation();     
-             //   var pointControl =  new OpenLayers.Control.DrawFeature(pointLayer,OpenLayers.Handler.Point, pointDrawFeatureOptions);
-             //   var lineControl = new OpenLayers.Control.DrawFeature(lineLayer, OpenLayers.Handler.Path,  lineDrawFeatureOptions);
-             // var polygonControl = new OpenLayers.Control.DrawFeature(polygonLayer,OpenLayers.Handler.Polygon, polygonDrawFeatureOptions); 
 
     var panelControls = [
        navControl,
@@ -360,24 +357,18 @@
     });
     toolbar.addControls(panelControls);
     map.addControl(toolbar);
-       // map.setCenter(new OpenLayers.LonLat(-12455964.826984994, 4988068.2521324),10);
-       //center = new OpenLayers.LonLat(-14451888.510683998, 5260795.5676214);
-      // map.setCenter(center, 10) ;   
-     // register the click handler while in navigate mode            
-    // map.events.register("click", map, query_map );
-
-
+    navigationControl.disableZoomWheel();  // disable mouse scroll zoom
+    ls.maximizeControl();  // open layerswitcher by default
 
      mapPanel = new GeoExt.MapPanel({
             title: "InterMountain West Joint Venture Exploration Tool",
             renderTo: "gxmap",
          //   stateId: "mappanel",
             height: 500,
-            width: 700,
+            width: 850,
             map: map,
             center: [-12698270.216376, 5183288.4348961],
             zoom: 5
-
      }); 
 
          // map.zoomToExtent(bounds);
@@ -410,17 +401,19 @@
                   <button type="button" class="defaultButton" value="lbcu" onclick="birdInfoClick('lbcu');">Long-billed Curlew</button>
                   <button type="button" class="defaultButton" value="sasp" onclick="birdInfoClick('sasp');">Sage Sparrow</button>
                   <button type="button" class="defaultButton" value="sath" onclick="birdInfoClick('sath');">Sage Thrasher</button>
-
+<!--
           <table>
               <tr>
                   <td>
-                      <div class="stategonTableContainer">    
-                          <div id="stategoninfoheader"></div>
-                          <div id="stategoninfotable" ></div>   
+                      -->
+                      <div id="stategonTableContainer">    
+                         <!-- <div id="stategoninfoheader"></div>-->
+                        <div id="stategoninfotable" ></div> 
                       </div>
-                  </td>
+            <!--      </td>
               </tr>         
           </table>
+            -->
           <div id="speciesTableContainer"></div>
           <div id="worksheetContainer"></div>
         </div>	
