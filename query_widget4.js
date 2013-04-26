@@ -73,16 +73,16 @@
        sppInfoElement.attr('class', 'birdInfo');                                //give it a class attribute of 'birdInfo'
        sppInfoElement.attr('src', "http://" + __BASEHOST + "/partners/iwjv/uploads/img/" + spp + "Info.png");   //give it a src attribute
        sppInfoElement.addClass(spp);
-       $("#birdInfoContainer").html(sppInfoElement);  //set the bird container element with the image element
+       $("#birdInfo").html(sppInfoElement);  //set the bird container element with the image element
        $('#mapInstructionContainer').hide();
        $("#birdInfoContainer").show();
-       $("#instructionsButton").show();       
+       $("#instructionsButtonContainer").show();       
     }
     
      function showInstructionInfo(){
         $("#birdInfoContainer").hide();  
         $('#mapInstructionContainer').show();
-        $("#instructionsButton").hide();
+        $("#instructionsButtonContainer").hide();
         
     }
     

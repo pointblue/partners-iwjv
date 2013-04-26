@@ -388,41 +388,28 @@
     <body  onload="load()">
         <div id="iwjvContainer">   
           <div id="siteTitle">Title for the site:  Inter-Mountain West Joint Venture</div>
-          <table>
-              <tr>
-                  <td>
+
                       <div id="gxmap"></div>  
                       <div id="panel" class="olControlEditingToolbar"></div>
-                  </td>
-                  <td>
-                      <div id="mapMiddleContainer">
-                          <div id="instructionsButton"><button type="button" id="instr_button" value="instr" onclick="showInstructionInfo();">Instructions</button></div>
-                      </div>
-                  </td>
-                  <td>
                       <div id="mapSidebarRightContainer">
-                          <div id="birdInfoContainer"></div>
+                          
+                          <div id="birdInfoContainer">
+                              <button type="button" id="instr_button"  class="defaultButton" value="instr" onclick="showInstructionInfo();">Instructions</button>
+                              <div id="birdInfo"></div>
+                          </div>
                           <div id="mapInstructionContainer">
                            <!--  lots of html-->
-                           <p>Instructions</p>
+                           <p style="margin: 0;">Instructions</p>
                           </div>
                      </div>
-                  </td>
-              </tr>
-          </table>
 
-          <div id="mapIntro"></div>
-          <table>
-              <tr>
-              <div class="birdinfoButtons" >
-                  <td><button type="button" id="brsp_button" value="brsp" onclick="birdInfoClick('brsp');">Brewer's Sparrow</button></td>
-                  <td><button type="button" id="grsp_button" value="grsp" onclick="birdInfoClick('grsp');">Grasshopper Sparrow</button></td>
-                  <td><button type="button" id="lbcu_button" value="lbcu" onclick="birdInfoClick('lbcu');">Long-billed Curlew</button></td>
-                  <td><button type="button" id="sasp_button" value="sasp" onclick="birdInfoClick('sasp');">Sage Sparrow</button></td>
-                  <td><button type="button" id="sath_button" value="sath" onclick="birdInfoClick('sath');">Sage Thrasher</button></td>
-              </div>
-              </tr>
-          </table>
+            <br class="clear">
+
+                  <button type="button" class="defaultButton" value="brsp" onclick="birdInfoClick('brsp');">Brewer's Sparrow</button>
+                  <button type="button" class="defaultButton" value="grsp" onclick="birdInfoClick('grsp');">Grasshopper Sparrow</button>
+                  <button type="button" class="defaultButton" value="lbcu" onclick="birdInfoClick('lbcu');">Long-billed Curlew</button>
+                  <button type="button" class="defaultButton" value="sasp" onclick="birdInfoClick('sasp');">Sage Sparrow</button>
+                  <button type="button" class="defaultButton" value="sath" onclick="birdInfoClick('sath');">Sage Thrasher</button>
 
           <table>
               <tr>

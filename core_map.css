@@ -4,6 +4,12 @@ body{
       background-color:#EAE0C1; 
 }
 
+.clear{
+    margin: 0;
+    padding: 0;
+    clear: both;
+}
+
 #iwjvContainer {
     display:block;
     position:relative;
@@ -38,6 +44,7 @@ body{
 
 #gxmap {
     display:block;
+    float:left;
     position:relative;
     top:5px;
     width: 700px;
@@ -75,20 +82,19 @@ body{
     font-weight: bold;
 }
 
+#birdInfoContainer button{
+    float: left;
+}
+
 /*Text for intro, bird info, and error messages*/
 #mapSidebarRightContainer {
-    display:block;
-    top:5px;
-    width: 800px;
-    height: 500px;
-    position:relative;
-    text-align: center;
-    font-weight: bold;
-    font-size: 22px;
-    background-color:  #F3EDDA ; /*#EAE0C1;*/
+    
     color:#787836;
-
-    left:50px;
+    font-weight: bold;
+    font-size: 1.5em;
+    height: 500px;
+    margin-left: 705px;
+    text-align: center;
 }
 img.birdInfo {
     display: block;
@@ -105,33 +111,9 @@ img.birdInfo {
 #mapInstructionContainer{
         display: none;
 }
-
-
-
-#brsp_button{
-    display: block; 
+.defaultButton{
     color:#FFFFFF;/*none;*/
     background-color: #C26D16;
-}
-#grsp_button{
-    display:block;
-    color:#FFFFFF;/*none;*/
-    background-color: #C26D16;
-}
-#lbcu_button{
-    display:block;
-    color:#FFFFFF;/*none;*/
-    background-color: #C26D16;
-}
-#sasp_button{
-    display:block;
-    color:#FFFFFF;/*none;*/
-    background-color: #C26D16;    
-}
-#sath_button{
-    display:block;
-    color:#FFFFFF;/*none;*/
-    background-color: #C26D16;    
 }
  
 .birdInfoButtons {
@@ -145,13 +127,8 @@ img.birdInfo {
     position:relative;
     color:#FFFFFF;
 }
-#instructionsButton {
-    color:#FFFFFF;/*none;*/
-    background-color: #C26D16; 
+#instructionsButtonContainer {
     display: none;
-    position:static;
-    top:0px;
-    
 }
 .stategonTableContainer {
     display:block;
