@@ -1,7 +1,8 @@
   // variables
         var siteMarker = new OpenLayers.Layer.Markers( "Site", {displayInLayerSwitcher: false} );
- 	var size = new OpenLayers.Size(40,40);
-        var icon = new OpenLayers.Icon('icons/orange-pin.png',size);
+ 	var size = new OpenLayers.Size(21,25);
+        var iconOffset = new OpenLayers.Pixel(-(size.w/2), -size.h);  // locate center bottom
+        var icon = new OpenLayers.Icon('icons/marker.png',size,iconOffset);
                 
         var style_black = new OpenLayers.StyleMap(
         {
