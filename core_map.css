@@ -131,13 +131,7 @@ img.birdInfo {
     display: none;
 }
 .stategonTableContainer {
-    display:block;
-    background-color:#F3EDDA;
-    position:relative;
-    top:0px;
-    width: auto;   /*800px;*/
-    height: 500px;
-    z-index:1;  
+    background-color:#F3EDDA; 
 
 }
 
