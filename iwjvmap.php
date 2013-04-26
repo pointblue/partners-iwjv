@@ -377,9 +377,10 @@
     </script>
     </head>
     <body  onload="load()">
-        <div id="iwjvContainer">   
+        <div id="iwjvContainer">
+            
           <div id="siteTitle">Title for the site:  Inter-Mountain West Joint Venture</div>
-
+            <div id="iwjvBodyContainer">
                       <div id="gxmap"></div>  
                       <div id="panel" class="olControlEditingToolbar"></div>
                       <div id="mapSidebarRightContainer">
@@ -416,6 +417,7 @@
             -->
           <div id="speciesTableContainer"></div>
           <div id="worksheetContainer"></div>
+            </div>
         </div>	
     </body>
 </html>
