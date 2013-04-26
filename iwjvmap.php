@@ -395,10 +395,22 @@
                       <div id="panel" class="olControlEditingToolbar"></div>
                   </td>
                   <td>
-                      <div id="mapSidebarRightContainer"></div>
+                      <div id="mapMiddleContainer">
+                          <div id="instructionsButton"><button type="button" id="instr_button" value="instr" onclick="showInstructionInfo();">Instructions</button></div>
+                      </div>
+                  </td>
+                  <td>
+                      <div id="mapSidebarRightContainer">
+                          <div id="birdInfoContainer"></div>
+                          <div id="mapInstructionContainer">
+                           <!--  lots of html-->
+                           <p>Instructions</p>
+                          </div>
+                     </div>
                   </td>
               </tr>
           </table>
+
           <div id="mapIntro"></div>
           <table>
               <tr>

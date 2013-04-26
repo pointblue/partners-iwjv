@@ -67,19 +67,23 @@
 
     function birdInfoClick(spp)
     {
-       var sppInfoElement = $("<img />");                                       //create sppInfo HTML Element
-       sppInfoElement.attr('class', 'birdInfo');                                //give is a class attribute of 'birdInfo'
+       
+       var sppInfoElement = $("<img />"); 
+          //create sppInfo HTML Element
+       sppInfoElement.attr('class', 'birdInfo');                                //give it a class attribute of 'birdInfo'
        sppInfoElement.attr('src', "http://" + __BASEHOST + "/partners/iwjv/uploads/img/" + spp + "Info.png");   //give it a src attribute
-       $("#mapSidebarRightContainer").html(sppInfoElement);                            //set the bird container element with the image element
+       sppInfoElement.addClass(spp);
+       $("#birdInfoContainer").html(sppInfoElement);  //set the bird container element with the image element
+       $('#mapInstructionContainer').hide();
+       $("#birdInfoContainer").show();
+       $("#instructionsButton").show();       
     }
     
      function showInstructionInfo(){
+        $("#birdInfoContainer").hide();  
+        $('#mapInstructionContainer').show();
+        $("#instructionsButton").hide();
         
-        //SHERIE!!! This would be a great area for me to show you how to use jquery objects
-        //to load dynamic information. let me know when you get here! :)        
-        var intro = '';
-        intro += "<p style='margin:0;'>App instructions</p>";
-        $('#mapSidebarRightContainer').html(intro);
     }
     
     function load()
