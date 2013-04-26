@@ -10,6 +10,8 @@ initApp();  //initialize the app
 
 function initApp(){
     
+    //init app tells which handlers are responsible for which events
+    
     appModel.setBaseHost(__BASEHOST);
     
     //listen for when the stategon is finished loading
@@ -43,9 +45,9 @@ function ImjvView(){
         var errorMessageText = "No data found for the selected area. Please try a different area.";
         //TODO: show no data alert box
         //reset error message if there is one
-        if( $("#mapSidebarRightContainer").text() === errorMessageText){
-            $("#mapSidebarRightContainer").html("");
-        }
+//        if( $("#mapSidebarRightContainer").text() === errorMessageText){
+//            $("#mapSidebarRightContainer").html("");
+//        }
         
         that.populateStategon(data);
         that.populateSpeciesTable(data);
@@ -53,9 +55,10 @@ function ImjvView(){
         
         if(data.stategon.code === ""){
             //report error
-            var errorMessageElement = $("<p></p>");
-            errorMessageElement.text(errorMessageText);
-            $("#mapSidebarRightContainer").html(errorMessageElement);
+//            var errorMessageElement = $("<p></p>");
+//            errorMessageElement.text(errorMessageText);
+//            $("#mapSidebarRightContainer").html(errorMessageElement);
+            alert(errorMessageText);
         }
     };
     
@@ -70,7 +73,12 @@ function ImjvView(){
         for(var conditionTime in data.estimate[0]){
             populateSpeciesTableEstimate(conditionTime, data);
         }
-        
+        //enable the worksheet buttons
+        $("#worksheetContainer button").removeAttr('disabled', 'disabled');
+    };
+    
+    this.handleEstimateRefreshInitialization = function(){
+        //animate before and after columns
     };
     
     function populateSpeciesTableEstimate(conditionTime, data){
@@ -81,8 +89,11 @@ function ImjvView(){
         }
     }
     
-    
-    
+    //---------------------------------------------
+    //
+    // WORKSHEET DISPLAY
+    //
+    //
     this.populateWorksheet = function(data){
         //todo: right align numbers
         //decread in red
@@ -103,6 +114,7 @@ function ImjvView(){
         
         var worksheetTable = $("<table></table>");
         worksheetTable.attr('id', 'worksheetTable');
+        worksheetTable.attr('cellspacing', 0)
         
         //First heading row
         var headingRow1 = $("<tr></tr>");
@@ -112,12 +124,20 @@ function ImjvView(){
         hr1Td1.text('Habitat');
         headingRow1.append(hr1Td1);
         var hr1Td2 = $("<td></td>");
+        hr1Td2.attr('class', 'conditionHeading');
+        hr1Td2.addClass('before');
         hr1Td2.attr('colspan', '3');
-        hr1Td2.text('Condition Before');
+        hr1Td2.html('Condition Before');
+        hr1Td2.append($('<br>'));
+        hr1Td2.append('<span>(Acres)</span>');
         headingRow1.append(hr1Td2);
         var hr1Td3 = $("<td></td>");
+        hr1Td3.attr('class', 'conditionHeading');
+        hr1Td3.addClass('after');
         hr1Td3.attr('colspan', '3');
-        hr1Td3.text('Condition After');
+        hr1Td3.html('Condition After');
+        hr1Td3.append($('<br>'));
+        hr1Td3.append('<span>(Acres)</span>');
         headingRow1.append(hr1Td3);
         worksheetTable.append(headingRow1);
         
@@ -127,6 +147,9 @@ function ImjvView(){
         headingRow2.attr('class', 'worksheetHeadingRow');
         for(var i=0;i<headingRow2ColumnNames.length;i++){
             var singleColumn = $("<td></td>");
+            if(i>2) singleColumn.attr('class', 'after');
+            else singleColumn.attr('class', 'before');
+            if(i===0||i===3)singleColumn.addClass('first');
             singleColumn.text(headingRow2ColumnNames[i]);
             headingRow2.append(singleColumn);
         }
@@ -137,10 +160,22 @@ function ImjvView(){
         for(var i=0;i<habitats.length;i++){
             var singleHabitat = $("<tr></tr>");
             singleHabitat.attr('class', 'worksheetHabitatRow');
-            var habitatName = $("<td></td>");
-            habitatName.attr('class', 'worksheetHabitatName');
-            habitatName.text(habitats[i]['ASSOCIATION']);
-            singleHabitat.append(habitatName);
+            if(i%2===0)singleHabitat.addClass('referenceRow');
+            
+            //
+            //habitat name
+            //
+            var habitatNameContainer = $("<td></td>");
+            habitatNameContainer.attr('class', 'worksheetHabitatName');
+            //habitat link
+            var linkRoot = 'http://data.prbo.org/partners/iwjv/uploads/habitat/';
+            var habitatNameLink = $("<a></a>");
+            habitatNameLink.attr('title', 'Habitat Description');
+            habitatNameLink.attr('href', linkRoot + habitats[i]['LINK']);
+            habitatNameLink.attr('target', '_BLANK');
+            habitatNameLink.text(habitats[i]['ASSOCIATION']);
+            habitatNameContainer.append(habitatNameLink);
+            singleHabitat.append(habitatNameContainer);
             
             for(var j=0;j<conditionTimes.length;j++){
                 for(var k=0;k<conditions.length;k++){
@@ -149,6 +184,7 @@ function ImjvView(){
                     singleHabitatCondition.addClass(conditions[k]);
                     var singleMastercode = "MCC-" + habitats[i]['MASTERCODE'] + "-" + (k+1).toString();
                     singleHabitatCondition.addClass(singleMastercode);
+                    if(k===0||k===3) singleHabitatCondition.addClass('first');
                     var conditionInput = $("<input/>");
                     conditionInput.attr('type', 'text');
                     
@@ -163,18 +199,41 @@ function ImjvView(){
         }
         
         var submitButton = $("<button></button>");
+        submitButton.attr('class', 'defaultButton');
         submitButton.attr('type', 'button');
-        submitButton.text("Submit");
+        submitButton.text("Calculate");
         
-        $("#" + containerId).html(submitButton);
+        var submitButtonContainer = $("<span></span>");
+        submitButtonContainer.attr('class', 'worksheetButtonContainer');
+        submitButtonContainer.addClass('psuedo-div');
+        submitButtonContainer.append(submitButton);
         
-        $("#" + containerId).append(worksheetTable);
+        var worksheetHeading = $("<h2></h2>");
+        worksheetHeading.text("Estimate Populations");
+        
+        var worksheetContent = $("<div></div>");
+        worksheetContent.attr('id','worksheetContent');
+        
+        //add to content container
+        $(worksheetContent).html(submitButtonContainer);
+        $(worksheetContent).append(worksheetTable);
+        $(worksheetContent).append(submitButtonContainer.clone());
+        
+        //add to main container already on page
+        $("#" + containerId).html(worksheetHeading);
+        $("#" + containerId).append(worksheetContent);
+        
         
         //call that worksheet has finished loading
         caller["worksheetLoaded"].fire();
         
     };
     
+    //---------------------------------------------------------------
+    //
+    // SPECIES TABLE
+    //
+    //
     this.populateSpeciesTable = function(data){
         
         var containerId = "speciesTableContainer";
@@ -191,6 +250,7 @@ function ImjvView(){
         
         var speciesTable = $("<table></table>");
         speciesTable.attr('id', 'speciesTable');
+        speciesTable.attr('cellspacing', '0');
         
         //make the heading
         var headingRow = $("<tr></tr>");
@@ -216,24 +276,32 @@ function ImjvView(){
                 var currentColumnName = columnNames[j];
                 var singleDataColumn = $("<td></td>");
                 singleDataColumn.attr('class', columnNames[j]);
+                if(j>0) singleDataColumn.addClass('numericContainer');
                 singleDataColumn.text(currentSpecies[ currentColumnName ]);
                 singleDataRow.append(singleDataColumn);
             }
             var beforeColumn = $("<td></td>");
             beforeColumn.attr('class', 'before');
+            beforeColumn.addClass('numericContainer');
             var afterColumn = $("<td></td>");
             afterColumn.attr('class', 'after');
+            afterColumn.addClass('numericContainer');
             singleDataRow.append(beforeColumn).append(afterColumn);
             
             speciesTable.append(singleDataRow);
             
         }
         
+        var speciesTableHeading = $("<h2></h2>");
+        speciesTableHeading.text("Species");
         
-        $("#" + containerId).html(speciesTable);
+        $("#" + containerId).html(speciesTableHeading);
+        
+        $("#" + containerId).append(speciesTable);
 
         
     };
+    
 }
 
 function ImjvController(){
@@ -265,19 +333,26 @@ function ImjvController(){
     
     //triggers when the estimate should be refreshed
     function eventEstimateRefresh(){
-        //TODO: make sure this is data to send
+        //TODO: make sure there is data to send
         //TODO: should remove blank data here
-        
         caller["worksheetChange"].fire(worksheetDataChanged);
     }
     
     function handleWorksheetSubmitClick(event){
-        //first the estimate refresh event
+        //disable button
+        $("#worksheetContainer button").attr('disabled', 'disabled');
+        //fire the estimate refresh event
         eventEstimateRefresh();
     }
     
     function handleWorksheetInputKeydown(event){
-        var inputCharacter = String.fromCharCode(event.which);
+        var correctKey = -1;
+        if(event.which >= 96 && event.which <= 105){
+            correctKey = event.which-48;
+        } else correctKey = event.which;
+        
+        var inputCharacter = String.fromCharCode(correctKey);
+
         //only allow numbers and backspaces
         if( inputCharacter.match(/[0123456789]/) === null ){
             if(event.which === 8) return true;

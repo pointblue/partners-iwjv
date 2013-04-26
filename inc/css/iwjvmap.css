@@ -6,6 +6,22 @@
         Purpose of the stylesheet follows.
 */
 
+/*main container*/
+#iwjvContainer{
+   
+}
+#iwjvBodyContainer{
+    padding: 10px;
+}
+
+/*table element that contains the species data*/
+#speciesTable{
+    margin-left: 25px;
+}
+
+#speciesTable td{
+    padding: 5px 10px;
+}
 /* Column headings of the species table  */
 .speciesTableHeadingRow{
     font-weight: bold;
@@ -26,14 +42,68 @@ td.stategonImage{
     
 }
 /* div element that contains the worksheetTable*/
-#worksheetContainer{
+#worksheetContainer {
+    display: inline-block;
     margin-bottom: 150px;
     
 }
+#worksheetContainer button{
+    margin: 10px 0 10px 0;
+}
+
+#worksheetContent{
+    margin-left: 25px;
+}
 /* table elements with worksheet info */
 #worksheetTable{
-    
+    border: 0;
 }
+/* heading for worksheet gets more padding */
+#worksheetTable .worksheetHeadingRow td {
+    padding-top: 10px;
+}
+#worksheetTable td {
+    padding: 5px 10px 5px 0;
+}
+
+#worksheetTable input{
+    width: 70px;
+}
+
+#worksheetTable .after, .speciesTableRow .after {
+    background-color: rgba(188,190,113,0.3);
+/*    background-color: #BCBE71;*/
+}
+
+#worksheetTable .before, .speciesTableRow .before {
+    background-color: rgba(217,171,117,0.5);
+/*    background-color: #F7F5ED;*/
+}
+
+#worksheetTable .after.first, #worksheetTable .before.first {
+    padding-left: 10px;
+}
+
+#worksheetTable .referenceRow{
+    background-color: rgba(255,255,255,.5);
+}
+
+.worksheetHeadingRow .conditionHeading span{
+    font-weight: normal;
+    font-size: 0.9em;
+}
+
+/* the rows that are considered the heading*/
+.worksheetHeadingRow {
+    vertical-align: top;
+    font-weight: bold;
+}
+
+.worksheetHeadingRow .conditionHeading {
+    text-align: center;
+}
+
+
 
 /* a single row in the worksheet table with habitat data*/
 .worksheetHabitatRow{
@@ -44,3 +114,16 @@ td.stategonImage{
 .worksheetHabitatName{
     
 }
+
+.psuedo-div{
+    display: block;
+}
+
+.worksheetButtonContainer{
+    text-align: right;
+}
+
+.numericContainer{
+    text-align: right;
+}
+
