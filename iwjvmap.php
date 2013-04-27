@@ -53,7 +53,8 @@
             var navOptions = 
             {
                  saveState: true,
-                 defaultControl : navControl        
+                 defaultControl : navControl, 
+                 zoomWheelEnabled: false
             };
 
             var navControl =  new OpenLayers.Control.Navigation(navOptions);     
@@ -357,7 +358,7 @@
     });
     toolbar.addControls(panelControls);
     map.addControl(toolbar);
-    navigationControl.disableZoomWheel();  // disable mouse scroll zoom
+
     ls.maximizeControl();  // open layerswitcher by default
 
      mapPanel = new GeoExt.MapPanel({

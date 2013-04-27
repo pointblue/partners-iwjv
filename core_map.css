@@ -19,16 +19,6 @@ body{
     background-color:#F3EDDA; 
 }
 
-/*The map and the location bar 
-#map {
-    display:block;
-    position:relative;
-    width: auto;
-    height: auto;
-    border: 5px solid black;
-    z-index:1;  
-}
-*/
 
 #mappanel {
     display:block;
@@ -135,31 +125,44 @@ img.birdInfo {
 
 }
 
-#stategoninfotable table {
-	width: 100%;
-	border: 1px solid #cef;
+#stategoninfotable #habitat_info {
+	/*width: 100%;    this div not spec enough*/
+	/*border: 1px solid #cef;*/
+
 	text-align: left; 
 }
 
+#stategoninfotable #habitat_info td, th {
+            padding: 4px 5px;
+}
+
+#stategoninfotable #habitat_info #odd {
+      background-color: rgba(217, 171, 117, 0.3); 
+}
 #stategonInfoHeader{
 
          width: auto;  /*1000px;*/
 }
-#stategontnfotable{
-        border:1px ;
-        padding:1px;
+/* table element that hold stategon info*/
+#stategoninfotable{
+       /* border:1px ;*/
+       /* padding:1px;*/
        /* background-color:#F3EDDA; */
-        width: auto;  /*1000px;*/
+       /* width: auto;  1000px;*/
 }
 
 .stategonInfoTableRow{
 
          
 }
-/* Single row in the species table */
-#mapPopup{
-    
+
+/* td elements that hold the stategon image */
+td.stategonImage{
+     width: 300px;
+     padding: 20px;
 }
+
+
 
 #ext-gen3 {
     display: none;
