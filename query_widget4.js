@@ -68,7 +68,7 @@
 
     function birdInfoClick(spp)
     {
-       
+       birdInfoClickLayerSwitcher(spp);
        var sppInfoElement = $("<img />"); 
           //create sppInfo HTML Element
        sppInfoElement.attr('class', 'birdInfo');                                //give it a class attribute of 'birdInfo'
@@ -79,6 +79,26 @@
        $("#birdInfoContainer").show();
        $("#instructionsButtonContainer").show(); 
        
+    }
+    
+    function birdInfoClickLayerSwitcher(spp)
+    {
+        var layerToTurnOn = "Nothing";
+        if (spp == 'brsp') layerToTurnOn = "Brewer Sparrow Range";
+        if (spp == 'grsp') layerToTurnOn = "Grasshopper Sparrow Range";
+        if (spp == 'lbcu') layerToTurnOn = "Long-billed Curlew Range";
+        if (spp == 'sasp') layerToTurnOn = "Sage Sparrow Range";
+        if (spp == 'sath') layerToTurnOn = "Sage Thrasher Range";
+    
+         var larray = map.getLayersByName(/\sRange/);   // all bird layers in map
+         for (var i = 0; i < larray.length; i++)
+         {
+             larray[i].setVisibility(false);
+             if (larray[i].name.toString() == layerToTurnOn)
+             {
+                 larray[i].setVisibility(true);             
+             }
+         }
     }
     
      function showInstructionInfo(){
