@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Inter-Mountain West Joint Venture</title>
-        
+        <title>Inter-Mountain West Joint Venture</title>   
         <?php //__BASEHOST defines the host to use for this instance?>
         <script type="text/javascript">var __BASEHOST = "localhost";</script>
         <?php if($_SERVER["HTTP_HOST"] !== "localhost") : ?>
             <script type="text/javascript">__BASEHOST = "data.prbo.org";</script>
         <?php endif;?>
-            
-
         <!--  all of these links and scripts can go in the core  -->		
         <script type="text/javascript" src="inc/js/ext-3.4.0/adapter/ext/ext-base.js"></script>
         <script type="text/javascript" src="inc/js/ext-3.4.0/ext-all.js"></script>
@@ -17,13 +14,12 @@
         <script src="OpenLayers-2.11/OpenLayers.js"></script>
         <script src="inc/js/GeoExt/lib/GeoExt.js" type="text/javascript"></script>
         <script type="text/javascript" src="proj4js-compressed.js"></script>
-        <!-- <script type="text/javascript" src="OpenLayers-2.11/lib/jquery-1.2.1.js"></script>-->
         <link type="text/css" rel="stylesheet" href="inc/css/iwjvmap.css">
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="inc/js/imjvmap.js"></script>
-        <script type="text/javascript" src="query_widget4.js"></script>
+     <!--   <script type="text/javascript" src="query_widget4.js"></script>-->
         <!--<script type="text/javascript" src="map_core.js" ></script>-->
-        <link rel="stylesheet" type="text/css" href="core_map.css"/>
+      <!--  <link rel="stylesheet" type="text/css" href="core_map.css"/>-->
 
 
     <script type="text/javascript">
@@ -42,8 +38,8 @@
             else path = url + z + "/" + x + "/" + y + "." + this.type;
 
             return path;
-    }   
-
+    }  
+            
             Proj4js.defs["EPSG:3310"]  = "+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs";      
             Proj4js.defs["EPSG:4326"] = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
 
@@ -111,18 +107,6 @@
          };
 
 
-    // define style for vector drawing
-
-
-                    var white =  new OpenLayers.StyleMap(
-                    {
-                            strokeColor: "#FFFFFF",
-                            strokeOpacity: 0.7,
-                            strokeWidth: 2,
-                            pointerEvents: "visiblePainted",
-                            fillOpacity: 0.0
-                    });
-
     //  need to define controls variable to activate the overrided  default click handler
                     var map, controls;
                     var mapPanel;
@@ -148,11 +132,10 @@
                     "Google Hybrid",
                     {type: G_HYBRID_MAP,'sphericalMercator': true, isBaseLayer:true, opacity:1}
                 );
-           // map.addLayer(layer);
 
-                    map.addLayers([ghyb,sat]);
+         map.addLayers([ghyb,sat]);
 
-                    states = new OpenLayers.Layer.WMS(
+         states = new OpenLayers.Layer.WMS(
                         "States", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
                             LAYERS: 'spatial2:iwjv_states_3857',
@@ -171,7 +154,7 @@
                         }
                     );
 
-                   stategons = new OpenLayers.Layer.WMS(
+          stategons = new OpenLayers.Layer.WMS(
                         "IWJV Region", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
                             LAYERS: 'spatial2:stategons_3857',
@@ -189,7 +172,7 @@
                             opacity: 0.6
                         }
                     );	                
-                    BCR_9 = new OpenLayers.Layer.WMS(
+          BCR_9 = new OpenLayers.Layer.WMS(
                         "BCR 9", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
                             LAYERS: 'spatial2:bcr_9_3857',
@@ -208,7 +191,7 @@
                         }
                     );	
 
-                    BCR_10 = new OpenLayers.Layer.WMS(
+          BCR_10 = new OpenLayers.Layer.WMS(
                         "BCR 10", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
                             LAYERS: 'spatial2:bcr_10_3857',
@@ -227,7 +210,7 @@
                         }
                     );	
 
-                    BCR_16 = new OpenLayers.Layer.WMS(
+          BCR_16 = new OpenLayers.Layer.WMS(
                         "BCR 16", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
                             LAYERS: 'spatial2:bcr_16_3857',
@@ -249,7 +232,7 @@
                     map.addLayers([stategons,BCR_9,BCR_10,BCR_16]);
 
        // bird layers
-                    brsp = new OpenLayers.Layer.WMS(
+          brsp = new OpenLayers.Layer.WMS(
                         "Brewer Sparrow Range", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
                             LAYERS: 'spatial2:brsp_breeding_3857',
@@ -268,7 +251,7 @@
                         }
                     );
 
-                    grsp = new OpenLayers.Layer.WMS(
+           grsp = new OpenLayers.Layer.WMS(
                         "Grasshopper Sparrow Range", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
                             LAYERS: 'spatial2:grsp_breeding_3857',
@@ -286,7 +269,7 @@
                             opacity: 0.5
                         }
                     );
-                    lbcu = new OpenLayers.Layer.WMS(
+           lbcu = new OpenLayers.Layer.WMS(
                         "Long-billed Curlew Range", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
                             LAYERS: 'spatial2:lbcu_breeding_3857',
@@ -305,7 +288,7 @@
                         }
                     );
 
-                    sath = new OpenLayers.Layer.WMS(
+           sath = new OpenLayers.Layer.WMS(
                         "Sage Thrasher Range", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
                             LAYERS: 'spatial2:sath_breeding_3857',
@@ -323,7 +306,7 @@
                             opacity: 0.5
                         }
                     );
-                    sgsp = new OpenLayers.Layer.WMS(
+             sgsp = new OpenLayers.Layer.WMS(
                         "Sage Sparrow Range", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
                             LAYERS: 'spatial2:sgsp_breeding_3857',
@@ -342,82 +325,80 @@
                         }
                     );
         //add the bird layers       
-                map.addLayers([brsp, grsp, lbcu, sath, sgsp]);        
+           map.addLayers([grsp, lbcu, brsp, sath,  sgsp]);        
          //add the sitemarker layer       
-                map.addLayer(siteMarker);
+           map.addLayer(siteMarker);
 
-    var panelControls = [
-       navControl,
-       pointControl
-     //  lineControl,
-      // polygonControl
-    ];
-    var toolbar = new OpenLayers.Control.Panel({
-       displayClass: 'olControlEditingToolbar',
-       defaultControl: panelControls[0]
-    });
-    toolbar.addControls(panelControls);
-    map.addControl(toolbar);
+        var panelControls = [
+           navControl,
+           pointControl
+        ];
+        var toolbar = new OpenLayers.Control.Panel({
+           displayClass: 'olControlEditingToolbar',
+           defaultControl: panelControls[0]
+        });
+        toolbar.addControls(panelControls);
+        map.addControl(toolbar);
 
-    ls.maximizeControl();  // open layerswitcher by default
+        ls.maximizeControl();  // open layerswitcher by default
 
-     mapPanel = new GeoExt.MapPanel({
+       mapPanel = new GeoExt.MapPanel({
             title: "InterMountain West Joint Venture Exploration Tool",
             renderTo: "gxmap",
          //   stateId: "mappanel",
             height: 500,
-            width: 850,
+            width: 750,
             map: map,
-            center: [-12698270.216376, 5183288.4348961],
+            center:   [-12098270.216376, 4883288.4348961],      //  [-12698270.216376, 5183288.4348961],
             zoom: 5
-     }); 
-
-         // map.zoomToExtent(bounds);
-    });        
-
+       }); 
+      });        
+       
     </script>
-    </head>
+    </head> 
+    <?php
+    //Introduction and Map Instruction
+       $htmlIntro = '';
+
+       $htmlIntro .='<h4 style="margin: 0; text-align:center">Mapping Tool Use</h4>';
+       $htmlIntro .='<br />';
+       $htmlIntro .=' This mapping tool was developed to help resource and land managers explore the effect of various restoration and management plans ';
+       $htmlIntro .=' on the bird populations. <br/>';
+       $htmlIntro .='Use the map to zoom into your area of interest.  Placing a marker on the map in your region of interest (using the pencil tool) will generate a report ';
+       $htmlIntro .=' for the present habitat ';
+
+       $htmlIntro .='<br />';
+       $htmlIntro .='This mapping tool was developed as a collaborative effort between IWJV, ABC Birds, and PRBO Conservation Science ';
+
+    ?>   
     <body  onload="load()">
-        <div id="iwjvContainer">
-            
-          <div id="siteTitle">Title for the site:  Inter-Mountain West Joint Venture</div>
+        <div id="iwjvContainer">         
+          <div id="siteTitle">Inter-Mountain West Joint Venture Mapping Tool</div>
             <div id="iwjvBodyContainer">
                       <div id="gxmap"></div>  
                       <div id="panel" class="olControlEditingToolbar"></div>
                       <div id="mapSidebarRightContainer">
-                          
-                          <div id="birdInfoContainer">
+                          <div id="buttonContainer">
                               <button type="button" id="instr_button"  class="defaultButton" value="instr" onclick="showInstructionInfo();">Instructions</button>
-                              <div id="birdInfo"></div>
+                              <button type="button" class="defaultButton" value="sasp" onclick="birdInfoClick('sasp');">Sage Sparrow</button>
+                              <button type="button" class="defaultButton" value="sath" onclick="birdInfoClick('sath');">Sage Thrasher</button>
+                              <button type="button" class="defaultButton" value="brsp" onclick="birdInfoClick('brsp');">Brewer's Sparrow</button>
+                              <button type="button" class="defaultButton" value="lbcu" onclick="birdInfoClick('lbcu');">Long-billed Curlew</button>
+                              <button type="button" class="defaultButton" value="grsp" onclick="birdInfoClick('grsp');">Grasshopper Sparrow</button>
+                          </div>
+                          <div id="birdInfoContainer">
+                               <div id="birdInfo"></div>
                           </div>
                           <div id="mapInstructionContainer">
-                           <!--  lots of html-->
-                           <p style="margin: 0;">Instructions</p>
+                              <?php echo $htmlIntro ?>
                           </div>
-                     </div>
-
-            <br class="clear">
-
-                  <button type="button" class="defaultButton" value="brsp" onclick="birdInfoClick('brsp');">Brewer's Sparrow</button>
-                  <button type="button" class="defaultButton" value="grsp" onclick="birdInfoClick('grsp');">Grasshopper Sparrow</button>
-                  <button type="button" class="defaultButton" value="lbcu" onclick="birdInfoClick('lbcu');">Long-billed Curlew</button>
-                  <button type="button" class="defaultButton" value="sasp" onclick="birdInfoClick('sasp');">Sage Sparrow</button>
-                  <button type="button" class="defaultButton" value="sath" onclick="birdInfoClick('sath');">Sage Thrasher</button>
-<!--
-          <table>
-              <tr>
-                  <td>
-                      -->
-                      <div id="stategonTableContainer">    
-                         <!-- <div id="stategoninfoheader"></div>-->
-                        <div id="stategoninfotable" ></div> 
                       </div>
-            <!--      </td>
-              </tr>         
-          </table>
-            -->
-          <div id="speciesTableContainer"></div>
-          <div id="worksheetContainer"></div>
+                    <br class="clear">
+                      <div id="stategonTableContainer">    
+                         <div id="stategoninfotable" ></div> 
+                      </div>
+                    <div id="speciesTableContainer"></div>
+                    <div id="worksheetContainer"></div>
             </div>
         </div>	
     </body>
