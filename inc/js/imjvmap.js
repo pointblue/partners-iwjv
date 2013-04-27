@@ -348,7 +348,7 @@ function ImjvController(){
     function handleWorksheetInputKeydown(event){
         var correctKey = -1;
         console.log(event.which);
-        if(event.which >= 37 && event.event.which <= 40) return true;   //arrow keys
+        if(event.which >= 37 && event.which <= 40) return true;   //arrow keys
         if(event.which === 46) return true; //delete
         if(event.which === 8) return true;  //backspace
         
