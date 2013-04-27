@@ -347,6 +347,11 @@ function ImjvController(){
     
     function handleWorksheetInputKeydown(event){
         var correctKey = -1;
+        console.log(event.which);
+        if(event.which >= 37 && event.event.which <= 40) return true;   //arrow keys
+        if(event.which === 46) return true; //delete
+        if(event.which === 8) return true;  //backspace
+        
         if(event.which >= 96 && event.which <= 105){
             correctKey = event.which-48;
         } else correctKey = event.which;
@@ -354,10 +359,10 @@ function ImjvController(){
         var inputCharacter = String.fromCharCode(correctKey);
 
         //only allow numbers and backspaces
-        if( inputCharacter.match(/[0123456789]/) === null ){
-            if(event.which === 8) return true;
-            else return false;
-        } else return true;
+        if( inputCharacter.match(/[0123456789]/) !== null ){
+            
+            return true;
+        } else return false;
     }
     
     function handleWorksheetInputKeyup(event){
