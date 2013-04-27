@@ -3,13 +3,31 @@
     Created on : Apr 19, 2013, 9:23:23 AM
     Author     : Martin Magana <magana.web@gmail.com>
     Description:
-        Purpose of the stylesheet follows.
+    Purpose of the stylesheet follows.
 */
 
 /*main container*/
-#iwjvContainer{
-   
+
+#iwjvContainer {
+    display:block;
+    position:relative;
+    width: auto;
+    height: auto;
+    z-index:1; 
+    background-color:#F3EDDA; 
 }
+
+#gxmap {
+    display:block;
+    float:left;
+    position:relative;
+    top:5px;
+    width: 750px;
+    height: 500px;
+    border: 1px solid black;
+    z-index:1;  
+}
+
 #iwjvBodyContainer{
     padding: 10px;
 }
@@ -118,3 +136,130 @@
     text-align: right;
 }
 
+
+#title {
+    display: none;            
+    top:0px;
+    position:absolute;
+    width: 850px;
+    height: auto;
+    border: 5px solid black;
+    z-index:1;  
+}
+
+#siteTitle {
+    display:block;
+    top:0px;
+    position:relative;
+    text-align: center;
+    width: auto;
+    height: 100px;
+    font-weight: bold;
+    font-size: 1.7em;
+    z-index:1;  
+    background-color: #EAE0C1;
+    color:#787836;/*none;*/
+}
+
+
+#birdInfoContainer button{
+    float: left;
+}
+#buttonContainer button{
+    display: block;
+    margin: 5px;
+    margin-left:auto;
+    margin-right:auto;
+    width: 12em;
+}
+
+#buttonContainer{
+    display: block;
+    float: left;
+
+}
+/*Text for intro, bird info, and error messages*/
+#mapSidebarRightContainer {
+    
+    color:#787836;
+    font-weight: bold;
+    font-size: 1.0em;
+    height: 500px;
+    margin-left: 755px;
+    text-align: center;
+    width: auto;
+}
+img.birdInfo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto ;
+    width: 620px;
+    padding-left: 5px;
+   /* height: 200px;*/
+}
+
+/*Info  for bird popup*/
+#birdInfoContainer{
+    display: none;
+    width: 620px;
+}
+
+#mapInstructionContainer{
+    display: none;
+    font-size: 1.0em;
+    padding-left: 10px;
+    text-align: left;
+    margin: 0;
+}
+
+.defaultButton{
+    color:#FFFFFF;/*none;*/
+    background-color: #C26D16;
+}
+ 
+.stategonTableContainer {
+    background-color:#F3EDDA; 
+
+}
+
+#stategoninfotable #habitat_info {
+	/*width: 100%;    this div not spec enough*/
+	/*border: 1px solid #cef;*/
+
+	text-align: left; 
+}
+
+#stategoninfotable #habitat_info td, th {
+            padding: 4px 5px;
+}
+
+#stategoninfotable th {
+    text-align: center;
+}
+#stategoninfotable #habitat_info #odd {
+      background-color: rgba(217, 171, 117, 0.3); 
+}
+#stategonInfoHeader{
+
+         width: auto;  /*1000px;*/
+}
+/* table element that hold stategon info*/
+#stategoninfotable{
+
+}
+
+.stategonInfoTableRow{
+
+         
+}
+
+/* td elements that hold the stategon image */
+td.stategonImage{
+     width: 300px;
+     padding: 20px;
+}
+
+/*geoExt top panel*/
+#ext-gen3 {
+    display: none;
+}
