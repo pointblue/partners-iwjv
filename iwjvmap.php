@@ -362,15 +362,15 @@
 
        $htmlIntro .='<h4 style="margin: 0; text-align:center">Mapping Tool Use</h4>';
        $htmlIntro .='<br />';
-       $htmlIntro .=' This mapping tool was developed to help resource and land managers  develop and implement habitat conservation that is both strategic and effective.  Using this tool explore the effect of various restoration and management plans ';
-       $htmlIntro .=' on the bird populations. ';
-       $htmlIntro .='<br />';
+       $htmlIntro .=' This mapping tool was developed to help resource and land managers develop and implement habitat conservation projects that are both strategic and effective.';  
+       $htmlIntro .='  This tool allows planners to explore the impact that various restoration and management plans have on bird populations ';
+       $htmlIntro .='<br /><br />';
        $htmlIntro .='Use the map to zoom into your area of interest.  Placing a marker  <img src="http://localhost/partners/iwjv/uploads/img/add_point_on.png"   style="vertical-align:middle"/> on the map in your region of interest will generate  reports ';
        $htmlIntro .=' describing the habitat composition for the marked State/ Bird Conservation Region (BCR). ';
-       $htmlIntro .=' and a report of the populations of land bird species found in htis region and goals for their future populations. ';
-       $htmlIntro .='for that region as well as  ';
-
-       $htmlIntro .='<br />';
+       $htmlIntro .=' Reports will also be presented for the populations of the bird species currently found in this region and goals for their future populations. ';
+       $htmlIntro .='<br /><br />';
+       $htmlIntro .= ' You will be presented with a calculation worksheet that allows you to estimate the effect of various habitat conservation efforts on the bird populations of the region';
+        $htmlIntro .='<br /><br />';
        $htmlIntro .='This mapping tool was developed as a collaborative effort between IWJV, ABC, and PRBO Conservation Science ';
 
     ?>   
