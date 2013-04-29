@@ -574,6 +574,12 @@ function ImjvModel(){
         $("#birdInfoContainer").hide();  
         $('#mapInstructionContainer').show();
         $("#instructionsButtonContainer").hide();
+        //turn off all bird layers in map?
+         var larray = map.getLayersByName(/\sRange/);   // all bird layers in map
+         for (var i = 0; i < larray.length; i++)
+         {
+             larray[i].setVisibility(false);
+         }
         
     }
     
