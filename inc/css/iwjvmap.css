@@ -7,6 +7,11 @@
 */
 
 /*main container*/
+body{
+    /*overflow:hidden;*/
+      font-family: "Myriad Pro",Myriad,"Trebuchet MS",Arial,Helvetica,sans-serif;
+      background-color:#EAE0C1; 
+}
 
 #iwjvContainer {
     display:block;
@@ -57,9 +62,11 @@
     
 }
 
-#worksheetContainer h4 {
+#worksheetContainer p {
    color:#787836;
-   width: 940px;
+   font-weight: bold;
+
+
 }
 
 #worksheetContainer button{
