@@ -158,7 +158,7 @@
           stategons = new OpenLayers.Layer.WMS(
                         "IWJV Region", "http://data.calcommons.org:8080/geoserver/spatial2/wms",
                         {
-                            LAYERS: 'spatial2:stategons_3857',
+                            LAYERS: 'spatial2:iwjv_boundary_3857',
                             STYLES: '',
                             format: format,
                             tiled: true,
