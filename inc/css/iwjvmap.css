@@ -56,6 +56,11 @@
     margin-bottom: 150px;
     
 }
+
+#worksheetContainer h4 {
+   color:#787836;
+}
+
 #worksheetContainer button{
     margin: 10px 0 10px 0;
 }
@@ -70,6 +75,7 @@
 /* heading for worksheet gets more padding */
 #worksheetTable .worksheetHeadingRow td {
     padding-top: 10px;
+    text-align: center;
 }
 #worksheetTable td {
     padding: 5px 10px 5px 0;
@@ -243,7 +249,7 @@ img.birdInfo {
     text-align: center;
 }
 #stategoninfotable #habitat_info #odd {
-      background-color: rgba(217, 171, 117, 0.3); 
+      background-color: rgba(249, 246, 237, 0.8); 
 }
 #stategonInfoHeader{
 
