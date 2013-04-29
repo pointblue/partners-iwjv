@@ -469,6 +469,7 @@ function ImjvModel(){
         if(typeof completeActions[status] !== "undefined") completeActions[status](data);
     }
 }
+
 // -- Supplemental js for Openlayers Map  --
 
   // variables
@@ -573,14 +574,7 @@ function ImjvModel(){
      function showInstructionInfo(){
         $("#birdInfoContainer").hide();  
         $('#mapInstructionContainer').show();
-        $("#instructionsButtonContainer").hide();
-        //turn off all bird layers in map?
-         var larray = map.getLayersByName(/\sRange/);   // all bird layers in map
-         for (var i = 0; i < larray.length; i++)
-         {
-             larray[i].setVisibility(false);
-         }
-        
+        $("#instructionsButtonContainer").hide();        
     }
     
     function load()
