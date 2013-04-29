@@ -212,7 +212,8 @@ function ImjvView(){
         worksheetHeading.text("Population Worksheet");
         
         var worksheetInstructions = $("<h4></h4>");
-        var instructions = "Enter the number of acres for each habitat/condition you have (before) and will be restoring (after) and then click the \"calculate\" button.    The calculated estimates for the species responce to these habitat changes will appear in the before/after columns of the Species Population Table"
+        var instructions = "Enter the number of acres for each habitat/condition you have (before) and will be restoring (after) and then click the \"calculate\" button. \ \ ";
+        instructions    += "   The calculated estimates for the species responce to these habitat changes will appear in the before/after columns of the Species Population Table";
         worksheetInstructions.text(instructions);
         
         var worksheetContent = $("<div></div>");
