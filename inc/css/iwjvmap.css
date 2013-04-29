@@ -12,6 +12,9 @@ body{
       font-family: "Myriad Pro",Myriad,"Trebuchet MS",Arial,Helvetica,sans-serif;
       background-color:#EAE0C1; 
 }
+h1, h2{
+    color:rgb(99, 88, 54);
+}
 
 #iwjvContainer {
     display:block;
@@ -63,8 +66,9 @@ body{
 }
 
 #worksheetContainer p {
-   color:#787836;
-   font-weight: bold;
+/*   color:#787836;
+   font-weight: bold;*/
+margin-left: 25px;
 
 
 }
@@ -161,18 +165,11 @@ body{
     z-index:1;  
 }
 
-#siteTitle {
-    display:block;
-    top:0px;
-    position:relative;
+#siteTitleContainer {
+
     text-align: center;
-    width: auto;
     height: 100px;
-    font-weight: bold;
-    font-size: 1.7em;
-    z-index:1;  
     background-color: #EAE0C1;
-    color:#787836;/*none;*/
 }
 
 
@@ -195,7 +192,7 @@ body{
 /*Text for intro, bird info, and error messages*/
 #mapSidebarRightContainer {
     
-    color:#787836;
+/*    color:#787836;*/
     font-weight: bold;
     font-size: 1.0em;
     height: 500px;
@@ -232,6 +229,10 @@ img.birdInfo {
     text-align: left;
     margin-left: 170px;
 }
+#mapInstructionContainer h2{
+    margin: 0;
+    text-align: center;
+}
 
 .defaultButton{
     color:#FFFFFF;/*none;*/
@@ -251,7 +252,7 @@ img.birdInfo {
 }
 
 #stategoninfotable #habitat_info td, th {
-            padding: 4px 5px;
+            padding: 4px 15px 4px 0;
 }
 
 #stategoninfotable th {
@@ -262,7 +263,12 @@ img.birdInfo {
 }
 #stategonInfoHeader{
 
-         width: auto;  /*1000px;*/
+}
+#stategonInfoHeader div{
+
+}
+#stategonInfoTableHeader div{
+    margin-left: 25px;
 }
 /* table element that hold stategon info*/
 #stategoninfotable{

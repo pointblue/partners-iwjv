@@ -114,7 +114,7 @@ function ImjvView(){
         
         var worksheetTable = $("<table></table>");
         worksheetTable.attr('id', 'worksheetTable');
-        worksheetTable.attr('cellspacing', 0)
+        worksheetTable.attr('cellspacing', 0);
         
         //First heading row
         var headingRow1 = $("<tr></tr>");
@@ -212,8 +212,8 @@ function ImjvView(){
         worksheetHeading.text("Population Worksheet");
         
         var worksheetInstructions = $("<p></p>");
-        var instructions = "Enter the number of acres for each habitat/condition you have (before) and will be restoring (after) and then click the \"calculate\" button. <br> ";
-        instructions    += "The calculated estimates for the species responce to these habitat changes will appear in the before/after columns of the Species Population Table";
+        var instructions = "Enter acres for each habitat you have (before) and will restore (after), then click 'calculate'.<br>";
+        instructions    += "Estimates appear in before / after columns of Species Population table above.";
         worksheetInstructions.html(instructions);
         
         var worksheetContent = $("<div></div>");
@@ -554,17 +554,17 @@ function ImjvModel(){
     function birdInfoClickLayerSwitcher(spp)
     {
         var layerToTurnOn = "Nothing";
-        if (spp == 'brsp') layerToTurnOn = "Brewer Sparrow Range";
-        if (spp == 'grsp') layerToTurnOn = "Grasshopper Sparrow Range";
-        if (spp == 'lbcu') layerToTurnOn = "Long-billed Curlew Range";
-        if (spp == 'sasp') layerToTurnOn = "Sage Sparrow Range";
-        if (spp == 'sath') layerToTurnOn = "Sage Thrasher Range";
+        if (spp === 'brsp') layerToTurnOn = "Brewer Sparrow Range";
+        if (spp === 'grsp') layerToTurnOn = "Grasshopper Sparrow Range";
+        if (spp === 'lbcu') layerToTurnOn = "Long-billed Curlew Range";
+        if (spp === 'sasp') layerToTurnOn = "Sage Sparrow Range";
+        if (spp === 'sath') layerToTurnOn = "Sage Thrasher Range";
     
          var larray = map.getLayersByName(/\sRange/);   // all bird layers in map
          for (var i = 0; i < larray.length; i++)
          {
              larray[i].setVisibility(false);
-             if (larray[i].name.toString() == layerToTurnOn)
+             if (larray[i].name.toString() === layerToTurnOn)
              {
                  larray[i].setVisibility(true);             
              }
