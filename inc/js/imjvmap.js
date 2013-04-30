@@ -55,6 +55,8 @@ function ImjvView(){
     
     var that = this;
     
+    var _isSpeciesInRegion = null;
+    
     var caller = [];
     caller["worksheetLoaded"] = $.Callbacks();
     
@@ -72,8 +74,8 @@ function ImjvView(){
         that.populateStategon(data);
         that.populateSpeciesTable(data);
         that.populateWorksheet(data);
-        
-        if(data.stategon.code === ""){
+        that._isSpeciesInRegion = isSpeciesInRegion(data.stategon.species);
+        if(data.stategon.code === "" || ! that._isSpeciesInRegion){
             alert(errorMessageText);    //report error to user
         }
     };
@@ -115,7 +117,7 @@ function ImjvView(){
         var containerId = "worksheetContainer";
         
         //set container element to blank and return if no stategon code
-        if(data.stategon.code === "") {
+        if(data.stategon.code === "" || ! that._isSpeciesInRegion) {
             $("#" + containerId).html("");
             return false;
         }
@@ -254,8 +256,8 @@ function ImjvView(){
         
         var containerId = "speciesTableContainer";
         
-        //set container element to blank and return if no stategon code
-        if(data.stategon.code === "") {
+        //set container element to blank and return if no stategon code or no species in region
+        if(data.stategon.code === "" || ! that._isSpeciesInRegion ) {
             $("#" + containerId).html("");
             return false;
         }
@@ -317,6 +319,15 @@ function ImjvView(){
 
         
     };
+    
+    function isSpeciesInRegion(species){
+        var isSpecies = false;
+        var speciesNames = ["BRSP", "GRSP", "LBCU", "SAGS", "SATH"];
+        for(var i=0;i<speciesNames.length;i++){
+            isSpecies = isSpecies || species[speciesNames[i]];
+        }
+        return Boolean(isSpecies);
+    }
     
 }
 
