@@ -17,12 +17,9 @@ h1, h2{
 }
 
 #iwjvContainer {
-    display:block;
-    position:relative;
-    width: auto;
-    height: auto;
-    z-index:1; 
-    background-color:#F3EDDA; 
+    background-color:#F3EDDA;
+    margin: 0 auto;
+    width: 1300px;
 }
 
 #gxmap {
@@ -186,19 +183,14 @@ margin-left: 25px;
 }
 
 #buttonContainer{
-    display: block;
     float: left;
-
+    margin: 0 20px;
 }
 /*Text for intro, bird info, and error messages*/
 #mapSidebarRightContainer {
-    
-/*    color:#787836;*/
     font-size: 1.0em;
     height: 500px;
     margin-left: 755px;
-    text-align: center;
-    width: auto;
 }
 
 #birdImgInfo {
@@ -260,27 +252,22 @@ margin-left: 25px;
 }
 
 #photoCredit{
-    margin-left: 20px;
-    float: left;
+    clear:both;
     color: rgb(65,48,0);
     font-size: 0.9em;
+    margin-left: 20px;
+    position: relative;
+    top: -18px;
 }
 /*Info  for bird popup*/
 #birdInfoContainer{
-    float: left;
     display: none;
-    width: 450px;
- /*  margin-top: 180px;*/
- /*  text-align: left;*/
 }
 
 #mapInstructionContainer{
     display: none;
     font-size: 1.0em;
-    padding-left: 5px;
-    padding-right: 20px;
-    text-align: left;
-    margin-left: 170px;
+    padding: 0 20px;
 }
 #mapInstructionContainer h2{
     margin: 0;
@@ -295,8 +282,7 @@ margin-left: 25px;
 #footer{
     font-family: futura,arial,helvetica,sans-serif;
     font-size: 1.0em;
-    font-weight: bold;
-    color:#C26D16;/*none;*/
+    color:#C26D16;
     float: right;
 }
 .stategonTableContainer {

@@ -1,13 +1,38 @@
+//-------------
+//
+//DEBUG
+//
+var __FORCEDEBUG = false;   //true to force debug on live/remote/production server
 
-//make a loader object
-var appModel = new ImjvModel();
+var __DEBUG = false;    //do not set this variable. shows debug variables
+//automatic debug mode on localhost or on force debug
+if(__BASEHOST === "localhost" || __FORCEDEBUG !== false){
+    __DEBUG = true;
+}
+if(__DEBUG){
+    if (!window.console) window.console = {};
+    if (!window.console.log) window.console.log = function () { };
+    if (!window.console.error) window.console.error = function () { };
+}
+//
+//-------------
 
-var appView = new ImjvView();
 
-var appController = new ImjvController();
+
+
+//-------------
+//
+//Main app variables
+//
+var appModel = new ImjvModel(); //Model loads data
+
+var appView = new ImjvView();   //View controls data display
+
+var appController = new ImjvController();   //Controller responds to events
 
 initApp();  //initialize the app
 
+//Initializes main app variables
 function initApp(){
     
     //init app tells which handlers are responsible for which events
@@ -43,22 +68,13 @@ function ImjvView(){
     //allows returned stategon to be checked for errors before populating view
     this.handleStategonLoad = function(data){
         var errorMessageText = "No data found for the selected area. Please try a different area.";
-        //TODO: show no data alert box
-        //reset error message if there is one
-//        if( $("#mapSidebarRightContainer").text() === errorMessageText){
-//            $("#mapSidebarRightContainer").html("");
-//        }
         
         that.populateStategon(data);
         that.populateSpeciesTable(data);
         that.populateWorksheet(data);
         
         if(data.stategon.code === ""){
-            //report error
-//            var errorMessageElement = $("<p></p>");
-//            errorMessageElement.text(errorMessageText);
-//            $("#mapSidebarRightContainer").html(errorMessageElement);
-            alert(errorMessageText);
+            alert(errorMessageText);    //report error to user
         }
     };
     
@@ -95,10 +111,6 @@ function ImjvView(){
     //
     //
     this.populateWorksheet = function(data){
-        //todo: right align numbers
-        //decread in red
-        //immediately change colors on worksheet submit, and fade back to original color
-        //on submit, disable submit button
         
         var containerId = "worksheetContainer";
         
@@ -109,8 +121,6 @@ function ImjvView(){
         }
         
         var habitats = data.stategon.habitats.data;
-        
-        
         
         var worksheetTable = $("<table></table>");
         worksheetTable.attr('id', 'worksheetTable');
@@ -353,22 +363,23 @@ function ImjvController(){
     
     function handleWorksheetInputKeydown(event){
         var correctKey = -1;
-        //console.log(event.which);
+        if(__DEBUG) console.log( "Keydown: " + event.which.toString() );
+        
+        //
+        //Check for valid keys
+        //
         if(event.which >= 37 && event.which <= 40) return true;   //arrow keys
         if(event.which === 46) return true; //delete
         if(event.which === 8) return true;  //backspace
         
-        if(event.which >= 96 && event.which <= 105){
-            correctKey = event.which-48;
-        } else correctKey = event.which;
+        if(event.which >= 96 && event.which <= 105) correctKey = event.which-48;
+        else correctKey = event.which;
         
         var inputCharacter = String.fromCharCode(correctKey);
 
         //only allow numbers and backspaces
-        if( inputCharacter.match(/[0123456789]/) !== null ){
-            
-            return true;
-        } else return false;
+        if( inputCharacter.match(/[0123456789]/) !== null ) return true;
+        else return false;
     }
     
     function handleWorksheetInputKeyup(event){
@@ -391,12 +402,6 @@ function ImjvController(){
                 worksheetDataChanged[conditionTime][mcc] = $(this).val();
             }
         } else worksheetDataChanged[conditionTime][mcc] = $(this).val();
-        
-        
-        //debug
-        //console.log("conditionTime: " + conditionTime + ", mcc: " + mcc);
-        //console.log("new data: " + worksheetDataChanged[conditionTime][mcc]);
-        //console.log("data length at keyup: " + worksheetDataChanged[conditionTime].length);
 
     }
     
@@ -404,7 +409,7 @@ function ImjvController(){
 
 
 function ImjvModel(){
-    var baseHost =   __BASEHOST;          //"data.prbo.org";   //"localhost";
+    var baseHost =   __BASEHOST;
     var baseUrl = "http://" + baseHost + "/api/v1/";
     var restBaseUrl = "habpop/";
     var stategonUrl = baseUrl + restBaseUrl + "stategons/";
@@ -443,7 +448,7 @@ function ImjvModel(){
         //what happens for a given status
         var completeActions = [];
         completeActions["success"] = function(data){caller["load"].fire(data);};    //fire callbacks to listeners
-        completeActions["fail"] = function(geom){console.error("Call to stategon rest api failed with geom = " + geom);};
+        completeActions["fail"] = function(geom){if(__DEBUG) console.error("Call to stategon rest api failed with geom = " + geom);};
         
         if(typeof completeActions[status] !== "undefined") completeActions[status](data);
     }
@@ -464,7 +469,7 @@ function ImjvModel(){
         //what happens for a given status
         var completeActions = [];
         completeActions["success"] = function(data){caller["change"].fire(data);};    //fire callbacks to listeners
-        completeActions["fail"] = function(data){console.error("Call to estimates rest api failed with data = " + data);};
+        completeActions["fail"] = function(data){if(__DEBUG) console.error("Call to estimates rest api failed with data = " + data);};
         
         if(typeof completeActions[status] !== "undefined") completeActions[status](data);
     }
@@ -521,36 +526,30 @@ function ImjvModel(){
 // define the  handler functions for the point done drawing
     function PointDoneHandler(point) 
     {
-                //console.log(point.toString());     
-                siteMarker.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(point.x,point.y),icon));		
-		var geom = point.transform(projSrc, projDisplay);  
-                geom = (geom.toString()); 
-       //remove previous sitemarker
-              map.removeLayer(siteMarker);
-       // add new site marker	
-              map.addLayer(siteMarker);         
-            // API call with point geom
-                appModel.loadAppData(geom);  
-            //deactivate point control and activate navigation
-                pointControl.deactivate();
-                navControl.activate();
+        if(__DEBUG) console.log( point.toString() );     
+        siteMarker.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(point.x,point.y),icon));		
+        var geom = point.transform(projSrc, projDisplay);  
+        geom = (geom.toString()); 
+        //remove previous sitemarker
+        map.removeLayer(siteMarker);
+        // add new site marker	
+        map.addLayer(siteMarker);         
+        // API call with point geom
+        appModel.loadAppData(geom);  
+        //deactivate point control and activate navigation
+        pointControl.deactivate();
+        navControl.activate();
     };   
 
     function birdInfoClick(spp)
     {
        birdInfoClickLayerSwitcher(spp);
-  //     var sppInfoElement = $("<p></p>"); 
-          //create sppInfo HTML Element
+       //create sppInfo HTML Element
        $("#birdImgInfo").attr('class', 'birdInfo');
        $("#birdImgInfo").addClass('birdInfoBackground-'+spp);
-
        
-       //give it a class attribute of 'birdInfo'
-      // sppInfoElement.attr('src', "http://" + __BASEHOST + "/partners/iwjv/uploads/img/" + spp + "Info.png");   //give it a src attribute
-      // sppInfoElement.addClass(spp);
       var birdTextUrl = "http://" + __BASEHOST + "/partners/iwjv/uploads/html/"+spp+"InfoText.php";
       $.get(birdTextUrl, function(data) {
-          
                 $("#birdImgInfo").html(data); 
       }).fail(function(){
           $("#birdImgInfo").html(""); 
@@ -558,7 +557,6 @@ function ImjvModel(){
 
       var photoCreditUrl = "http://" + __BASEHOST + "/partners/iwjv/uploads/html/"+spp+"PhotoCredit.txt";
       $.get(photoCreditUrl, function(data) {
-          
             $("#photoCredit").text(data); 
       }).fail(function(){
           $("#photoCredit").text("");
