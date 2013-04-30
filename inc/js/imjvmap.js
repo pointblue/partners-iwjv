@@ -539,12 +539,27 @@ function ImjvModel(){
     function birdInfoClick(spp)
     {
        birdInfoClickLayerSwitcher(spp);
-       var sppInfoElement = $("<img />"); 
+  //     var sppInfoElement = $("<p></p>"); 
           //create sppInfo HTML Element
-       sppInfoElement.attr('class', 'birdInfo');                                //give it a class attribute of 'birdInfo'
-       sppInfoElement.attr('src', "http://" + __BASEHOST + "/partners/iwjv/uploads/img/" + spp + "Info.png");   //give it a src attribute
-       sppInfoElement.addClass(spp);
-       $("#birdInfo").html(sppInfoElement);  //set the bird container element with the image element
+       $("#birdImgInfo").attr('class', 'birdInfo');
+       $("#birdImgInfo").addClass('birdInfoBackground-'+spp);
+
+       
+       //give it a class attribute of 'birdInfo'
+      // sppInfoElement.attr('src', "http://" + __BASEHOST + "/partners/iwjv/uploads/img/" + spp + "Info.png");   //give it a src attribute
+      // sppInfoElement.addClass(spp);
+       var birdTextUrl = "http://" + __BASEHOST + "/partners/iwjv/uploads/html/"+spp+"InfoText.php";
+      $.get(birdTextUrl, function(data) {
+          
+                $("#birdImgInfo").html(data); 
+      });
+
+$("#mydiv").focusin(function() {
+  $("#mydiv").css("background","red");
+});
+       
+    //   sppInfoElement.text('Super text');
+   //    $("#birdInfo").html(sppInfoElement);  //set the bird container element with the image element
        $('#mapInstructionContainer').hide();  
        $("#birdInfoContainer").show();
        $("#instructionsButtonContainer").show(); 

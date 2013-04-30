@@ -23,7 +23,8 @@
     <body  onload="load();">
         <div id="iwjvContainer">         
           <div id="siteTitleContainer">
-              <h1>Inter-Mountain West Joint Venture Mapping Tool</h1>
+             <!-- <h1>Inter-Mountain West Joint Venture Mapping Tool</h1>-->
+             <img src="./uploads/img/IWJV_logo.png" />
           </div>
             <div id="iwjvBodyContainer">
                       <div id="gxmap"></div>  
@@ -38,7 +39,8 @@
                               <button type="button" class="defaultButton" value="grsp" onclick="birdInfoClick('grsp');">Grasshopper Sparrow</button>
                           </div>
                           <div id="birdInfoContainer">
-                               <div id="birdInfo"></div>
+                               <div id="birdImgInfo"></div>
+                               <!--<div id="birdImg"></div>-->
                           </div>
                           <div id="mapInstructionContainer">
                               <h2>Mapping Tool Use</h2>

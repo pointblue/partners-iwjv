@@ -165,13 +165,19 @@ margin-left: 25px;
     z-index:1;  
 }
 
-#siteTitleContainer {
+#siteTitleContainer  {
 
     text-align: center;
-    height: 100px;
+    height: 160px;
     background-color: #EAE0C1;
 }
 
+#siteTitleContainer img {
+
+    float:left;
+    margin-left: 130px;
+
+}
 
 #birdInfoContainer button{
     float: left;
@@ -210,7 +216,38 @@ img.birdInfo {
 
 }
 
+#birdImgInfo {
+    background-repeat:no-repeat;
+    width: 350px;
+    height: 350px;
+    float: left;
+    margin-left:20px;
+    margin-top:10px;
+    text-align: center;
+    color: rgb(254,254,253);  /*rgb(243,237,218);*/
+    font-size: 1.2em;
+    
+}
 
+.birdInfoBackground-sasp {
+        background-image: url('../../uploads/img/saspInfo.jpg');
+}
+
+.birdInfoBackground-sath {
+        background-image: url('../../uploads/img/sathInfo.jpg');
+}
+
+.birdInfoBackground-grsp {
+        background-image: url('../../uploads/img/grspInfo.jpg');
+}
+
+.birdInfoBackground-brsp {
+        background-image: url('../../uploads/img/brspInfo.jpg');
+}
+
+.birdInfoBackground-lbcu {
+        background-image: url('../../uploads/img/lbcuInfo.jpg');
+}
 
 /*Info  for bird popup*/
 #birdInfoContainer{
