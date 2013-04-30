@@ -353,7 +353,7 @@ function ImjvController(){
     
     function handleWorksheetInputKeydown(event){
         var correctKey = -1;
-        console.log(event.which);
+        //console.log(event.which);
         if(event.which >= 37 && event.which <= 40) return true;   //arrow keys
         if(event.which === 46) return true; //delete
         if(event.which === 8) return true;  //backspace
@@ -521,7 +521,7 @@ function ImjvModel(){
 // define the  handler functions for the point done drawing
     function PointDoneHandler(point) 
     {
-                console.log(point.toString());     
+                //console.log(point.toString());     
                 siteMarker.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(point.x,point.y),icon));		
 		var geom = point.transform(projSrc, projDisplay);  
                 geom = (geom.toString()); 
