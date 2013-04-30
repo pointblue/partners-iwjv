@@ -24,7 +24,7 @@
         <div id="iwjvContainer">         
           <div id="siteTitleContainer">
              <!-- <h1>Inter-Mountain West Joint Venture Mapping Tool</h1>-->
-             <img src="./uploads/img/IWJV_logo.png" />
+             <a href="http://iwjv.org/" target="_blank"><img src="./uploads/img/IWJV_logo.png" /></a>
           </div>
             <div id="iwjvBodyContainer">
                       <div id="gxmap"></div>  
@@ -40,6 +40,7 @@
                           </div>
                           <div id="birdInfoContainer">
                                <div id="birdImgInfo"></div>
+                               <div id="photoCredit"></div>
                                <!--<div id="birdImg"></div>-->
                           </div>
                           <div id="mapInstructionContainer">
@@ -72,6 +73,8 @@
                     <div id="speciesTableContainer"></div>
                     <div id="worksheetContainer"></div>
             </div>
+            <div id="footer"><a href="http://www.prbo.org/" target="_blank" ><img src="./uploads/img/logo_prbo.jpg" /></a> powered by PRBO</div>
+            <!-- <img src="./uploads/img/powered_by_PRBO.gif" />-->
         </div>	
     </body>
 </html>

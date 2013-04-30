@@ -1,11 +1,11 @@
 <?php
 
 $htmlString = '';
-$htmlString .= 'Sage Sparrow: 8.1 million BCR 9';
-$htmlString .= '<br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
-$htmlString .= 'Sagebrush cover 15 - 30%,  50-100cm  (up to 2m) in height<br>';
-$htmlString .= 'Tall, dense  or patchy sagebrush<br>';
-$htmlString .= 'Sparse grass cover for nests (particularly bunchgrasses)';
+$htmlString .= '<p>Sage Sparrow: 8.1 million</p>';
+$htmlString .= '<br><br><br><br><br>';
+$htmlString .= '<p>Sagebrush cover 15 - 30%,  50-100cm in height</p>';
+$htmlString .= '<p>Tall, dense  or patchy sagebrush<p>';
+
 echo $htmlString;
 
 

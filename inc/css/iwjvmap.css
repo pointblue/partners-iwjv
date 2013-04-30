@@ -219,13 +219,13 @@ img.birdInfo {
 #birdImgInfo {
     background-repeat:no-repeat;
     width: 350px;
-    height: 350px;
+    height: 300px;
     float: left;
     margin-left:20px;
     margin-top:10px;
     text-align: center;
     color: rgb(254,254,253);  /*rgb(243,237,218);*/
-    font-size: 1.2em;
+    font-size: 1.1em;
     
 }
 
@@ -249,6 +249,12 @@ img.birdInfo {
         background-image: url('../../uploads/img/lbcuInfo.jpg');
 }
 
+#photoCredit{
+    margin-left: 20px;
+    float: left;
+    color: rgb(65,48,0);
+    font-size: 0.9em;
+}
 /*Info  for bird popup*/
 #birdInfoContainer{
     float: left;
@@ -276,6 +282,13 @@ img.birdInfo {
     background-color: #C26D16;
 }
  
+#footer{
+    font-family: futura,arial,helvetica,sans-serif;
+    font-size: 1.0em;
+    font-weight: bold;
+    color:#C26D16;/*none;*/
+    float: right;
+}
 .stategonTableContainer {
     background-color:#F3EDDA; 
 

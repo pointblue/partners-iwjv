@@ -548,18 +548,18 @@ function ImjvModel(){
        //give it a class attribute of 'birdInfo'
       // sppInfoElement.attr('src', "http://" + __BASEHOST + "/partners/iwjv/uploads/img/" + spp + "Info.png");   //give it a src attribute
       // sppInfoElement.addClass(spp);
-       var birdTextUrl = "http://" + __BASEHOST + "/partners/iwjv/uploads/html/"+spp+"InfoText.php";
+      var birdTextUrl = "http://" + __BASEHOST + "/partners/iwjv/uploads/html/"+spp+"InfoText.php";
       $.get(birdTextUrl, function(data) {
           
                 $("#birdImgInfo").html(data); 
       });
 
-$("#mydiv").focusin(function() {
-  $("#mydiv").css("background","red");
-});
+      var photoCreditUrl = "http://" + __BASEHOST + "/partners/iwjv/uploads/html/"+spp+"PhotoCredit.txt";
+      $.get(photoCreditUrl, function(data2) {
+          
+            $("#photoCredit").text(data2); 
+      });
        
-    //   sppInfoElement.text('Super text');
-   //    $("#birdInfo").html(sppInfoElement);  //set the bird container element with the image element
        $('#mapInstructionContainer').hide();  
        $("#birdInfoContainer").show();
        $("#instructionsButtonContainer").show(); 
@@ -568,6 +568,7 @@ $("#mydiv").focusin(function() {
     
     function birdInfoClickLayerSwitcher(spp)
     {
+        //turn off all birdInfo and photoCredit div contents?
         var layerToTurnOn = "Nothing";
         if (spp === 'brsp') layerToTurnOn = "Brewer Sparrow Range";
         if (spp === 'grsp') layerToTurnOn = "Grasshopper Sparrow Range";
