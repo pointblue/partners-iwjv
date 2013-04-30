@@ -1,12 +1,6 @@
-<?php
-$htmlString = ''; 
-$htmlString .= '<p>Grasshopper Sparrow</p>';
-$htmlString .= '<br><br><br><br><br><br>';
-$htmlString .='<p>Grasslands, preferably tall bunchgrass<br>'; 
-
-$htmlString .= 'Moderate litter levels, low shrub density<br>';
-
-$htmlString .= '<10% woody vegetation</p>';
-echo $htmlString;
-
-?>
+<span class="birdInfoTotalPopulation grsp">Brewers Sparrow</span>
+<span class="birdInfoHabitatsConditions grsp">
+    Grasslands, preferably tall bunchgrass<br>
+    Moderate litter levels, low shrub density<br>
+    <10% woody vegetation
+</span>
