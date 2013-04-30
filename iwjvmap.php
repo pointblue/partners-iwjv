@@ -41,7 +41,6 @@
                           <div id="birdInfoContainer">
                                <div id="birdImgInfo"></div>
                                <div id="photoCredit"></div>
-                               <!--<div id="birdImg"></div>-->
                           </div>
                           <div id="mapInstructionContainer">
                               <h2>Mapping Tool Use</h2>
@@ -74,7 +73,6 @@
                     <div id="worksheetContainer"></div>
             </div>
             <div id="footer"><a href="http://www.prbo.org/" target="_blank" ><img src="./uploads/img/logo_prbo.jpg" /></a> powered by PRBO</div>
-            <!-- <img src="./uploads/img/powered_by_PRBO.gif" />-->
         </div>	
     </body>
 </html>
