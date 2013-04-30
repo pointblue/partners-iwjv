@@ -166,17 +166,12 @@ margin-left: 25px;
 }
 
 #siteTitleContainer  {
-
-    text-align: center;
     height: 160px;
     background-color: #EAE0C1;
 }
 
 #siteTitleContainer img {
-
-    float:left;
     margin-left: 130px;
-
 }
 
 #birdInfoContainer button{
@@ -199,21 +194,11 @@ margin-left: 25px;
 #mapSidebarRightContainer {
     
 /*    color:#787836;*/
-    font-weight: bold;
     font-size: 1.0em;
     height: 500px;
     margin-left: 755px;
     text-align: center;
     width: auto;
-}
-img.birdInfo {
-    display: block;
-    /*margin-left: auto;*/ 
-    margin-right: auto ;
-    width: 400px;
-    padding-left: 20px;
-    padding-top: 10px;
-
 }
 
 #birdImgInfo {
@@ -221,10 +206,12 @@ img.birdInfo {
     width: 350px;
     height: 300px;
     float: left;
+    font-weight: 900;
     margin-left:20px;
     margin-top:10px;
+    position: relative; /* used to position .birdInfoHabitatConditions to bottom*/
     text-align: center;
-    color: rgb(254,254,253);  /*rgb(243,237,218);*/
+    color: rgba(255,255,255,1);
     font-size: 1.1em;
     
 }
@@ -247,6 +234,29 @@ img.birdInfo {
 
 .birdInfoBackground-lbcu {
         background-image: url('../../uploads/img/lbcuInfo.jpg');
+}
+
+/*bird info element, total population*/
+.birdInfoTotalPopulation {
+    background-color: rgba(194,109,22,.8);
+    display: block;
+    padding: 5px 0;
+    width: 100%;
+}
+/* bird info element, habitat and conditions blurb*/
+.birdInfoHabitatsConditions{
+    background-color: rgba(194,109,22,.8);
+    bottom:0;
+    display: block;
+    padding: 5px 0;
+    position: absolute;
+    width: 100%;
+    
+}
+
+/* SASP - bird info element, habitat and conditions blurb*/
+.birdInfoHabitatsConditions.sasp{
+
 }
 
 #photoCredit{

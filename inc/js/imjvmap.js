@@ -552,12 +552,16 @@ function ImjvModel(){
       $.get(birdTextUrl, function(data) {
           
                 $("#birdImgInfo").html(data); 
+      }).fail(function(){
+          $("#birdImgInfo").html(""); 
       });
 
       var photoCreditUrl = "http://" + __BASEHOST + "/partners/iwjv/uploads/html/"+spp+"PhotoCredit.txt";
-      $.get(photoCreditUrl, function(data2) {
+      $.get(photoCreditUrl, function(data) {
           
-            $("#photoCredit").text(data2); 
+            $("#photoCredit").text(data); 
+      }).fail(function(){
+          $("#photoCredit").text("");
       });
        
        $('#mapInstructionContainer').hide();  
