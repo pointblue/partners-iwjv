@@ -50,7 +50,7 @@
                                 and goals for their future populations.
                               </p>
                               <p>
-                                Click a bird species <img src="./uploads/img/birdButton.png" style=" width:100px; vertical-align:middle"/> for
+                                Click a bird species <img src="./uploads/img/birdButton.png" style=" width:140px; vertical-align:middle"/> button for
                                 information about population estimates, goals, habitat preferences, and range.
                               </p>
                               <p>

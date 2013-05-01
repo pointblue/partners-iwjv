@@ -169,6 +169,12 @@ margin-left: 25px;
 
 #siteTitleContainer img {
     margin-left: 130px;
+    border: none;
+}
+
+#siteTitleContainer a {
+
+   outline: none;
 }
 
 #birdInfoContainer button{
@@ -285,6 +291,14 @@ margin-left: 25px;
     color:#C26D16;
     float: right;
 }
+#footer img {
+    margin-left: 130px;
+    border: none;
+}
+
+#footer a {
+   outline: none;
+}
 .stategonTableContainer {
     background-color:#F3EDDA; 
 
@@ -328,10 +342,13 @@ margin-left: 25px;
 
 /* td elements that hold the stategon image */
 td.stategonImage{
-     width: 300px;
-     padding: 20px;
+     width: 400px;
+     padding: 10px;
 }
-
+td.stategonImage img{
+     width: 450px;
+    /* height:400px;*/
+}
 /*geoExt top panel*/
 #ext-gen3 {
     display: none;

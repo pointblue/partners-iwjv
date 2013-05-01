@@ -68,7 +68,7 @@ function ImjvView(){
     };
     
     //allows returned stategon to be checked for errors before populating view
-    this.handleStategonLoad = function(data){
+        this.handleStategonLoad = function(data){
         var errorMessageText = "No data found for the selected area. Please try a different area.";
         
         that._isSpeciesInRegion = isSpeciesInRegion(data.stategon.species);
