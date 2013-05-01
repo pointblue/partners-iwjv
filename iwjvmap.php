@@ -17,7 +17,7 @@
         
         <?php $__ISREMOTE = ($_SERVER["HTTP_HOST"] !== "localhost");  $__VERSION = "";?>
         <?php if( $__ISREMOTE ) : ?>
-            <?php $__VERSION = "?" + (string)(time()); ?>
+            <?php $__VERSION = "?" . (string)(time()); ?>
             <script type="text/javascript">var __BASEHOST = "data.prbo.org";</script>
         <?php else : ?>
             <script type="text/javascript">var __BASEHOST = "localhost";</script>
