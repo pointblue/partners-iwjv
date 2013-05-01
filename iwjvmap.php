@@ -41,6 +41,7 @@
           <div id="siteTitleContainer">
              <!-- <h1>Inter-Mountain West Joint Venture Mapping Tool</h1>-->
              <a href="http://iwjv.org/" target="_blank"><img src="./uploads/img/IWJV_logo.png" /></a>
+        
           </div>
             <div id="iwjvBodyContainer">
                       <div id="gxmap"></div>  
@@ -67,7 +68,7 @@
                               </p>
                               <p>
                                 Click a bird species <img src="./uploads/img/birdButton.png" style=" width:140px; vertical-align:middle"/> button for
-                                information about population estimates, goals, habitat preferences, and range.
+                                information about the species' habitat preferences.
                               </p>
                               <p>
                                   The population worksheet estimates the effects of various habitat conservation efforts on regional bird populations.
@@ -88,7 +89,11 @@
                     <div id="speciesTableContainer"></div>
                     <div id="worksheetContainer"></div>
             </div>
-            <div id="footer"><a href="http://www.prbo.org/" target="_blank" ><img src="./uploads/img/logo_prbo.jpg" /></a> powered by PRBO</div>
+            <div class="footer">
+                <div id="prbo"><a href="http://www.prbo.org/" target="_blank" ><img src="./uploads/img/logo_prbo.jpg" /></a> powered by PRBO</div>
+                <div id="abc"><a href="http://www.abcbirds.org/" target="_blank" ><img src="./uploads/img/ABC_logo.jpg" /></a></div>
+            </div>
+                
         </div>	
     </body>
 </html>
