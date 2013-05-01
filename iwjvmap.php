@@ -39,9 +39,9 @@
     <body  onload="load();">
         <div id="iwjvContainer">         
           <div id="siteTitleContainer">
-             <!-- <h1>Inter-Mountain West Joint Venture Mapping Tool</h1>-->
+             <h1>Inter-Mountain West Joint Venture Mapping Tool</h1>
              <a href="http://iwjv.org/" target="_blank"><img src="./uploads/img/IWJV_logo.png" /></a>
-        
+
           </div>
             <div id="iwjvBodyContainer">
                       <div id="gxmap"></div>  

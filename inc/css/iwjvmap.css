@@ -176,6 +176,10 @@ margin-left: 25px;
 
    outline: none;
 }
+#siteTitleContainer h1{
+    position: absolute;
+    left: -99999px;
+}
 
 #birdInfoContainer button{
     float: left;
