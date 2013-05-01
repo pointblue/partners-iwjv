@@ -284,19 +284,38 @@ margin-left: 25px;
     color:#FFFFFF;/*none;*/
     background-color: #C26D16;
 }
- 
-#footer{
+
+.footer #prbo img{
+    float: right;
+    margin-top:0px;
+} 
+
+.footer #prbo{
     font-family: futura,arial,helvetica,sans-serif;
     font-size: 1.0em;
     color:#C26D16;
     float: right;
+    margin-top:0px;
 }
-#footer img {
-    margin-left: 130px;
+
+
+.footer #abc{
+    font-family: futura,arial,helvetica,sans-serif;
+    font-size: 1.0em;
+    color:#C26D16;
+    float: left;
+}
+.footer #abc img{
+    width:180px;
+    margin-left: 0px;
+
+}
+.footer img {
+    /*margin-left: 130px;*/
     border: none;
 }
 
-#footer a {
+.footer a {
    outline: none;
 }
 .stategonTableContainer {
