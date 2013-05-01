@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <title>Inter-Mountain West Joint Venture</title>   
-        <?php //__BASEHOST defines the host to use for this instance?>
-        <script type="text/javascript">var __BASEHOST = "localhost";</script>
-        <?php if($_SERVER["HTTP_HOST"] !== "localhost") : ?>
-            <script type="text/javascript">__BASEHOST = "data.prbo.org";</script>
+        
+        
+        <?php 
+              //
+              // VERSIONING AND HOST LOCATION
+              //                                                                
+              // __BASEHOST defines the host to use for this instance (JavaScript)
+              // $__ISREMOTE is true if the current host is not local (PHP)
+              // $__VERSION is used on remote hosts, appended to some javascript files to force refresh
+              //
+                                                                                ?>
+        
+        <?php $__ISREMOTE = ($_SERVER["HTTP_HOST"] !== "localhost");  $__VERSION = "";?>
+        <?php if( $__ISREMOTE ) : ?>
+            <?php $__VERSION = "?" + (string)(time()); ?>
+            <script type="text/javascript">var __BASEHOST = "data.prbo.org";</script>
+        <?php else : ?>
+            <script type="text/javascript">var __BASEHOST = "localhost";</script>
         <?php endif;?>
             
-        <!--  all of these links and scripts can go in the core  -->		
+        <link type="text/css" rel="stylesheet" href="inc/css/iwjvmap.css<?php echo $__VERSION ?>">
+        
         <script type="text/javascript" src="inc/js/ext-3.4.0/adapter/ext/ext-base.js"></script>
         <script type="text/javascript" src="inc/js/ext-3.4.0/ext-all.js"></script>
-        <script src="http://maps.google.com/maps?file=api&amp;v=3&amp;key=AIzaSyDs6QcNHclTKt5HZNacqC6Cfn2f7JGIXjo" type="text/javascript"></script>
-        <script src="OpenLayers-2.11/OpenLayers.js"></script>
-        <script src="inc/js/GeoExt/lib/GeoExt.js" type="text/javascript"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=3&amp;key=AIzaSyDs6QcNHclTKt5HZNacqC6Cfn2f7JGIXjo"></script>
+        <script type="text/javascript" src="OpenLayers-2.11/OpenLayers.js"></script>
+        <script type="text/javascript" src="inc/js/GeoExt/lib/GeoExt.js" ></script>
         <script type="text/javascript" src="proj4js-compressed.js"></script>
-        <link type="text/css" rel="stylesheet" href="inc/css/iwjvmap.css">
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script type="text/javascript" src="inc/js/imjvmap.js"></script>
-        <script type="text/javascript" src="inc/js/mapInit.js"></script>
+        <script type="text/javascript" src="inc/js/imjvmap.js<?php echo $__VERSION ?>"></script>
+        <script type="text/javascript" src="inc/js/mapInit.js<?php echo $__VERSION ?>"></script>
+        
     </head>    
     <body  onload="load();">
         <div id="iwjvContainer">         

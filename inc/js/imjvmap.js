@@ -68,15 +68,29 @@ function ImjvView(){
     };
     
     //allows returned stategon to be checked for errors before populating view
-        this.handleStategonLoad = function(data){
-        var errorMessageText = "No data found for the selected area. Please try a different area.";
+    this.handleStategonLoad = function(data){
+
         
         that._isSpeciesInRegion = isSpeciesInRegion(data.stategon.species);
         that.populateStategon(data);
         that.populateSpeciesTable(data);
         that.populateWorksheet(data);
         
-        if(data.stategon.code === "" || ! that._isSpeciesInRegion){
+        //
+        //build potential error messages
+        //
+        var errorMessagePrefix = "No ";
+        var errorMessageSuffix = " found for the selected area. Please try a different area.";       
+        var dataMessage, birdMessage;
+        
+        if(data.stategon.code === "") dataMessage = "data";
+        if( ! that._isSpeciesInRegion ) birdMessage = "bird species";
+        
+        var errorSubject = dataMessage || birdMessage;
+        
+        //display any errors
+        if(errorSubject){
+            var errorMessageText = errorMessagePrefix + errorSubject + errorMessageSuffix;
             alert(errorMessageText);    //report error to user
         }
     };
