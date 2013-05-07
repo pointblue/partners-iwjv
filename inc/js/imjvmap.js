@@ -240,7 +240,8 @@ function ImjvView(){
         
         var worksheetInstructions = $("<p></p>");
         var instructions = "Enter acres for each habitat you have (before) and will restore (after), then click 'calculate'.<br>";
-        instructions    += "Estimates appear in before / after columns of Species Population table above.";
+        instructions    += "Estimates appear in before / after columns of Species Population table above.<br>";
+        instructions    += "For descriptions of the habitats/conditions,  click on the links in the worksheet below.";
         worksheetInstructions.html(instructions);
         
         var worksheetContent = $("<div></div>");

@@ -53,9 +53,11 @@
           <div id="siteTitleContainer">
              <h1>Inter-Mountain West Joint Venture Mapping Tool</h1>
              <a href="http://iwjv.org/" target="_blank"><img src="./uploads/img/IWJV_logo.png" /></a>
-
+                   <!--       <h3>Habitats and Populations Strategies (HABPOPS) Database</h3> -->
           </div>
+           <div id="subtitle"><h2>Habitats and Populations Strategies (HABPOPS) Database</h2></div> 
             <div id="iwjvBodyContainer">
+
                       <div id="gxmap"></div>  
                       <div id="panel" class="olControlEditingToolbar"></div>
                       <div id="mapSidebarRightContainer">
@@ -88,7 +90,7 @@
                               <p>
                                 This mapping tool was developed to help resource and land managers develop and implement habitat 
                                 conservation projects that are both strategic and effective. It allows planners to explore the 
-                                impact that various restoration and management plans have on bird populations.
+                                impact that various restoration and management plans have on bird populations for BCR's 9, 10 and 16 within the Inter-Mountain West Joint Venture (IWJV) region.
                               </p>
                               <p>
                                 This mapping tool was developed as a collaborative effort between IWJV, ABC, and PRBO Conservation Science.

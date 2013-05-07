@@ -22,6 +22,20 @@ h1, h2{
     width: 1300px;
 }
 
+#subtitle {
+    height: 30px;
+    margin-left: 0px;
+    background-color: #635836;   /*#413000;*/
+
+}
+
+#subtitle h2{
+    padding: 0px;
+    display:inline;
+    color: #F3EDDA;
+    padding-left: 80px;
+    font-size: 1.4em;
+}
 #gxmap {
     display:block;
     float:left;
@@ -181,6 +195,11 @@ margin-left: 25px;
     left: -99999px;
 }
 
+#siteTitleContainer h3{
+    margin-left: 650px;
+
+}
+
 #birdInfoContainer button{
     float: left;
 }
@@ -326,7 +345,11 @@ margin-left: 25px;
     background-color:#F3EDDA; 
 
 }
+#stategonInfoTableInfo{
 
+    margin-left: 200px;
+    font-size: 1.0em;
+}
 #stategoninfotable #habitat_info {
 	/*width: 100%;    this div not spec enough*/
 	/*border: 1px solid #cef;*/
@@ -348,10 +371,15 @@ margin-left: 25px;
 
 }
 #stategonInfoHeader div{
-
+    
 }
 #stategonInfoTableHeader div{
     margin-left: 25px;
+}
+#stategonInfoTableHeader p{
+   /* margin-left: 600px;*/
+    text-align: center;
+    font-size: 1.2em;
 }
 /* table element that hold stategon info*/
 #stategoninfotable{
