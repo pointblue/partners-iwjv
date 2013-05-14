@@ -68,7 +68,7 @@
                             new OpenLayers.Control.PanZoomBar(),
                             new OpenLayers.Control.ScaleLine(),
                             new OpenLayers.Control.MousePosition(),
-                            new OpenLayers.Control.KeyboardDefaults(),
+                           // new OpenLayers.Control.KeyboardDefaults(),  take care of map moving with arrow keys
                             ls
                        ],
             projection: projSrc,
