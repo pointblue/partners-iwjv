@@ -349,7 +349,8 @@ function ImjvView(){
 
 function ImjvController(){
     
-    var worksheetDataChanged = {};                                              //holds data that has been changed in the worksheet w mcc as key and input.value as value
+    //holds data that has been changed in the worksheet w mcc as key and input.value as value
+    var worksheetDataChanged = {};                                              
     worksheetDataChanged["before"] = {};
     worksheetDataChanged["after"] = {};
     
@@ -368,7 +369,13 @@ function ImjvController(){
         $("#worksheetContainer button").bind('click', handleWorksheetSubmitClick);
         $("#worksheetTable input").bind('keydown', handleWorksheetInputKeydown);
         $("#worksheetTable input").bind('keyup', handleWorksheetInputKeyup);
-    };    
+    };
+    
+    this.resetWorksheetData = function(){
+        worksheetDataChanged = {};                                              
+        worksheetDataChanged["before"] = {};
+        worksheetDataChanged["after"] = {};
+    };
     
     function updateWorksheetData(mcc, data){
         worksheetDataChanged[mcc] = data;
@@ -553,7 +560,8 @@ function ImjvModel(){
 // define the  handler functions for the point done drawing
     function PointDoneHandler(point) 
     {
-        if(__DEBUG) console.log( point.toString() );     
+        if(__DEBUG) console.log( point.toString() );
+        appController.resetWorksheetData();
         siteMarker.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(point.x,point.y),icon));		
         var geom = point.transform(projSrc, projDisplay);  
         geom = (geom.toString()); 
