@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
         <title>Inter-Mountain West Joint Venture</title>   
-        
-        
         <?php 
               //
               // VERSIONING AND HOST LOCATION
@@ -13,12 +10,11 @@
               // $__ISREMOTE is true if the current host is not local (PHP)
               // $__VERSION is used on remote hosts, appended to some javascript files to force refresh
               //
-                                                                                ?>
-        
+		?>
         <?php $__ISREMOTE = ($_SERVER["HTTP_HOST"] !== "localhost");  $__VERSION = "";?>
         <?php if( $__ISREMOTE ) : ?>
             <?php $__VERSION = "?" . (string)(time()); ?>
-            <script type="text/javascript">var __BASEHOST = "data.prbo.org";</script>
+            <script type="text/javascript">var __BASEHOST = "data.pointblue.org";</script>
         <?php else : ?>
             <script type="text/javascript">var __BASEHOST = "localhost";</script>
         <?php endif;?>
@@ -46,9 +42,8 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="inc/js/imjvmap.js<?php echo $__VERSION ?>"></script>
         <script type="text/javascript" src="inc/js/mapInit.js<?php echo $__VERSION ?>"></script>
-        
     </head>    
-    <body  onload="load();">
+    <body onload="load();">
         <div id="iwjvContainer">         
           <div id="siteTitleContainer">
              <h1>Inter-Mountain West Joint Venture Mapping Tool</h1>
@@ -93,7 +88,7 @@
                                 impact that various restoration and management plans have on bird populations for BCR's 9, 10 and 16 within the Inter-Mountain West Joint Venture (IWJV) region.
                               </p>
                               <p>
-                                This mapping tool was developed as a collaborative effort between IWJV, ABC, and PRBO Conservation Science.
+                                This mapping tool was developed as a collaborative effort between IWJV, ABC, and Point Blue Conservation Science.
                               </p>
                           </div>
                       </div>
@@ -104,10 +99,9 @@
                     <div id="worksheetContainer"></div>
             </div>
             <div class="footer">
-                <div id="prbo"><a href="http://www.prbo.org/" target="_blank" ><img src="./uploads/img/logo_prbo.jpg" /></a> powered by PRBO</div>
+                <div id="prbo"><a href="http://www.pointblue.org/" target="_blank" ><img src="./uploads/img/logo_prbo.jpg" /></a> powered by Point Blue Data Solutions</div>
                 <div id="abc"><a href="http://www.abcbirds.org/" target="_blank" ><img src="./uploads/img/ABC_logo.jpg" /></a></div>
             </div>
-                
         </div>	
     </body>
 </html>
