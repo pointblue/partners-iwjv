@@ -99,7 +99,7 @@
                     <div id="worksheetContainer"></div>
             </div>
             <div class="footer">
-                <div id="prbo"><a href="http://www.pointblue.org/" target="_blank" ><img src="./uploads/img/logo_prbo.jpg" /></a> powered by Point Blue Data Solutions</div>
+                <div id="prbo"><a href="http://www.pointblue.org/" target="_blank" ><img src="images/PB_logo_notag_sm90.jpg"></a> powered by Point Blue Data Solutions</div>
                 <div id="abc"><a href="http://www.abcbirds.org/" target="_blank" ><img src="./uploads/img/ABC_logo.jpg" /></a></div>
             </div>
         </div>	
