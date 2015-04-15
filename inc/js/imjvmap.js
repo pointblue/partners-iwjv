@@ -195,6 +195,7 @@ function ImjvView(){
             var habitatNameContainer = $("<td></td>");
             habitatNameContainer.attr('class', 'worksheetHabitatName');
             //habitat link
+            //TODO: The server host should be configuration
             var linkRoot = 'http://data.prbo.org/partners/iwjv/uploads/habitat/';
             var habitatNameLink = $("<a></a>");
             habitatNameLink.attr('title', 'Habitat Description');
@@ -443,7 +444,8 @@ function ImjvController(){
 
 
 function ImjvModel(){
-    var baseHost =   __BASEHOST;
+	//TODO: The url needs to be loaded a bit differently. The api is now on a different server.
+    var baseHost =   'data.prbo.org';
     var baseUrl = "http://" + baseHost + "/api/v1/";
     var restBaseUrl = "habpop/";
     var stategonUrl = baseUrl + restBaseUrl + "stategons/";
