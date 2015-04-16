@@ -1,36 +1,52 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Inter-Mountain West Joint Venture</title>   
+        <title>Inter-Mountain West Joint Venture</title>
         <?php 
-              //
-              // VERSIONING AND HOST LOCATION
-              //                                                                
-              // __BASEHOST defines the host to use for this instance (JavaScript)
-              // $__ISREMOTE is true if the current host is not local (PHP)
-              // $__VERSION is used on remote hosts, appended to some javascript files to force refresh
-              //
-		?>
-        <?php $__ISREMOTE = ($_SERVER["HTTP_HOST"] !== "localhost");  $__VERSION = "";?>
-        <?php if( $__ISREMOTE ) : ?>
-            <?php $__VERSION = "?" . (string)(time()); ?>
-            <script type="text/javascript">var __BASEHOST = "data.pointblue.org";</script>
-        <?php else : ?>
-            <script type="text/javascript">var __BASEHOST = "localhost";</script>
-        <?php endif;?>
-            
-        <link type="text/css" rel="stylesheet" href="inc/css/iwjvmap.css<?php echo $__VERSION ?>">
+            //
+            // VERSIONING AND HOST LOCATION
+            //
+            // __BASEHOST defines the host to use for this instance (JavaScript)
+            // $isRunningInProduction is true if the current host is not local (PHP)
+            // $siteVersion is used on remote hosts, appended to some javascript files to force refresh
+            //
+            require('config.php');
+            $siteVersion = "";
+            $isRunningInProduction = ($_SERVER["HTTP_HOST"] === SITE_HOST);
+
+        ?>
+        <script type="text/javascript">
+            //Export variables defined in config.php to Javascript
+            <?php foreach($globalsExportToJavascript as $key => $exportValue): ?>
+                var <?php echo $key; ?> = "<?php echo $exportValue; ?>"; <?php echo "\r\n"; ?>
+            <?php endforeach; ?>
+            //OTHER GLOBAL VARIABLES
+            var ACTIVE_HOST = "localhost";      //The active value being used in places where SITE_HOST would normally be used. This allows us to dynamically change it when working locally.
+            var GEO_FULL_URL = GEO_PROTOCOL + '://' + GEO_HOST;                 //Geoserver full url
+            var API_FULL_URL = API_PROTOCOL + "://" + API_HOST + API_ROUTE;     //data.prbo.org api v1 full url
+            var API_HABPOP_STATEGONS_URL = API_FULL_URL + API_ROUTE_HABPOP + API_ROUTE_HABPOP_STATEGONS;    //habpop stategons api full url
+            var API_HABPOP_ESTIMATES_URL = API_FULL_URL + API_ROUTE_HABPOP + API_ROUTE_HABPOP_ESTIMATES;    //habpop estimates api full url
+        </script>
+        <?php
+            if( $isRunningInProduction ) :
+                $siteVersion = "?" . (string)(time());
+        ?>
+                <script type="text/javascript">__BASEHOST = "<?php echo SITE_HOST; ?>";</script>
+        <?php
+            endif;
+        ?>
+        <link type="text/css" rel="stylesheet" href="inc/css/iwjvmap.css<?php echo $siteVersion ?>">
         <script type="text/javascript">
 
-          var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', 'UA-40690497-30']);
-          _gaq.push(['_trackPageview']);
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-40690497-30']);
+            _gaq.push(['_trackPageview']);
 
-          (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-          })();
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
 
         </script>
         <script type="text/javascript" src="inc/js/ext-3.4.0/adapter/ext/ext-base.js"></script>
@@ -40,19 +56,17 @@
         <script type="text/javascript" src="inc/js/GeoExt/lib/GeoExt.js" ></script>
         <script type="text/javascript" src="proj4js-compressed.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script type="text/javascript" src="inc/js/imjvmap.js<?php echo $__VERSION ?>"></script>
-        <script type="text/javascript" src="inc/js/mapInit.js<?php echo $__VERSION ?>"></script>
+        <script type="text/javascript" src="inc/js/imjvmap.js<?php echo $siteVersion ?>"></script>
+        <script type="text/javascript" src="inc/js/mapInit.js<?php echo $siteVersion ?>"></script>
     </head>    
     <body onload="load();">
         <div id="iwjvContainer">         
           <div id="siteTitleContainer">
              <h1>Inter-Mountain West Joint Venture Mapping Tool</h1>
              <a href="http://iwjv.org/" target="_blank"><img src="./uploads/img/IWJV_logo.png" /></a>
-                   <!--       <h3>Habitats and Populations Strategies (HABPOPS) Database</h3> -->
           </div>
            <div id="subtitle"><h2>Habitats and Populations Strategies (HABPOPS) Database</h2></div> 
             <div id="iwjvBodyContainer">
-
                       <div id="gxmap"></div>  
                       <div id="panel" class="olControlEditingToolbar"></div>
                       <div id="mapSidebarRightContainer">
@@ -71,12 +85,12 @@
                           <div id="mapInstructionContainer">
                               <h2>Mapping Tool Use</h2>
                               <p>
-                                Place a map marker <img src="./uploads/img/add_point_on.png" style="vertical-align:middle"/> to generate reports 
+                                Place a map marker <img src="uploads/img/add_point_on.png" style="vertical-align:middle"/> to generate reports
                                 for the selected State / Bird Conservation Region (BCR) including habitat composition, populations of bird species, 
                                 and goals for their future populations.
                               </p>
                               <p>
-                                Click a bird species <img src="./uploads/img/birdButton.png" style=" width:140px; vertical-align:middle"/> button for
+                                Click a bird species <img src="uploads/img/birdButton.png" style=" width:140px; vertical-align:middle"/> button for
                                 information about the species' habitat preferences.
                               </p>
                               <p>
@@ -92,7 +106,8 @@
                               </p>
                           </div>
                       </div>
-                      <div id="stategonTableContainer">    
+                      <div id="stategonTableContainer">
+                          <!-- The content for the #stategoninfotable is rendered in /api/v1/routes/Habpop.php -->
                          <div id="stategoninfotable" ></div> 
                       </div>
                     <div id="speciesTableContainer"></div>
@@ -102,6 +117,6 @@
                 <div id="prbo"><a href="http://www.pointblue.org/" target="_blank" ><img src="images/PB_logo_notag_sm90.jpg"></a> powered by Point Blue Data Solutions</div>
                 <div id="abc"><a href="http://www.abcbirds.org/" target="_blank" ><img src="./uploads/img/ABC_logo.jpg" /></a></div>
             </div>
-        </div>	
+        </div>
     </body>
 </html>

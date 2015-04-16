@@ -1,4 +1,4 @@
-var __GEOHOST__ = 'http://geo.pointblue.org';
+
 
 function get_my_url(bounds) {
     var res = this.map.getResolution();
@@ -18,7 +18,8 @@ function get_my_url(bounds) {
 
 Proj4js.defs["EPSG:3310"] = "+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs";
 Proj4js.defs["EPSG:4326"] = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
-
+var navControl = new OpenLayers.Control.Navigation(navOptions);
+var pointControl = new OpenLayers.Control.DrawFeature(pointLayer, OpenLayers.Handler.Point, pointDrawFeatureOptions);
 var projSrc = new OpenLayers.Projection("EPSG:900913");
 var projDisplay = new OpenLayers.Projection("EPSG:4326");
 
@@ -29,8 +30,7 @@ var navOptions =
     zoomWheelEnabled: false
 };
 
-var navControl = new OpenLayers.Control.Navigation(navOptions);
-var pointControl = new OpenLayers.Control.DrawFeature(pointLayer, OpenLayers.Handler.Point, pointDrawFeatureOptions);
+
 
 
 // --------
@@ -64,7 +64,7 @@ var bounds = new OpenLayers.Bounds(-14451888.510683998, 5260795.5676214, -125342
 var navigationControl = new OpenLayers.Control.Navigation({zoomWheelEnabled: false});
 var ls = new OpenLayers.Control.LayerSwitcher({'ascending': false});
 
-var options = {
+var mapOptions = {
     controls: [
         navigationControl,
         new OpenLayers.Control.PanZoomBar(),
@@ -91,7 +91,7 @@ var format = 'image/png';
 
 Ext.onReady(function () {
 
-    map = new OpenLayers.Map("gxmap", options);
+    map = new OpenLayers.Map("gxmap", mapOptions);
     // base layers
 
     var street = new OpenLayers.Layer.WMS(
@@ -112,7 +112,7 @@ Ext.onReady(function () {
     map.addLayers([ghyb, sat]);
 
     states = new OpenLayers.Layer.WMS(
-        "States", __GEOHOST__ + "/geoserver/spatial2/wms",
+        "States", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:iwjv_states_3857',
             STYLES: '',
@@ -131,7 +131,7 @@ Ext.onReady(function () {
     );
 
     stategons = new OpenLayers.Layer.WMS(
-        "IWJV Region", __GEOHOST__ + "/geoserver/spatial2/wms",
+        "IWJV Region", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:iwjv_boundary_3857',
             STYLES: '',
@@ -149,7 +149,7 @@ Ext.onReady(function () {
         }
     );
     BCR_9 = new OpenLayers.Layer.WMS(
-        "BCR 9", __GEOHOST__ + "/geoserver/spatial2/wms",
+        "BCR 9", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:bcr_9_3857',
             STYLES: 'iwjv_bcr',
@@ -168,7 +168,7 @@ Ext.onReady(function () {
     );
 
     BCR_10 = new OpenLayers.Layer.WMS(
-        "BCR 10", __GEOHOST__ + "/geoserver/spatial2/wms",
+        "BCR 10", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:bcr_10_3857',
             STYLES: '',
@@ -187,7 +187,7 @@ Ext.onReady(function () {
     );
 
     BCR_16 = new OpenLayers.Layer.WMS(
-        "BCR 16", __GEOHOST__ + "/geoserver/spatial2/wms",
+        "BCR 16", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:bcr_16_3857',
             STYLES: '',
@@ -209,7 +209,7 @@ Ext.onReady(function () {
 
     // bird layers
     brsp = new OpenLayers.Layer.WMS(
-        "Brewer Sparrow Range", __GEOHOST__ + "/geoserver/spatial2/wms",
+        "Brewer Sparrow Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:brsp_breeding_3857',
             STYLES: '',
@@ -228,7 +228,7 @@ Ext.onReady(function () {
     );
 
     grsp = new OpenLayers.Layer.WMS(
-        "Grasshopper Sparrow Range", __GEOHOST__ + "/geoserver/spatial2/wms",
+        "Grasshopper Sparrow Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:grsp_breeding_3857',
             STYLES: '',
@@ -246,7 +246,7 @@ Ext.onReady(function () {
         }
     );
     lbcu = new OpenLayers.Layer.WMS(
-        "Long-billed Curlew Range", __GEOHOST__ + "/geoserver/spatial2/wms",
+        "Long-billed Curlew Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:lbcu_breeding_3857',
             STYLES: '',
@@ -265,7 +265,7 @@ Ext.onReady(function () {
     );
 
     sath = new OpenLayers.Layer.WMS(
-        "Sage Thrasher Range", __GEOHOST__ + "/geoserver/spatial2/wms",
+        "Sage Thrasher Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:sath_breeding_3857',
             STYLES: '',
@@ -283,7 +283,7 @@ Ext.onReady(function () {
         }
     );
     sgsp = new OpenLayers.Layer.WMS(
-        "Sage Sparrow Range", __GEOHOST__ + "/geoserver/spatial2/wms",
+        "Sage Sparrow Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:sgsp_breeding_3857',
             STYLES: '',

@@ -2,11 +2,12 @@
 //
 //DEBUG
 //
+//TODO: Make __FORCEDEBUG settable at a higher level
 var __FORCEDEBUG = false;   //true to force debug on live/remote/production server
 
 var __DEBUG = false;    //do not set this variable. shows debug variables
 //automatic debug mode on localhost or on force debug
-if(__BASEHOST === "localhost" || __FORCEDEBUG !== false){
+if(ACTIVE_HOST === "localhost" || __FORCEDEBUG !== false){
     __DEBUG = true;
 }
 if(__DEBUG){
@@ -36,8 +37,6 @@ initApp();  //initialize the app
 function initApp(){
     
     //init app tells which handlers are responsible for which events
-    
-    appModel.setBaseHost(__BASEHOST);
     
     //listen for when the stategon is finished loading
     appModel.addListener("load", appView.handleStategonLoad);
@@ -444,23 +443,11 @@ function ImjvController(){
 
 
 function ImjvModel(){
-	//TODO: The url needs to be loaded a bit differently. The api is now on a different server.
-    var baseHost =   'data.prbo.org';
-    var baseUrl = "http://" + baseHost + "/api/v1/";
-    var restBaseUrl = "habpop/";
-    var stategonUrl = baseUrl + restBaseUrl + "stategons/";
-    var estimatesUrl = baseUrl + restBaseUrl + "estimates/";
-    
+
     var caller = [];
     caller["load"] = $.Callbacks();
     caller["change"] = $.Callbacks();
-    
-    this.setBaseHost = function(newBaseHost){
-        //if you are a string and you are not empty
-        if(typeof newBaseHost === "string" || newBaseHost !== "") baseHost = newBaseHost;
-        //else, you are already set to localhost
-    };
-    
+
     this.addListener = function(subject, listener){
         if(typeof caller[subject] !== "undefined"){
             caller[subject].add(listener);
@@ -474,7 +461,7 @@ function ImjvModel(){
             data:sendData,
             dataType: "jsonp",
             success: function(data){completeGetStategon("success", data);},
-            url: stategonUrl
+            url: API_HABPOP_STATEGONS_URL,
         }).fail(function(){completeGetStategon("fail", geom);});
     };
     
@@ -497,7 +484,7 @@ function ImjvModel(){
             data:sendData,
             dataType: "jsonp",
             success: function(data){completeRefreshEstimate("success", data);},
-            url: estimatesUrl
+            url: API_HABPOP_ESTIMATES_URL,
         }).fail(function(){completeRefreshEstimate("fail", worksheetData);});
     };
     
@@ -576,7 +563,7 @@ function ImjvModel(){
         //deactivate point control and activate navigation
         pointControl.deactivate();
         navControl.activate();
-    };   
+    };
 
     function birdInfoClick(spp)
     {
@@ -585,14 +572,14 @@ function ImjvModel(){
        $("#birdImgInfo").attr('class', 'birdInfo');
        $("#birdImgInfo").addClass('birdInfoBackground-'+spp);
        
-      var birdTextUrl = "http://" + __BASEHOST + "/partners/iwjv/uploads/html/"+spp+"InfoText.php";
+      var birdTextUrl = "uploads/html/" + spp + "InfoText.php";
       $.get(birdTextUrl, function(data) {
                 $("#birdImgInfo").html(data); 
       }).fail(function(){
           $("#birdImgInfo").html(""); 
       });
 
-      var photoCreditUrl = "http://" + __BASEHOST + "/partners/iwjv/uploads/html/"+spp+"PhotoCredit.txt";
+      var photoCreditUrl = "uploads/html/" + spp + "PhotoCredit.txt";
       $.get(photoCreditUrl, function(data) {
             $("#photoCredit").text(data); 
       }).fail(function(){
