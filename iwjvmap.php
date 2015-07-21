@@ -85,7 +85,7 @@
                           <div id="mapInstructionContainer">
                               <h2>Mapping Tool Use</h2>
                               <p>
-                                Place a map marker <img src="uploads/img/add_point_on.png" style="vertical-align:middle"/> to generate reports
+                                Click in the map and place a marker <img src="icons/marker.png" style="vertical-align:middle"/> to generate report
                                 for the selected State / Bird Conservation Region (BCR) including habitat composition, populations of bird species, 
                                 and goals for their future populations.
                               </p>

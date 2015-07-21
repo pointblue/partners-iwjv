@@ -26,12 +26,9 @@ var projDisplay = new OpenLayers.Projection("EPSG:4326");
 var navOptions =
 {
     saveState: true,
-    defaultControl: navControl,
+    defaultControl: pointControl, // navControl,
     zoomWheelEnabled: false
 };
-
-
-
 
 // --------
 OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
@@ -69,7 +66,8 @@ var mapOptions = {
         navigationControl,
         new OpenLayers.Control.PanZoomBar(),
         new OpenLayers.Control.ScaleLine(),
-        new OpenLayers.Control.MousePosition(),
+        new OpenLayers.Control.Navigation(),
+        // new OpenLayers.Control.MousePosition(),
         // new OpenLayers.Control.KeyboardDefaults(),  take care of map moving with arrow keys
         ls
     ],
@@ -92,30 +90,44 @@ var format = 'image/png';
 Ext.onReady(function () {
 
     map = new OpenLayers.Map("gxmap", mapOptions);
+    
+    //
     // base layers
-
-    var street = new OpenLayers.Layer.WMS(
+    //
+    var baseLayers = [];
+    
+    /*
+    baseLayers.push(new OpenLayers.Layer.WMS(
         "Global Imagery",
         "http://maps.opengeo.org/geowebcache/service/wms",
         // {layers: "bluemarble"}
         {layers: "openstreetmap", format: "image/png"}
-    );
-    var sat = new OpenLayers.Layer.TMS("World Imagery",
+    ));
+    */
+   
+    baseLayers.push(new OpenLayers.Layer.TMS("World Imagery",
         "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/",
         {'type': 'esri', 'getURL': get_my_url, isBaseLayer: true, opacity: 1}
-    );
-    var ghyb = new OpenLayers.Layer.Google(
+    ));
+    
+    /*
+    baseLayers.push(new OpenLayers.Layer.Google(
         "Google Hybrid",
         {type: G_HYBRID_MAP, 'sphericalMercator': true, isBaseLayer: true, opacity: 1}
-    );
+    ));
+    */
 
-    map.addLayers([ghyb, sat]);
+    //
+    // vector layers
+    //
+    var vectorLayers = [];
 
-    states = new OpenLayers.Layer.WMS(
+    
+    vectorLayers.push(new OpenLayers.Layer.WMS(
         "States", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:iwjv_states_3857',
-            STYLES: '',
+            STYLES: 'whiteline',
             format: format,
             tiled: true,
             transparent: true,
@@ -126,11 +138,12 @@ Ext.onReady(function () {
             displayOutsideMaxExtent: true,
             isBaseLayer: false,
             visibility: false,
-            opacity: 0.4
+            opacity: 0.7
         }
-    );
+    ));
+    
 
-    stategons = new OpenLayers.Layer.WMS(
+    vectorLayers.push(new OpenLayers.Layer.WMS(
         "IWJV Region", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:iwjv_boundary_3857',
@@ -147,8 +160,9 @@ Ext.onReady(function () {
             visibility: true,
             opacity: 0.6
         }
-    );
-    BCR_9 = new OpenLayers.Layer.WMS(
+    ));
+    
+    vectorLayers.push(new OpenLayers.Layer.WMS(
         "BCR 9", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:bcr_9_3857',
@@ -165,9 +179,9 @@ Ext.onReady(function () {
             visibility: false,
             opacity: 0.6
         }
-    );
-
-    BCR_10 = new OpenLayers.Layer.WMS(
+    ));
+    
+    vectorLayers.push(new OpenLayers.Layer.WMS(
         "BCR 10", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:bcr_10_3857',
@@ -184,9 +198,9 @@ Ext.onReady(function () {
             visibility: false,
             opacity: 0.5
         }
-    );
-
-    BCR_16 = new OpenLayers.Layer.WMS(
+    ));
+    
+    vectorLayers.push(new OpenLayers.Layer.WMS(
         "BCR 16", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:bcr_16_3857',
@@ -203,12 +217,9 @@ Ext.onReady(function () {
             visibility: false,
             opacity: 0.5
         }
-    );
-
-    map.addLayers([stategons, BCR_9, BCR_10, BCR_16]);
-
-    // bird layers
-    brsp = new OpenLayers.Layer.WMS(
+    ));
+    
+    vectorLayers.push(new OpenLayers.Layer.WMS(
         "Brewer Sparrow Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:brsp_breeding_3857',
@@ -225,9 +236,9 @@ Ext.onReady(function () {
             visibility: false,
             opacity: 0.5
         }
-    );
-
-    grsp = new OpenLayers.Layer.WMS(
+    ));
+    
+    vectorLayers.push(new OpenLayers.Layer.WMS(
         "Grasshopper Sparrow Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:grsp_breeding_3857',
@@ -244,8 +255,9 @@ Ext.onReady(function () {
             visibility: false,
             opacity: 0.5
         }
-    );
-    lbcu = new OpenLayers.Layer.WMS(
+    ));
+    
+    vectorLayers.push(new OpenLayers.Layer.WMS(
         "Long-billed Curlew Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:lbcu_breeding_3857',
@@ -262,9 +274,9 @@ Ext.onReady(function () {
             visibility: false,
             opacity: 0.5
         }
-    );
-
-    sath = new OpenLayers.Layer.WMS(
+    ));
+    
+    vectorLayers.push(new OpenLayers.Layer.WMS(
         "Sage Thrasher Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:sath_breeding_3857',
@@ -281,8 +293,9 @@ Ext.onReady(function () {
             visibility: false,
             opacity: 0.5
         }
-    );
-    sgsp = new OpenLayers.Layer.WMS(
+    ));
+    
+    vectorLayers.push(new OpenLayers.Layer.WMS(
         "Sage Sparrow Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
             LAYERS: 'spatial2:sgsp_breeding_3857',
@@ -299,10 +312,11 @@ Ext.onReady(function () {
             visibility: false,
             opacity: 0.5
         }
-    );
-    //add the bird layers
-    map.addLayers([grsp, lbcu, brsp, sath, sgsp]);
-    //add the sitemarker layer
+    ));
+    
+    // add layers to the map
+    map.addLayers(baseLayers);
+    map.addLayers(vectorLayers);
     map.addLayer(siteMarker);
 
     var panelControls = [
@@ -311,7 +325,7 @@ Ext.onReady(function () {
     ];
     var toolbar = new OpenLayers.Control.Panel({
         displayClass: 'olControlEditingToolbar',
-        defaultControl: panelControls[0]
+        defaultControl: panelControls[1]  // 0
     });
     toolbar.addControls(panelControls);
     map.addControl(toolbar);
