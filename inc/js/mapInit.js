@@ -90,39 +90,39 @@ var format = 'image/png';
 Ext.onReady(function () {
 
     map = new OpenLayers.Map("gxmap", mapOptions);
-    
+
     //
     // base layers
     //
     var baseLayers = [];
-    
+
     /*
-    baseLayers.push(new OpenLayers.Layer.WMS(
-        "Global Imagery",
-        "http://maps.opengeo.org/geowebcache/service/wms",
-        // {layers: "bluemarble"}
-        {layers: "openstreetmap", format: "image/png"}
-    ));
-    */
-   
+     baseLayers.push(new OpenLayers.Layer.WMS(
+     "Global Imagery",
+     "http://maps.opengeo.org/geowebcache/service/wms",
+     // {layers: "bluemarble"}
+     {layers: "openstreetmap", format: "image/png"}
+     ));
+     */
+
     baseLayers.push(new OpenLayers.Layer.TMS("World Imagery",
         "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/",
         {'type': 'esri', 'getURL': get_my_url, isBaseLayer: true, opacity: 1}
     ));
-    
+
     /*
-    baseLayers.push(new OpenLayers.Layer.Google(
-        "Google Hybrid",
-        {type: G_HYBRID_MAP, 'sphericalMercator': true, isBaseLayer: true, opacity: 1}
-    ));
-    */
+     baseLayers.push(new OpenLayers.Layer.Google(
+     "Google Hybrid",
+     {type: G_HYBRID_MAP, 'sphericalMercator': true, isBaseLayer: true, opacity: 1}
+     ));
+     */
 
     //
     // vector layers
     //
     var vectorLayers = [];
 
-    
+
     vectorLayers.push(new OpenLayers.Layer.WMS(
         "States", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
@@ -141,7 +141,7 @@ Ext.onReady(function () {
             opacity: 0.7
         }
     ));
-    
+
 
     vectorLayers.push(new OpenLayers.Layer.WMS(
         "IWJV Region", GEO_FULL_URL + "/geoserver/spatial2/wms",
@@ -161,7 +161,7 @@ Ext.onReady(function () {
             opacity: 0.6
         }
     ));
-    
+
     vectorLayers.push(new OpenLayers.Layer.WMS(
         "BCR 9", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
@@ -180,7 +180,7 @@ Ext.onReady(function () {
             opacity: 0.6
         }
     ));
-    
+
     vectorLayers.push(new OpenLayers.Layer.WMS(
         "BCR 10", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
@@ -199,7 +199,7 @@ Ext.onReady(function () {
             opacity: 0.5
         }
     ));
-    
+
     vectorLayers.push(new OpenLayers.Layer.WMS(
         "BCR 16", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
@@ -218,7 +218,7 @@ Ext.onReady(function () {
             opacity: 0.5
         }
     ));
-    
+
     vectorLayers.push(new OpenLayers.Layer.WMS(
         "Brewer Sparrow Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
@@ -237,7 +237,7 @@ Ext.onReady(function () {
             opacity: 0.5
         }
     ));
-    
+
     vectorLayers.push(new OpenLayers.Layer.WMS(
         "Grasshopper Sparrow Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
@@ -256,7 +256,7 @@ Ext.onReady(function () {
             opacity: 0.5
         }
     ));
-    
+
     vectorLayers.push(new OpenLayers.Layer.WMS(
         "Long-billed Curlew Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
@@ -275,7 +275,7 @@ Ext.onReady(function () {
             opacity: 0.5
         }
     ));
-    
+
     vectorLayers.push(new OpenLayers.Layer.WMS(
         "Sage Thrasher Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
@@ -294,7 +294,7 @@ Ext.onReady(function () {
             opacity: 0.5
         }
     ));
-    
+
     vectorLayers.push(new OpenLayers.Layer.WMS(
         "Sage Sparrow Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
         {
@@ -313,7 +313,7 @@ Ext.onReady(function () {
             opacity: 0.5
         }
     ));
-    
+
     // add layers to the map
     map.addLayers(baseLayers);
     map.addLayers(vectorLayers);

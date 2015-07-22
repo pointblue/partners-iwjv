@@ -9,8 +9,8 @@
 /*main container*/
 body{
     /*overflow:hidden;*/
-      font-family: "Myriad Pro",Myriad,"Trebuchet MS",Arial,Helvetica,sans-serif;
-      background-color:#EAE0C1; 
+    font-family: "Myriad Pro",Myriad,"Trebuchet MS",Arial,Helvetica,sans-serif;
+    background-color:#EAE0C1;
 }
 h1, h2{
     color:rgb(99, 88, 54);
@@ -44,7 +44,7 @@ h1, h2{
     width: 750px;
     height: 500px;
     border: 1px solid black;
-    z-index:1;  
+    z-index:1;
 }
 
 #iwjvBodyContainer{
@@ -66,20 +66,20 @@ h1, h2{
 
 /* Single row in the species table */
 .speciesTableRow{
-    
+
 }
 
 /* div element that contains the worksheetTable*/
 #worksheetContainer {
     display: inline-block;
     margin-bottom: 150px;
-    
+
 }
 
 #worksheetContainer p {
-/*   color:#787836;
-   font-weight: bold;*/
-margin-left: 25px;
+    /*   color:#787836;
+       font-weight: bold;*/
+    margin-left: 25px;
 
 
 }
@@ -110,12 +110,12 @@ margin-left: 25px;
 
 #worksheetTable .after, .speciesTableRow .after {
     background-color: rgba(188,190,113,0.3);
-/*    background-color: #BCBE71;*/
+    /*    background-color: #BCBE71;*/
 }
 
 #worksheetTable .before, .speciesTableRow .before {
     background-color: rgba(217,171,117,0.5);
-/*    background-color: #F7F5ED;*/
+    /*    background-color: #F7F5ED;*/
 }
 
 #worksheetTable .after.first, #worksheetTable .before.first {
@@ -145,12 +145,12 @@ margin-left: 25px;
 
 /* a single row in the worksheet table with habitat data*/
 .worksheetHabitatRow{
-    
+
 }
 
 /* td element containing habitat name in worksheet table */
 .worksheetHabitatName{
-    
+
 }
 
 .psuedo-div{
@@ -167,13 +167,13 @@ margin-left: 25px;
 
 
 #title {
-    display: none;            
+    display: none;
     top:0px;
     position:absolute;
     width: 850px;
     height: auto;
     border: 5px solid black;
-    z-index:1;  
+    z-index:1;
 }
 
 #siteTitleContainer  {
@@ -188,7 +188,7 @@ margin-left: 25px;
 
 #siteTitleContainer a {
 
-   outline: none;
+    outline: none;
 }
 #siteTitleContainer h1{
     position: absolute;
@@ -234,27 +234,27 @@ margin-left: 25px;
     text-align: center;
     color: rgba(255,255,255,1);
     font-size: 1.1em;
-    
+
 }
 
 .birdInfoBackground-sasp {
-        background-image: url('../../uploads/img/saspInfo.jpg');
+    background-image: url('../../uploads/img/saspInfo.jpg');
 }
 
 .birdInfoBackground-sath {
-        background-image: url('../../uploads/img/sathInfo.jpg');
+    background-image: url('../../uploads/img/sathInfo.jpg');
 }
 
 .birdInfoBackground-grsp {
-        background-image: url('../../uploads/img/grspInfo.jpg');
+    background-image: url('../../uploads/img/grspInfo.jpg');
 }
 
 .birdInfoBackground-brsp {
-        background-image: url('../../uploads/img/brspInfo.jpg');
+    background-image: url('../../uploads/img/brspInfo.jpg');
 }
 
 .birdInfoBackground-lbcu {
-        background-image: url('../../uploads/img/lbcuInfo.jpg');
+    background-image: url('../../uploads/img/lbcuInfo.jpg');
 }
 
 /*bird info element, total population*/
@@ -272,7 +272,7 @@ margin-left: 25px;
     padding: 5px 0;
     position: absolute;
     width: 100%;
-    
+
 }
 
 /* SASP - bird info element, habitat and conditions blurb*/
@@ -311,7 +311,7 @@ margin-left: 25px;
 .footer #prbo img{
     float: right;
     margin-top:0px;
-} 
+}
 
 .footer #prbo{
     font-family: futura,arial,helvetica,sans-serif;
@@ -339,10 +339,10 @@ margin-left: 25px;
 }
 
 .footer a {
-   outline: none;
+    outline: none;
 }
 .stategonTableContainer {
-    background-color:#F3EDDA; 
+    background-color:#F3EDDA;
 
 }
 #stategonInfoTableInfo{
@@ -351,33 +351,33 @@ margin-left: 25px;
     font-size: 1.0em;
 }
 #stategoninfotable #habitat_info {
-	/*width: 100%;    this div not spec enough*/
-	/*border: 1px solid #cef;*/
+    /*width: 100%;    this div not spec enough*/
+    /*border: 1px solid #cef;*/
 
-	text-align: left; 
+    text-align: left;
 }
 
 #stategoninfotable #habitat_info td, th {
-            padding: 4px 15px 4px 0;
+    padding: 4px 15px 4px 0;
 }
 
 #stategoninfotable th {
     text-align: center;
 }
 #stategoninfotable #habitat_info #odd {
-      background-color: rgba(249, 246, 237, 0.8); 
+    background-color: rgba(249, 246, 237, 0.8);
 }
 #stategonInfoHeader{
 
 }
 #stategonInfoHeader div{
-    
+
 }
 #stategonInfoTableHeader div{
     margin-left: 25px;
 }
 #stategonInfoTableHeader p{
-   /* margin-left: 600px;*/
+    /* margin-left: 600px;*/
     text-align: center;
     font-size: 1.2em;
 }
@@ -388,19 +388,44 @@ margin-left: 25px;
 
 .stategonInfoTableRow{
 
-         
+
 }
 
 /* td elements that hold the stategon image */
 td.stategonImage{
-     width: 400px;
-     padding: 10px;
+    width: 400px;
+    padding: 10px;
 }
 td.stategonImage img{
-     width: 450px;
+    width: 450px;
     /* height:400px;*/
 }
 /*geoExt top panel*/
 #ext-gen3 {
+    display: none;
+}
+/*
+.olControlEditingToolbar .olControlDrawFeaturePointItemInactive {
+    display: block;
+    background: #EBE9E4 !important;
+    background-image: url("images/draw_poly_inactive.jpg?ver=130214.1") !important;
+    background-repeat: no-repeat !important;
+    background-size:91px 35px !important;
+    width:  91px !important;
+    height: 35px !important;
+}
+.olControlEditingToolbar .olControlDrawFeaturePointItemActive {
+    display: block;
+    background: #EBE9E4 !important;
+    background-image: url("images/draw_poly_active.jpg?ver=130214.1") !important;
+    background-repeat: no-repeat !important;
+    background-size:91px 35px !important;
+    width:  91px !important;
+    height: 35px !important;
+}
+
+*/
+
+.olControlEditingToolbar {
     display: none;
 }
