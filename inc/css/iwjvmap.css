@@ -364,7 +364,7 @@ h1, h2{
 #stategoninfotable th {
     text-align: center;
 }
-#stategoninfotable #habitat_info #odd {
+#stategoninfotable .odd {
     background-color: rgba(249, 246, 237, 0.8);
 }
 #stategonInfoHeader{
@@ -428,4 +428,16 @@ td.stategonImage img{
 
 .olControlEditingToolbar {
     display: none;
+}
+
+.stategonInfoTable {
+    margin-top: 25px;
+    width: 100%;
+}
+.stategonInfoTable td {
+    padding: 5px;
+}
+.total {
+    text-align: center;
+    width: 10%;
 }

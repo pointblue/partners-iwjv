@@ -106,11 +106,21 @@
                 </p>
             </div>
         </div>
-        <div id="stategonTableContainer">
+        <div id="stategonTableContainer" style="display: none;">
             <!-- The content for the #stategoninfotable is rendered in /api/v1/routes/Habpop.php -->
+            <div>
+                <h2>Regional Habitats</h2>
+                Bird Conservation Region: <span class="bcr"></span>, <span class="state"></span>
+                <br>
+                Total Habitat Acreage: <span class="acres"></span>
+                <br>
+                <a href="" target="_blank" class="iwjv">Conservation Plan for Bird Conservation Area - PDF</a><br>
+                <a href="" target="_blank" class="swap">Regional Wildlife Action Plan - PDF</a>
+            </div>
+            <img src="" alt="Stategon Info" style="width:500px;float: left;">
             <div id="stategoninfotable" ></div>
         </div>
-        <div id="speciesTableContainer"></div>
+        <div id="speciesTableContainer" style="clear: both;"></div>
         <div id="worksheetContainer"></div>
     </div>
     <div class="footer">

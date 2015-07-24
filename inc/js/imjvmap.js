@@ -25,6 +25,29 @@ if(__DEBUG){
 //
 //Main app variables
 //
+var conditionCodes = [
+    "Poor",
+    "Fair",
+    "Good",
+    "Grass",
+    "Woodland (>30%)",
+    "Shrub",
+    "Recently burned",
+    "Dryland",
+    "Irrigated",
+    "Dry",
+    "Wet",
+    "Grazed",
+    "Ungrazed",
+    "Non-native",
+    "Native"
+];
+
+function getConditionCodeName(conditionCode){
+    if(conditionCode < 1 || conditionCode > 15) throw new Error('Cannot retrieve the name of the condition code. Index is out of bounds.');
+    return conditionCodes[conditionCode-1];
+}
+
 var appModel = new ImjvModel(); //Model loads data
 
 var appView = new ImjvView();   //View controls data display
@@ -94,12 +117,14 @@ function ImjvView(){
         }
     };
 
+    /*
     this.populateStategon = function(data){
         if(data.stategon.code !== ""){
             $("#stategoninfotable").html(data.stategon.habitats.formated);
         } else $("#stategoninfotable").html("");    //if no stategon, reset the info inside
 
     };
+    */
     //populate the before after section
     this.handleEstimateRefresh = function(data){
         for(var conditionTime in data.estimate[0]){
@@ -346,6 +371,81 @@ function ImjvView(){
     }
 
 }
+
+ImjvView.prototype.populateStategon = function(data){
+    if(data.stategon.code !== ""){
+        $("#stategonTableContainer").show();
+        $("#stategonTableContainer .bcr").text(data.stategon.details.bcr);
+        $("#stategonTableContainer .state").text(data.stategon.details.acres);
+        $("#stategonTableContainer .acres").text(data.stategon.details.state);
+        $("#stategonTableContainer .iwjv").attr('href', data.stategon.details.iwjv);
+        $("#stategonTableContainer .swap").attr('href', data.stategon.details.swap);
+        $("#stategonTableContainer img").attr('src', 'http://data.pointblue.org/partners/iwjv/uploads/img/' + data.stategon.code + '.jpg');
+
+        var currentConditionSet = '';
+        var conditions;
+        var currentTableIndex = -1;
+        var stategonInfoTables = [];
+        for(var i = 0;i<data.stategon.habitats.data.length;i++){
+            var thisHabitat = data.stategon.habitats.data[i];
+            //create table if we are on a new set of conditions
+            if(currentConditionSet != thisHabitat.CONDITIONS){  //new set
+                currentConditionSet = thisHabitat.CONDITIONS;
+                //create a new table for the new condition set
+                stategonInfoTables.push(  $("<table class='stategonInfoTable'></table>")  );
+                currentTableIndex++;
+                stategonInfoTables[currentTableIndex].attr('cellspacing', '0');
+                var tableHeading= $("<thead></thead>");
+                var tableHeadingRow = $("<tr></tr>");
+                if(currentTableIndex == 0){
+                    tableHeadingRow.append(  $("<th>Habitat Type</th>")  );
+                } else {
+                    tableHeadingRow.append(  $("<th></th>")  );
+                }
+
+                conditions = currentConditionSet.split(',');//parse the currentConditionSet into an array. grab the name for each item in the array and add it as a td to the tableHeadingRow
+                //if you have less than three conditions, insert blank columns before the existing columns
+                var blankColumnsCount = 3 - conditions.length;
+                for(var j=0;j<conditions.length;j++){
+                    var conditionName = getConditionCodeName(  parseInt(conditions[j])  );
+                    tableHeadingRow.append(  $("<th>" + conditionName + "</th>")  );
+                }
+                for(var jj=0;jj<blankColumnsCount;jj++){
+                    tableHeadingRow.append(  $("<th></th>")  );
+                }
+                if(currentTableIndex == 0){
+                    tableHeadingRow.append(  $("<th>Total Acres</th>")  );
+                } else {
+                    tableHeadingRow.append(  $("<th></th>")  );
+                }
+                tableHeading.append(tableHeadingRow);
+                stategonInfoTables[currentTableIndex].append(tableHeading);
+            }
+            //add data for current row
+            var tableRow = $("<tr></tr>");
+            if(i%2 != 0){
+                tableRow.attr('class', 'odd');
+            }
+            tableRow.append( $("<td>" + thisHabitat.ASSOCIATION + "</td>") );
+            for(var k=0;k<conditions.length;k++){
+                tableRow.append(  $("<td class='total'>" + thisHabitat.CONDITION_TOTALS[k] + "</td>")  );
+            }
+            for(jj=0;jj<blankColumnsCount;jj++){
+                tableRow.append(  $("<td class='total'></td>")  );
+            }
+            tableRow.append( $("<td class='total'>" + thisHabitat.TOTAL + "</td>") );
+            stategonInfoTables[currentTableIndex].append(tableRow);
+        }
+
+        $("#stategoninfotable").html("");
+        for(i=0;i<stategonInfoTables.length;i++){
+            $("#stategoninfotable").append(stategonInfoTables[i]);
+        }
+    } else {
+        $("#stategoninfotable").html(""); //if no stategon, reset the info inside
+        $("#stategonTableContainer").hide();
+    }
+};
 
 function ImjvController(){
 
