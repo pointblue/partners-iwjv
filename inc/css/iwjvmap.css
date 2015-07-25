@@ -92,37 +92,37 @@ h1, h2{
     margin-left: 25px;
 }
 /* table elements with worksheet info */
-#worksheetTable{
+.worksheetTable{
     border: 0;
 }
 /* heading for worksheet gets more padding */
-#worksheetTable .worksheetHeadingRow td {
+.worksheetTable .worksheetHeadingRow td {
     padding-top: 10px;
     text-align: center;
 }
-#worksheetTable td {
+.worksheetTable td {
     padding: 5px 10px 5px 0;
 }
 
-#worksheetTable input{
-    width: 70px;
+.worksheetTable input{
+    width: 100%;
 }
 
-#worksheetTable .after, .speciesTableRow .after {
+.worksheetTable .after, .speciesTableRow .after {
     background-color: rgba(188,190,113,0.3);
     /*    background-color: #BCBE71;*/
 }
 
-#worksheetTable .before, .speciesTableRow .before {
+.worksheetTable .before, .speciesTableRow .before {
     background-color: rgba(217,171,117,0.5);
     /*    background-color: #F7F5ED;*/
 }
 
-#worksheetTable .after.first, #worksheetTable .before.first {
+.worksheetTable .after.first, .worksheetTable .before.first {
     padding-left: 10px;
 }
 
-#worksheetTable .referenceRow{
+.worksheetTable .referenceRow{
     background-color: rgba(255,255,255,.5);
 }
 

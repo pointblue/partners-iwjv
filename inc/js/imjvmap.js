@@ -156,59 +156,87 @@ function ImjvView(){
         var containerId = "worksheetContainer";
 
         //set container element to blank and return if no stategon code
-        if(data.stategon.code === "" || ! that._isSpeciesInRegion) {
-            $("#" + containerId).html("");
+        if(data['stategon']['code'] === '' || ! that._isSpeciesInRegion) {
+            $('#' + containerId).html('');
             return false;
         }
 
-        var habitats = data.stategon.habitats.data;
+        var habitats = data['stategon']['habitats']['data'];
 
-        var worksheetTable = $("<table></table>");
-        worksheetTable.attr('id', 'worksheetTable');
-        worksheetTable.attr('cellspacing', 0);
 
-        //First heading row
-        var headingRow1 = $("<tr></tr>");
-        headingRow1.attr('class', 'worksheetHeadingRow');
-        var hr1Td1 = $("<td></td>");
-        hr1Td1.attr('rowspan', '2');
-        hr1Td1.text('Habitat');
-        headingRow1.append(hr1Td1);
-        var hr1Td2 = $("<td></td>");
-        hr1Td2.attr('class', 'conditionHeading');
-        hr1Td2.addClass('before');
-        hr1Td2.attr('colspan', '3');
-        hr1Td2.html('Condition Before');
-        hr1Td2.append($('<br>'));
-        hr1Td2.append('<span>(Acres)</span>');
-        headingRow1.append(hr1Td2);
-        var hr1Td3 = $("<td></td>");
-        hr1Td3.attr('class', 'conditionHeading');
-        hr1Td3.addClass('after');
-        hr1Td3.attr('colspan', '3');
-        hr1Td3.html('Condition After');
-        hr1Td3.append($('<br>'));
-        hr1Td3.append('<span>(Acres)</span>');
-        headingRow1.append(hr1Td3);
-        worksheetTable.append(headingRow1);
+        var worksheets = [];
+        var currentWorksheetIndex = -1;
+        var currentConditionsSet = '';
+        for(var ii=0;ii<habitats.length;ii++){
+            if(currentConditionsSet != habitats[ii]['CONDITIONS']){
+                //new set, create a worksheet
+                currentConditionsSet = habitats[ii]['CONDITIONS'];
+                var conditionCodes = currentConditionsSet.split(',');
+                worksheets.push(  $("<table></table>")  );
+                currentWorksheetIndex++;
+                worksheets[currentWorksheetIndex].attr('class', 'worksheetTable');
+                worksheets[currentWorksheetIndex].attr('cellspacing', 0);
 
-        //Second heading row
-        var headingRow2ColumnNames = ["Poor", "Fair", "Good", "Poor", "Fair", "Good"];
-        var headingRow2 = $("<tr></tr>");
-        headingRow2.attr('class', 'worksheetHeadingRow');
-        for(var i=0;i<headingRow2ColumnNames.length;i++){
-            var singleColumn = $("<td></td>");
-            if(i>2) singleColumn.attr('class', 'after');
-            else singleColumn.attr('class', 'before');
-            if(i===0||i===3)singleColumn.addClass('first');
-            singleColumn.text(headingRow2ColumnNames[i]);
-            headingRow2.append(singleColumn);
-        }
-        worksheetTable.append(headingRow2);
+                if(currentWorksheetIndex == 0){
+                    //First heading row
+                    var headingRow1 = $("<tr></tr>");
+                    headingRow1.attr('class', 'worksheetHeadingRow');
+                    var hr1Td1 = $("<td></td>");
+                    hr1Td1.text('Habitat');
+                    headingRow1.append(hr1Td1);
+                    var hr1Td2 = $("<td></td>");
+                    hr1Td2.attr('class', 'conditionHeading');
+                    hr1Td2.addClass('before');
+                    hr1Td2.attr('colspan', '3');
+                    hr1Td2.html('Condition Before');
+                    hr1Td2.append($('<br>'));
+                    hr1Td2.append('<span>(Acres)</span>');
+                    headingRow1.append(hr1Td2);
+                    var hr1Td3 = $("<td></td>");
+                    hr1Td3.attr('class', 'conditionHeading');
+                    hr1Td3.addClass('after');
+                    hr1Td3.attr('colspan', '3');
+                    hr1Td3.html('Condition After');
+                    hr1Td3.append($('<br>'));
+                    hr1Td3.append('<span>(Acres)</span>');
+                    headingRow1.append(hr1Td3);
+                    worksheets[currentWorksheetIndex].append(headingRow1);
+                }
 
-        var conditions = ["poor", "fair", "good"];
-        var conditionTimes = ["before", "after"];
-        for(var i=0;i<habitats.length;i++){
+                //Second heading row
+                var headingRow2ColumnNames = [];
+                for(var jj=0;jj<conditionCodes.length;jj++){
+                    var conditionName = getConditionCodeName(  parseInt(conditionCodes[jj])  );
+                    headingRow2ColumnNames.push(conditionName);
+                }
+                //repeat the column names
+                headingRow2ColumnNames = headingRow2ColumnNames.concat(headingRow2ColumnNames.slice());
+                var headingRow2 = $("<tr></tr>");
+                headingRow2.attr('class', 'worksheetHeadingRow');
+                headingRow2.append(  $("<td></td>")  ); //space for the habitat type name
+                var fillerColCount = 3 - conditionCodes.length;
+                for(var i=0;i<6;i++){   //always make 6 columns
+
+                    var singleColumn = $("<td></td>");
+                    if(  fillerColCount === 0 || (fillerColCount-i != -1 || (fillerColCount+3)-i != -1 )  ){
+                        if(i>conditionCodes.length-1) {
+                            singleColumn.attr('class', 'after');
+                        }
+                        else {
+                            singleColumn.attr('class', 'before');
+                        }
+                        if(i===0||i===conditionCodes.length){
+                            singleColumn.addClass('first');
+                        }
+                        singleColumn.text(headingRow2ColumnNames[i]);
+                    }
+
+                    headingRow2.append(singleColumn);
+                }
+                worksheets[currentWorksheetIndex].append(headingRow2);
+            }
+
+            var conditionTimes = ["before", "after"];
             var singleHabitat = $("<tr></tr>");
             singleHabitat.attr('class', 'worksheetHabitatRow');
             if(i%2===0)singleHabitat.addClass('referenceRow');
@@ -223,19 +251,22 @@ function ImjvView(){
             var linkRoot = 'http://data.prbo.org/partners/iwjv/uploads/habitat/';
             var habitatNameLink = $("<a></a>");
             habitatNameLink.attr('title', 'Habitat Description');
-            habitatNameLink.attr('href', linkRoot + habitats[i]['LINK']);
+            habitatNameLink.attr('href', linkRoot + habitats[ii]['LINK']);
             habitatNameLink.attr('target', '_BLANK');
-            habitatNameLink.text(habitats[i]['ASSOCIATION']);
+            habitatNameLink.text(habitats[ii]['ASSOCIATION']);
             habitatNameContainer.append(habitatNameLink);
             singleHabitat.append(habitatNameContainer);
 
+            //CREATE BEFORE AND AFTER COLUMNS WITH CONDITIONS
+
             for(var j=0;j<conditionTimes.length;j++){
-                for(var k=0;k<conditions.length;k++){
+                for(var k=0;k<conditionCodes.length;k++){
                     var singleHabitatCondition = $("<td></td>");
                     singleHabitatCondition.attr('class', conditionTimes[j]);
-                    singleHabitatCondition.addClass(conditions[k]);
-                    var singleMastercode = "MCC-" + habitats[i]['MASTERCODE'] + "-" + (k+1).toString();
+                    singleHabitatCondition.addClass(conditionCodes[k]);
+                    var singleMastercode = "MCC-" + habitats[ii]['MASTERCODE'] + "-" + (k+1).toString();
                     singleHabitatCondition.addClass(singleMastercode);
+                    //TODO: Make this variable length
                     if(k===0||k===3) singleHabitatCondition.addClass('first');
                     var conditionInput = $("<input/>");
                     conditionInput.attr('type', 'text');
@@ -246,9 +277,11 @@ function ImjvView(){
 
             }
 
-            worksheetTable.append(singleHabitat);
+            worksheets[currentWorksheetIndex].append(singleHabitat);
 
         }
+
+        //POST WORKSHEET CREATION
 
         var submitButton = $("<button></button>");
         submitButton.attr('class', 'defaultButton');
@@ -274,7 +307,11 @@ function ImjvView(){
 
         //add to content container
         $(worksheetContent).html(submitButtonContainer);
-        $(worksheetContent).append(worksheetTable);
+        //add all the worksheets
+        for(ii=0;ii<worksheets.length;ii++){
+            $(worksheetContent).append(worksheets[ii]);
+        }
+
         $(worksheetContent).append(submitButtonContainer.clone());
 
         //add to main container already on page
