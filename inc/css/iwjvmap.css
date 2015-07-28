@@ -110,11 +110,13 @@ h1, h2{
 
 .worksheetTable .after, .speciesTableRow .after {
     background-color: rgba(188,190,113,0.3);
+    width: 10%;
     /*    background-color: #BCBE71;*/
 }
 
 .worksheetTable .before, .speciesTableRow .before {
     background-color: rgba(217,171,117,0.5);
+    width: 10%;
     /*    background-color: #F7F5ED;*/
 }
 
@@ -140,6 +142,8 @@ h1, h2{
 .worksheetHeadingRow .conditionHeading {
     text-align: center;
 }
+
+
 
 
 

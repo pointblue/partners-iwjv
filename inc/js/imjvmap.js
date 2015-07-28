@@ -163,7 +163,6 @@ function ImjvView(){
 
         var habitats = data['stategon']['habitats']['data'];
 
-
         var worksheets = [];
         var currentWorksheetIndex = -1;
         var currentConditionsSet = '';
@@ -172,6 +171,7 @@ function ImjvView(){
                 //new set, create a worksheet
                 currentConditionsSet = habitats[ii]['CONDITIONS'];
                 var conditionCodes = currentConditionsSet.split(',');
+                var fillerColCount = 3 - conditionCodes.length; //how many blank columns we need
                 worksheets.push(  $("<table></table>")  );
                 currentWorksheetIndex++;
                 worksheets[currentWorksheetIndex].attr('class', 'worksheetTable');
@@ -210,36 +210,41 @@ function ImjvView(){
                     headingRow2ColumnNames.push(conditionName);
                 }
                 //repeat the column names
-                headingRow2ColumnNames = headingRow2ColumnNames.concat(headingRow2ColumnNames.slice());
+                //headingRow2ColumnNames = headingRow2ColumnNames.concat(headingRow2ColumnNames.slice());
                 var headingRow2 = $("<tr></tr>");
                 headingRow2.attr('class', 'worksheetHeadingRow');
                 headingRow2.append(  $("<td></td>")  ); //space for the habitat type name
-                var fillerColCount = 3 - conditionCodes.length;
-                for(var i=0;i<6;i++){   //always make 6 columns
+                for(var l=0;l<2;l++){
+                    for(var ll=0;ll<3;ll++){   //always make 3 columns
 
-                    var singleColumn = $("<td></td>");
-                    if(  fillerColCount === 0 || (fillerColCount-i != -1 || (fillerColCount+3)-i != -1 )  ){
-                        if(i>conditionCodes.length-1) {
+                        var singleColumn = $("<td></td>");
+                        if(l===0){
+                            singleColumn.attr('class', 'before');
+                        } else {
                             singleColumn.attr('class', 'after');
                         }
-                        else {
-                            singleColumn.attr('class', 'before');
-                        }
-                        if(i===0||i===conditionCodes.length){
+                        if(ll===0){
                             singleColumn.addClass('first');
                         }
-                        singleColumn.text(headingRow2ColumnNames[i]);
-                    }
 
-                    headingRow2.append(singleColumn);
+                        var isFillerColumn = ll > 2-fillerColCount;
+                        if(!isFillerColumn){
+                            singleColumn.text(headingRow2ColumnNames[ll]);
+                        }
+
+                        headingRow2.append(singleColumn);
+                    }
                 }
+
                 worksheets[currentWorksheetIndex].append(headingRow2);
             }
 
-            var conditionTimes = ["before", "after"];
+
             var singleHabitat = $("<tr></tr>");
             singleHabitat.attr('class', 'worksheetHabitatRow');
-            if(i%2===0)singleHabitat.addClass('referenceRow');
+            if(ii%2===0) {
+                singleHabitat.addClass('referenceRow');
+            }
 
             //
             //habitat name
@@ -257,24 +262,40 @@ function ImjvView(){
             habitatNameContainer.append(habitatNameLink);
             singleHabitat.append(habitatNameContainer);
 
+            var conditionTimes = ["before", "after"];
             //CREATE BEFORE AND AFTER COLUMNS WITH CONDITIONS
-
             for(var j=0;j<conditionTimes.length;j++){
-                for(var k=0;k<conditionCodes.length;k++){
+                for(var k=0;k<3;k++){
                     var singleHabitatCondition = $("<td></td>");
                     singleHabitatCondition.attr('class', conditionTimes[j]);
-                    singleHabitatCondition.addClass(conditionCodes[k]);
-                    var singleMastercode = "MCC-" + habitats[ii]['MASTERCODE'] + "-" + (k+1).toString();
-                    singleHabitatCondition.addClass(singleMastercode);
-                    //TODO: Make this variable length
-                    if(k===0||k===3) singleHabitatCondition.addClass('first');
-                    var conditionInput = $("<input/>");
-                    conditionInput.attr('type', 'text');
+                    var isFillerColumn = k > 2 - fillerColCount;
+                    if(!isFillerColumn) {
+                        var singleMastercode = "MCC-" + habitats[ii]['MASTERCODE'] + "-" + (k + 1).toString();
+                        singleHabitatCondition.addClass(conditionCodes[k]);
+                        singleHabitatCondition.addClass(singleMastercode);
 
-                    singleHabitatCondition.append(conditionInput);
+                        if (k === 0) {
+                            singleHabitatCondition.addClass('first');
+                        }
+
+                        var conditionInput = $("<input/>");
+                        var conditionName = getConditionCodeName(  parseInt(conditionCodes[k])  );
+                        var inputTitle =
+                            'Acres of ' +                                               //Acres of
+                            habitats[ii]['ASSOCIATION'] +                               //Plains
+                            ' in ' +                                                    //in
+                            conditionName +                                             //Dry
+                            ' condition ' +                                             //condtion
+                            '(' + conditionTimes[j] + ')';                              //(before/after)
+                        conditionInput.attr('type', 'text');
+                        conditionInput.attr('title',inputTitle);
+
+                        singleHabitatCondition.append(conditionInput);
+                    }
+
                     singleHabitat.append(singleHabitatCondition);
-                }
 
+                }
             }
 
             worksheets[currentWorksheetIndex].append(singleHabitat);
@@ -360,7 +381,7 @@ function ImjvView(){
         speciesTable.append(headingRow);
 
         //add the main data
-        var tableData = data.stategon.speciestable;
+        var tableData = data['stategon']['speciestable'];
         for(var i=0;i<tableData.length;i++){
             var singleDataRow = $("<tr></tr>");
             singleDataRow.attr('class', 'speciesTableRow');
@@ -410,7 +431,7 @@ function ImjvView(){
 }
 
 ImjvView.prototype.populateStategon = function(data){
-    if(data.stategon.code !== ""){
+    if(data['stategon']['code'] !== ''){
         $("#stategonTableContainer").show();
         $("#stategonTableContainer .bcr").text(data.stategon.details.bcr);
         $("#stategonTableContainer .state").text(data.stategon.details.acres);
@@ -503,9 +524,9 @@ function ImjvController(){
 
     //bind functions to events for worksheet
     this.bindWorksheet = function(){
-        $("#worksheetContainer button").bind('click', handleWorksheetSubmitClick);
-        $("#worksheetTable input").bind('keydown', handleWorksheetInputKeydown);
-        $("#worksheetTable input").bind('keyup', handleWorksheetInputKeyup);
+        $('#worksheetContainer button').bind('click', handleWorksheetSubmitClick);
+        $('.worksheetTable input').bind('keydown', handleWorksheetInputKeydown);
+        $('.worksheetTable input').bind('keyup', handleWorksheetInputKeyup);
     };
 
     this.resetWorksheetData = function(){
@@ -542,6 +563,7 @@ function ImjvController(){
         if(event.which >= 37 && event.which <= 40) return true;   //arrow keys
         if(event.which === 46) return true; //delete
         if(event.which === 8) return true;  //backspace
+        //TODO: Allow tab key
 
         if(event.which >= 96 && event.which <= 105) correctKey = event.which-48;
         else correctKey = event.which;
