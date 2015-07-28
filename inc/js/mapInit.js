@@ -1,5 +1,4 @@
 
-
 function get_my_url(bounds) {
     var res = this.map.getResolution();
     var x = Math.round((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
@@ -16,20 +15,16 @@ function get_my_url(bounds) {
     return path;
 }
 
-Proj4js.defs["EPSG:3310"] = "+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs";
-Proj4js.defs["EPSG:4326"] = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
-var navControl = new OpenLayers.Control.Navigation(navOptions);
 var pointControl = new OpenLayers.Control.DrawFeature(pointLayer, OpenLayers.Handler.Point, pointDrawFeatureOptions);
-var projSrc = new OpenLayers.Projection("EPSG:900913");
-var projDisplay = new OpenLayers.Projection("EPSG:4326");
-
 var navOptions =
 {
     saveState: true,
     defaultControl: pointControl, // navControl,
     zoomWheelEnabled: false
 };
-
+var navControl = new OpenLayers.Control.Navigation(navOptions);
+var projSrc = new OpenLayers.Projection("EPSG:900913");
+var projDisplay = new OpenLayers.Projection("EPSG:4326");
 // --------
 OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
     defaultHandlerOptions: {
