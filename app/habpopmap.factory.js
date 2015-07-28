@@ -35,13 +35,22 @@
             mapOptions,
             map,
             mapPanel,
-            format;
+            format,
+            pointDroppedHandler = function(){};
 
         var factory = {
-            'initialize':initialize
+            'initialize':initialize,
+            'setPointDroppedHandler':setPointDroppedHandler
         };
 
         return factory;
+
+        function setPointDroppedHandler(callback){
+            if(typeof callback !== 'function'){
+                throw "Error: point dropped handler must be of type 'function'";
+            }
+            pointDroppedHandler = callback;
+        }
 
         function drawFeature(){
             if(pointLayer.features.length > 0){
@@ -70,23 +79,11 @@
 
         // define the  handler functions for the point done drawing
         function pointDoneHandler(point) {
-            if(__DEBUG) console.log( point.toString() );
-            //TODO: Implement in angular
-            //appController.resetWorksheetData();
             siteMarker.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(point.x,point.y),icon));
-            var geom = point.transform(projSrc, projDisplay);
-            geom = (geom.toString());
-            //remove previous sitemarker
+            var geom = point.transform(projSrc, projDisplay).toString();
             map.removeLayer(siteMarker);
-            // add new site marker
             map.addLayer(siteMarker);
-            // API call with point geom
-            console.log(geom);
-            //TODO: Implement in angular
-            //appModel.loadAppData(geom);
-            //deactivate point control and activate navigation
-            // pointControl.deactivate();
-            // navControl.activate();
+            pointDroppedHandler(geom);            // API call with point geom
         }
 
         function initialize(){

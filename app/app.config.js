@@ -3,10 +3,10 @@
         .module('app')
         .config(configure);
 
-    //configure.$inject = [];
+    configure.$inject = ['$logProvider'];
 
-    function configure(){
-        //app configuration here
+    function configure($logProvider){
+        $logProvider.debugEnabled(true);
     }
 
 })();
