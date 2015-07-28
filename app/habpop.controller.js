@@ -9,9 +9,11 @@
 
     Habpop.$inject = ['HabpopMap'];
 
-    function Habpop(){
+    function Habpop(HabpopMap){
         var vm = this;
         vm.helloworld = 'hello world';
+
+        HabpopMap.initialize();
 
     }
 })();

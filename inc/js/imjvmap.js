@@ -657,6 +657,33 @@ function ImjvModel(){
     }
 }
 
+function birdInfoClick(spp) {
+    birdInfoClickLayerSwitcher(spp);
+    //create sppInfo HTML Element
+    $("#birdImgInfo")
+        .attr('class', 'birdInfo')
+        .addClass('birdInfoBackground-'+spp);
+
+    var birdTextUrl = "uploads/html/" + spp + "InfoText.php";
+    $.get(birdTextUrl, function(data) {
+        $("#birdImgInfo").html(data);
+    }).fail(function(){
+        $("#birdImgInfo").html("");
+    });
+
+    var photoCreditUrl = "uploads/html/" + spp + "PhotoCredit.txt";
+    $.get(photoCreditUrl, function(data) {
+        $("#photoCredit").text(data);
+    }).fail(function(){
+        $("#photoCredit").text("");
+    });
+
+    $('#mapInstructionContainer').hide();
+    $("#birdInfoContainer").show();
+    $("#instructionsButtonContainer").show();
+
+}
+
 function showInstructionInfo(){
     $("#birdInfoContainer").hide();
     $('#mapInstructionContainer').show();

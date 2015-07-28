@@ -1,3 +1,10 @@
+/**
+ * habpopmap.factory.js
+ *
+ * Initialize the map for the habpop tool
+ * Includes all map settings an configuration
+ *
+ */
 (function(){
     angular
         .module('app')
@@ -8,55 +15,63 @@
 
     function HabpopMap(OpenLayers){
 
+        //Notes on the code style for this factory:
+        //https://github.com/johnpapa/angular-styleguide#factories
 
-        // Map Objects
-        var siteMarker = new OpenLayers.Layer.Markers( "Site", {displayInLayerSwitcher: false} );
-        var size = new OpenLayers.Size(21,25);
-        var iconOffset = new OpenLayers.Pixel(-(size.w/2), -size.h);  // locate center bottom
-        var icon = new OpenLayers.Icon('icons/marker.png',size,iconOffset);
+        var siteMarker,
+            size,
+            iconOffset,
+            icon,
+            styleMap,
+            pointLayer,
+            pointDrawFeatureOptions,
+            pointControl,
+            navOptions,
+            navControl,
+            projSrc,
+            projDisplay,
+            navigationControl,
+            layerSwitcher,
+            mapOptions,
+            map,
+            mapPanel,
+            format;
 
-        var style_black = new OpenLayers.StyleMap({
-            strokeColor: '#000000',
-            strokeOpacity: 0.7,
-            strokeWidth: 2,
-            pointerEvents: 'visiblePainted',
-            fillOpacity: 0.0
-        });
+        var factory = {
+            'initialize':initialize
+        };
 
-        var pointLayer = new OpenLayers.Layer.Vector('Point Layer', {
-            styleMap: style_black,
-            displayInLayerSwitcher: false
-        });
+        return factory;
 
-        // define the pointDrawFeatureOptions functions to handle the vector drawing
-        var pointDrawFeatureOptions = {
-            drawFeature: function() {
-                if(pointLayer.features.length > 0){
-                    pointLayer.removeAllFeatures();
-                }
-            },
-            'displayClass': 'olControlDrawFeaturePoint',
-            callbacks : {
-                'done': pointDoneHandler
+        function drawFeature(){
+            if(pointLayer.features.length > 0){
+                pointLayer.removeAllFeatures();
             }
-        };
+        }
 
-        var drawControls = {
-            point: new OpenLayers.Control.DrawFeature(
-                pointLayer,
-                OpenLayers.Handler.Point,pointDrawFeatureOptions
-            )
-        };
+        function createRequestUrl(bounds) {
+            var path = '';
+            var res = this.map.getResolution();
+            var x = Math.round((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
+            var y = Math.round((this.maxExtent.top - bounds.top) / (res * this.tileSize.h));
+            var z = this.map.getZoom();
+            var url = this.url;
+            if (url instanceof Array) {
+                url = this.selectUrl(null, url);
+            }
+            if (this.type === 'esri') {
+                path = url + z + "/" + y + "/" + x;
+            } else {
+                path = url + z + "/" + x + "/" + y + "." + this.type;
+            }
 
-        function query_map(evt) {
-            var output = document.getElementById(this.key + "Output");
-            var lonlat = map.getLonLatFromPixel(evt.xy).transform(projSrc, projDisplay);
-            alert("You clicked near " + lonlat.lat + " lat, " + lonlat.lon + " lon");
+            return path;
         }
 
         // define the  handler functions for the point done drawing
         function pointDoneHandler(point) {
             if(__DEBUG) console.log( point.toString() );
+            //TODO: Implement in angular
             //appController.resetWorksheetData();
             siteMarker.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(point.x,point.y),icon));
             var geom = point.transform(projSrc, projDisplay);
@@ -67,97 +82,115 @@
             map.addLayer(siteMarker);
             // API call with point geom
             console.log(geom);
+            //TODO: Implement in angular
             //appModel.loadAppData(geom);
             //deactivate point control and activate navigation
             // pointControl.deactivate();
             // navControl.activate();
         }
 
-        function get_my_url(bounds) {
-            var res = this.map.getResolution();
-            var x = Math.round((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
-            var y = Math.round((this.maxExtent.top - bounds.top) / (res * this.tileSize.h));
-            var z = this.map.getZoom();
-            var url = this.url;
-            if (url instanceof Array) {
-                url = this.selectUrl(path, url);
-            }
-            var path = '';
-            if (this.type === 'esri') {
-                path = url + z + "/" + y + "/" + x;
-            } else {
-                path = url + z + "/" + x + "/" + y + "." + this.type;
-            }
+        function initialize(){
+            // Map Objects
+            siteMarker = new OpenLayers.Layer.Markers( "Site", {displayInLayerSwitcher: false} );
+            size = new OpenLayers.Size(21,25);
+            iconOffset = new OpenLayers.Pixel(-(size.w/2), -size.h);  // locate center bottom
+            icon = new OpenLayers.Icon('icons/marker.png',size,iconOffset);
 
-            return path;
+            styleMap = new OpenLayers.StyleMap({
+                strokeColor: '#000000',
+                strokeOpacity: 0.7,
+                strokeWidth: 2,
+                pointerEvents: 'visiblePainted',
+                fillOpacity: 0.0
+            });
+
+            pointLayer = new OpenLayers.Layer.Vector(
+                'Point Layer', {
+                    'styleMap': styleMap,
+                    displayInLayerSwitcher: false
+                }
+            );
+
+
+            // define the pointDrawFeatureOptions functions to handle the vector drawing
+            pointDrawFeatureOptions = {
+                'drawFeature': drawFeature,
+                'displayClass': 'olControlDrawFeaturePoint',
+                'callbacks' : {
+                    'done': pointDoneHandler
+                }
+            };
+
+            pointControl = new OpenLayers.Control.DrawFeature(
+                pointLayer,
+                OpenLayers.Handler.Point,
+                pointDrawFeatureOptions
+            );
+
+
+            navOptions = {
+                saveState: true,
+                defaultControl: pointControl, // navControl,
+                zoomWheelEnabled: false
+            };
+
+            navControl = new OpenLayers.Control.Navigation(navOptions);
+            projSrc = new OpenLayers.Projection("EPSG:900913");
+            projDisplay = new OpenLayers.Projection("EPSG:4326");
+
+            OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
+                defaultHandlerOptions: {
+                    'single': true,
+                    'double': false,
+                    'pixelTolerance': 0,
+                    'stopSingle': false,
+                    'stopDouble': false
+                },
+
+                initialize: function (options) {
+                    this.handlerOptions = OpenLayers.Util.extend(
+                        {}, this.defaultHandlerOptions
+                    );
+                    OpenLayers.Control.prototype.initialize.apply(
+                        this, arguments
+                    );
+                    this.handler = new OpenLayers.Handler.Click(
+                        this, {
+                            'click': this.onClick,
+                            'dblclick': this.onDblclick
+                        }, this.handlerOptions
+                    );
+                }
+
+            });
+
+
+            navigationControl = new OpenLayers.Control.Navigation({zoomWheelEnabled: false});
+            layerSwitcher = new OpenLayers.Control.LayerSwitcher({'ascending': false});
+
+            mapOptions = {
+                controls: [
+                    navigationControl,
+                    new OpenLayers.Control.PanZoomBar(),
+                    new OpenLayers.Control.ScaleLine(),
+                    new OpenLayers.Control.Navigation(),
+                    layerSwitcher
+                ],
+                projection: projSrc,
+                displayProjection: projDisplay,
+                units: "m",
+                numZoomLevels: 18,
+                maxResolution: 156543.0339,
+                maxExtent: new OpenLayers.Bounds(-20037508.3427892, -20037508.3427892, 20037508.3427892, 20037508.3427892)
+            };
+
+            format = 'image/png';
+
+            Ext.onReady(extOnReady);
+
         }
 
-        var pointControl = new OpenLayers.Control.DrawFeature(pointLayer, OpenLayers.Handler.Point, pointDrawFeatureOptions);
-        var navOptions = {
-            saveState: true,
-            defaultControl: pointControl, // navControl,
-            zoomWheelEnabled: false
-        };
-        var navControl = new OpenLayers.Control.Navigation(navOptions);
-        var projSrc = new OpenLayers.Projection("EPSG:900913");
-        var projDisplay = new OpenLayers.Projection("EPSG:4326");
-// --------
-        OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
-            defaultHandlerOptions: {
-                'single': true,
-                'double': false,
-                'pixelTolerance': 0,
-                'stopSingle': false,
-                'stopDouble': false
-            },
-
-            initialize: function (options) {
-                this.handlerOptions = OpenLayers.Util.extend(
-                    {}, this.defaultHandlerOptions
-                );
-                OpenLayers.Control.prototype.initialize.apply(
-                    this, arguments
-                );
-                this.handler = new OpenLayers.Handler.Click(
-                    this, {
-                        'click': this.onClick,
-                        'dblclick': this.onDblclick
-                    }, this.handlerOptions
-                );
-            }
-
-        });
-//-------------------------------------------
-        var bounds = new OpenLayers.Bounds(-14451888.510683998, 5260795.5676214, -12534236.348121, 3913057.8822958, -11448219.050396, 5219213.8214511, -12974513.630982, 6217175.6626035);
-        var navigationControl = new OpenLayers.Control.Navigation({zoomWheelEnabled: false});
-        var ls = new OpenLayers.Control.LayerSwitcher({'ascending': false});
-
-        var mapOptions = {
-            controls: [
-                navigationControl,
-                new OpenLayers.Control.PanZoomBar(),
-                new OpenLayers.Control.ScaleLine(),
-                new OpenLayers.Control.Navigation(),
-                // new OpenLayers.Control.MousePosition(),
-                // new OpenLayers.Control.KeyboardDefaults(),  take care of map moving with arrow keys
-            ],
-            projection: projSrc,
-            displayProjection: projDisplay,
-            units: "m",
-            numZoomLevels: 18,
-            maxResolution: 156543.0339,
-            maxExtent: new OpenLayers.Bounds(-20037508.3427892, -20037508.3427892, 20037508.3427892, 20037508.3427892)
-            //restrictedExtent: bounds
-        };
-
-
-//  need to define controls variable to activate the overrided  default click handler
-        var map, controls;
-        var mapPanel;
-        var format = 'image/png';
-
-
-        Ext.onReady(function () {
+        function extOnReady() {
 
             map = new OpenLayers.Map("gxmap", mapOptions);
 
@@ -166,26 +199,10 @@
             //
             var baseLayers = [];
 
-            /*
-             baseLayers.push(new OpenLayers.Layer.WMS(
-             "Global Imagery",
-             "http://maps.opengeo.org/geowebcache/service/wms",
-             // {layers: "bluemarble"}
-             {layers: "openstreetmap", format: "image/png"}
-             ));
-             */
-
             baseLayers.push(new OpenLayers.Layer.TMS("World Imagery",
                 "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/",
-                {'type': 'esri', 'getURL': get_my_url, isBaseLayer: true, opacity: 1}
+                {'type': 'esri', 'getURL': createRequestUrl, isBaseLayer: true, opacity: 1}
             ));
-
-            /*
-             baseLayers.push(new OpenLayers.Layer.Google(
-             "Google Hybrid",
-             {type: G_HYBRID_MAP, 'sphericalMercator': true, isBaseLayer: true, opacity: 1}
-             ));
-             */
 
             //
             // vector layers
@@ -395,12 +412,12 @@
             ];
             var toolbar = new OpenLayers.Control.Panel({
                 displayClass: 'olControlEditingToolbar',
-                defaultControl: panelControls[1]  // 0
+                defaultControl: panelControls[1]
             });
             toolbar.addControls(panelControls);
             map.addControl(toolbar);
 
-            ls.maximizeControl();  // open layerswitcher by default
+            layerSwitcher.maximizeControl();  // open layerswitcher by default
 
             mapPanel = new GeoExt.MapPanel({
                 title: "InterMountain West Joint Venture Exploration Tool",
@@ -409,40 +426,11 @@
                 height: 500,
                 width: 750,
                 map: map,
-                center: [-12098270.216376, 4883288.4348961],      //  [-12698270.216376, 5183288.4348961],
+                center: [-12098270.216376, 4883288.4348961],
                 zoom: 5
             });
 
             birdInfoClickLayerSwitcher("Nothing");
-
-        });
-
-        // -- Supplemental js for Openlayers Map  --
-
-        function birdInfoClick(spp) {
-            birdInfoClickLayerSwitcher(spp);
-            //create sppInfo HTML Element
-            $("#birdImgInfo")
-                .attr('class', 'birdInfo')
-                .addClass('birdInfoBackground-'+spp);
-
-            var birdTextUrl = "uploads/html/" + spp + "InfoText.php";
-            $.get(birdTextUrl, function(data) {
-                $("#birdImgInfo").html(data);
-            }).fail(function(){
-                $("#birdImgInfo").html("");
-            });
-
-            var photoCreditUrl = "uploads/html/" + spp + "PhotoCredit.txt";
-            $.get(photoCreditUrl, function(data) {
-                $("#photoCredit").text(data);
-            }).fail(function(){
-                $("#photoCredit").text("");
-            });
-
-            $('#mapInstructionContainer').hide();
-            $("#birdInfoContainer").show();
-            $("#instructionsButtonContainer").show();
 
         }
 
@@ -466,20 +454,9 @@
             }
         }
 
-        function _setPointDropHandler(_pointDropHandler){
-            if(typeof  _pointDropHandler !== 'function'){
-                throw "Error: point drop handler must be of type function";
-            }
-            pointDoneHandler = _pointDropHandler;
-        }
 
+    }       //end Habpop
 
-        return {
-            setPointDropHandler:_setPointDropHandler
-        };
-
-
-    }
 
 
 })();
