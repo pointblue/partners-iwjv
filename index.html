@@ -155,8 +155,72 @@
                         </tbody>
                     </table>
                 </div>
-                <div id="stategoninfotable"></div>
             </div>
+            <div ng-show="vm.stategon">
+                <h2>Species Populations</h2>
+                <table id="speciesTable" cellspacing="0">
+                    <thead>
+                    <tr class="speciesTableHeadingRow">
+                        <th>Species Name</th>
+                        <th>Occupied Acres</th>
+                        <th>Population Estimate</th>
+                        <th>Population Objective</th>
+                        <th>Objective Increase</th>
+                        <th>Before</th>
+                        <th>After</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="species in vm.stategon.speciestable" class="speciesTableRow">
+                        <td class="SpeciesName">{{species.SpeciesName}}</td>
+                        <td class="OccupiedAcres numericContainer">{{species.OccupiedAcres}}</td>
+                        <td class="PopEstimate numericContainer">{{species.PopEstimate}}</td>
+                        <td class="PopObjective numericContainer">{{species.PopObjective}}</td>
+                        <td class="ObjectiveIncrease numericContainer">{{species.ObjectiveIncrease}}</td>
+                        <td class="before numericContainer"></td>
+                        <td class="after numericContainer"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-show="vm.stategon" class="under-construction" style="display: none;">
+                <h2>Population Worksheet</h2>
+                <div class="worksheetContainer" ng-repeat="habitatSets in vm.stategon.habitats.byconditionset">
+                    <table class="worksheetTable">
+                        <thead>
+                        <tr>
+                            <th ng-if="$index === 0">Habitat Type</th>
+                            <th ng-if="$index !== 0"></th>
+                            <!-- before columns -->
+                            <th ng-repeat="condtion in habitatSets.setConditions">{{condtion}}</th>
+                            <th ng-if="habitatSets.setConditions.length < 2">{{condtion}}</th>
+                            <th ng-if="habitatSets.setConditions.length < 3">{{condtion}}</th>
+                            <!-- after columns -->
+                            <th ng-repeat="condtion in habitatSets.setConditions">{{condtion}}</th>
+                            <th ng-if="habitatSets.setConditions.length < 2">{{condtion}}</th>
+                            <th ng-if="habitatSets.setConditions.length < 3">{{condtion}}</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th colspan="3">(Before)</th>
+                            <th colspan="3">(After)</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="habitat in habitatSets.setData">
+                            <td>{{habitat.ASSOCIATION}}</td>
+                            <td ng-repeat="conditiontotal in habitat.CONDITION_TOTALS track by $index" class="total">{{conditiontotal}}</td>
+                            <td ng-if="habitat.CONDITION_TOTALS.length < 2" class="total"></td>
+                            <td ng-if="habitat.CONDITION_TOTALS.length < 3" class="total"></td>
+                            <td class="total">{{habitat.TOTAL}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <div id="speciesTableContainer" style="clear: both;"></div>
             <div id="worksheetContainer"></div>
         </div>
