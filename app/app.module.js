@@ -6,7 +6,8 @@
 (function(){
     angular
         .module('app', [
-            'OpenLayers'
+            'OpenLayers',
+            'underscore'
         ])
     ;
 })();

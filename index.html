@@ -33,26 +33,30 @@
         var API_HABPOP_STATEGONS_URL = API_FULL_URL + API_ROUTE_HABPOP + API_ROUTE_HABPOP_STATEGONS;    //habpop stategons api full url
         var API_HABPOP_ESTIMATES_URL = API_FULL_URL + API_ROUTE_HABPOP + API_ROUTE_HABPOP_ESTIMATES;    //habpop estimates api full url
     </script>
-    <script type="text/javascript" src="inc/js/ext-3.4.0/adapter/ext/ext-base.js"></script>
-    <script type="text/javascript" src="inc/js/ext-3.4.0/ext-all.js"></script>
-    <script type="text/javascript" src="inc/js/OpenLayers-2.11/OpenLayers.js"></script>
-    <script type="text/javascript" src="inc/js/GeoExt/lib/GeoExt.js" ></script>
-    <script type="text/javascript" src="inc/js/jquery.js"></script>
+    <script src="inc/js/ext-3.4.0/adapter/ext/ext-base.js"></script>
+    <script src="inc/js/ext-3.4.0/ext-all.js"></script>
+    <script src="inc/js/OpenLayers-2.11/OpenLayers.js"></script>
+    <script src="inc/js/GeoExt/lib/GeoExt.js" ></script>
+    <script src="inc/js/jquery.js"></script>
+    <script src="inc/js/underscore.js"></script>
 
 
     <!-- https://github.com/johnpapa/angular-styleguide -->
     <script src="inc/js/angular.js"></script>
     <script src="app/OpenLayers.module.js"></script>
+    <script src="app/underscore.module.js"></script>
     <script src="app/app.module.js"></script>
     <script src="app/app.config.js"></script>
     <script src="app/app.run.js"></script>
     <script src="app/stategon.factory.js"></script>
     <script src="app/habpopmap.factory.js"></script>
+    <script src="app/conditionnames.factory.js"></script>
     <script src="app/habpop.controller.js"></script>
 
     <script type="text/javascript">var __BASEHOST = window.location.host;</script>
 
     <link type="text/css" rel="stylesheet" href="inc/css/iwjvmap.css">
+    <!--
     <script type="text/javascript">
 
         var _gaq = _gaq || [];
@@ -66,82 +70,101 @@
         })();
 
     </script>
+    -->
 
     <script type="text/javascript" src="inc/js/imjvmap.js"></script>
-    <!-- <script type="text/javascript" src="inc/js/mapInit.js"></script> -->
 </head>
 <body onload="load();">
-<div id="iwjvContainer">
-    <div id="siteTitleContainer">
-        <h1>Inter-Mountain West Joint Venture Mapping Tool</h1>
-        <a href="http://iwjv.org/" target="_blank"><img src="./uploads/img/IWJV_logo.png" /></a>
-    </div>
-    <div id="subtitle"><h2>Habitats and Populations Strategies (HABPOPS) Database</h2></div>
-    <div id="iwjvBodyContainer">
-        <div id="gxmap"></div>
-        <div id="panel" class="olControlEditingToolbar"></div>
-        <div id="mapSidebarRightContainer">
-            <div id="buttonContainer">
-                <button type="button" id="instr_button"  class="defaultButton" value="instr" onclick="showInstructionInfo();">Instructions</button>
-                <button type="button" class="defaultButton" value="sasp" onclick="birdInfoClick('sasp');">Sage Sparrow</button>
-                <button type="button" class="defaultButton" value="sath" onclick="birdInfoClick('sath');">Sage Thrasher</button>
-                <button type="button" class="defaultButton" value="brsp" onclick="birdInfoClick('brsp');">Brewer's Sparrow</button>
-                <button type="button" class="defaultButton" value="lbcu" onclick="birdInfoClick('lbcu');">Long-billed Curlew</button>
-                <button type="button" class="defaultButton" value="grsp" onclick="birdInfoClick('grsp');">Grasshopper Sparrow</button>
-            </div>
-            <div id="birdInfoContainer">
-                <div id="birdImgInfo"></div>
-                <div id="photoCredit"></div>
-            </div>
-            <div id="mapInstructionContainer">
-                <h2>Mapping Tool Use</h2>
-                <p>
-                    Click in the map and place a marker <img src="icons/marker.png" style="vertical-align:middle"/> to generate report
-                    for the selected State / Bird Conservation Region (BCR) including habitat composition, populations of bird species,
-                    and goals for their future populations.
-                </p>
-                <p>
-                    Click a bird species <img src="uploads/img/birdButton.png" style=" width:140px; vertical-align:middle"/> button for
-                    information about the species' habitat preferences.
-                </p>
-                <p>
-                    The population worksheet estimates the effects of various habitat conservation efforts on regional bird populations.
-                </p>
-                <p>
-                    This mapping tool was developed to help resource and land managers develop and implement habitat
-                    conservation projects that are both strategic and effective. It allows planners to explore the
-                    impact that various restoration and management plans have on bird populations for BCR's 9, 10 and 16 within the Inter-Mountain West Joint Venture (IWJV) region.
-                </p>
-                <p>
-                    This mapping tool was developed as a collaborative effort between IWJV, ABC, and Point Blue Conservation Science.
-                </p>
-            </div>
+    <div id="iwjvContainer" ng-controller="Habpop as vm">
+        <div id="siteTitleContainer">
+            <h1>Inter-Mountain West Joint Venture Mapping Tool</h1>
+            <a href="http://iwjv.org/" target="_blank"><img src="./uploads/img/IWJV_logo.png" /></a>
         </div>
-        <div id="stategonTableContainer" style="display: none;">
-            <!-- The content for the #stategoninfotable is rendered in /api/v1/routes/Habpop.php -->
-            <div>
-                <h2>Regional Habitats</h2>
-                Bird Conservation Region: <span class="bcr"></span>, <span class="state"></span>
-                <br>
-                Total Habitat Acreage: <span class="acres"></span>
-                <br>
-                <a href="" target="_blank" class="iwjv">Conservation Plan for Bird Conservation Area - PDF</a><br>
-                <a href="" target="_blank" class="swap">Regional Wildlife Action Plan - PDF</a>
+        <div id="subtitle"><h2>Habitats and Populations Strategies (HABPOPS) Database</h2></div>
+        <div id="iwjvBodyContainer">
+            <div id="gxmap"></div>
+            <div id="panel" class="olControlEditingToolbar"></div>
+            <div id="mapSidebarRightContainer">
+                <div id="buttonContainer">
+                    <button type="button" id="instr_button"  class="defaultButton" value="instr" onclick="showInstructionInfo();">Instructions</button>
+                    <button type="button" class="defaultButton" value="sasp" onclick="birdInfoClick('sasp');">Sage Sparrow</button>
+                    <button type="button" class="defaultButton" value="sath" onclick="birdInfoClick('sath');">Sage Thrasher</button>
+                    <button type="button" class="defaultButton" value="brsp" onclick="birdInfoClick('brsp');">Brewer's Sparrow</button>
+                    <button type="button" class="defaultButton" value="lbcu" onclick="birdInfoClick('lbcu');">Long-billed Curlew</button>
+                    <button type="button" class="defaultButton" value="grsp" onclick="birdInfoClick('grsp');">Grasshopper Sparrow</button>
+                </div>
+                <div id="birdInfoContainer">
+                    <div id="birdImgInfo"></div>
+                    <div id="photoCredit"></div>
+                </div>
+                <div id="mapInstructionContainer">
+                    <h2>Mapping Tool Use</h2>
+                    <p>
+                        Click in the map and place a marker <img src="icons/marker.png" style="vertical-align:middle"/> to generate report
+                        for the selected State / Bird Conservation Region (BCR) including habitat composition, populations of bird species,
+                        and goals for their future populations.
+                    </p>
+                    <p>
+                        Click a bird species <img src="uploads/img/birdButton.png" style=" width:140px; vertical-align:middle"/> button for
+                        information about the species' habitat preferences.
+                    </p>
+                    <p>
+                        The population worksheet estimates the effects of various habitat conservation efforts on regional bird populations.
+                    </p>
+                    <p>
+                        This mapping tool was developed to help resource and land managers develop and implement habitat
+                        conservation projects that are both strategic and effective. It allows planners to explore the
+                        impact that various restoration and management plans have on bird populations for BCR's 9, 10 and 16 within the Inter-Mountain West Joint Venture (IWJV) region.
+                    </p>
+                    <p>
+                        This mapping tool was developed as a collaborative effort between IWJV, ABC, and Point Blue Conservation Science.
+                    </p>
+                </div>
             </div>
-            <img src="" alt="Stategon Info" style="width:500px;float: left;">
-            <div id="stategoninfotable" ></div>
+            <div id="stategonInformationContainer" ng-show="vm.stategon">
+                <div>
+                    <h2>Regional Habitats</h2>
+                    Bird Conservation Region: {{vm.stategon.details.bcr}}, {{vm.stategon.details.state}}
+                    <br>
+                    Total Habitat Acreage: {{vm.stategon.details.acres}}
+                    <br>
+                    <a ng-href="{{vm.stategon.details.iwjv}}" target="_blank" class="iwjv">Conservation Plan for Bird Conservation Area - PDF</a><br>
+                    <a ng-href="{{vm.stategon.details.swap}}" target="_blank" class="swap">Regional Wildlife Action Plan - PDF</a>
+                </div>
+                <img ng-src="http://data.pointblue.org/partners/iwjv/uploads/img/{{vm.stategon.code}}.jpg" alt="Stategon Info" style="width:500px;float: left;">
+                <div ng-repeat="habitatSets in vm.stategon.habitats.byconditionset">
+                    <table class="stategonInfoTable">
+                        <thead>
+                            <tr>
+                                <th ng-if="$index === 0">Habitat Type</th>
+                                <th ng-if="$index !== 0"></th>
+                                <th ng-repeat="condtion in habitatSets.setConditions">{{condtion}}</th>
+                                <th ng-if="habitatSets.setConditions.length < 2">{{condtion}}</th>
+                                <th ng-if="habitatSets.setConditions.length < 3">{{condtion}}</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="habitat in habitatSets.setData">
+                                <td>{{habitat.ASSOCIATION}}</td>
+                                <td ng-repeat="conditiontotal in habitat.CONDITION_TOTALS track by $index" class="total">{{conditiontotal}}</td>
+                                <td ng-if="habitat.CONDITION_TOTALS.length < 2" class="total"></td>
+                                <td ng-if="habitat.CONDITION_TOTALS.length < 3" class="total"></td>
+                                <td class="total">{{habitat.TOTAL}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="stategoninfotable"></div>
+            </div>
+            <div id="speciesTableContainer" style="clear: both;"></div>
+            <div id="worksheetContainer"></div>
         </div>
-        <div id="speciesTableContainer" style="clear: both;"></div>
-        <div id="worksheetContainer"></div>
+        <div class="footer">
+            <div id="prbo"><a href="http://www.pointblue.org/" target="_blank" ><img src="images/PB_logo_notag_sm90.jpg"></a> powered by Point Blue Data Solutions</div>
+            <div id="abc"><a href="http://www.abcbirds.org/" target="_blank" ><img src="./uploads/img/ABC_logo.jpg" /></a></div>
+        </div>
     </div>
-    <div class="footer">
-        <div id="prbo"><a href="http://www.pointblue.org/" target="_blank" ><img src="images/PB_logo_notag_sm90.jpg"></a> powered by Point Blue Data Solutions</div>
-        <div id="abc"><a href="http://www.abcbirds.org/" target="_blank" ><img src="./uploads/img/ABC_logo.jpg" /></a></div>
-    </div>
-</div>
 
-<div ng-controller="Habpop as vm">
-    {{vm.helloworld}}
-</div>
 </body>
 </html>
