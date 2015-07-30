@@ -244,13 +244,8 @@ th.before, td.before {
     position: relative;
     top: -18px;
 }
-/*Info  for bird popup*/
-#birdInfoContainer{
-    display: none;
-}
 
 #mapInstructionContainer{
-    display: none;
     font-size: 1.0em;
     padding: 0 20px;
 }

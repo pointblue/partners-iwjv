@@ -15,6 +15,8 @@
         vm.worksheetModels = {};
         vm.submitWorksheets = submitWorksheets;
         vm.estimate = {'before':{},'after':{}};
+        vm.showBirdInfo = showBirdInfo;
+        vm.selectedBirdInfoSpecies = null;
 
         HabpopMap.setPointDroppedHandler(handlePointDropped);
 
@@ -51,6 +53,11 @@
         function loadEstimate(estimate){
             $log.debug('loading estimate', estimate);
             vm.estimate = estimate;
+        }
+
+        function showBirdInfo(species){
+            $log.debug('changing selected bird info species', species);
+            vm.selectedBirdInfoSpecies = species;
         }
 
     }

@@ -683,19 +683,4 @@ function birdInfoClick(spp) {
     $("#instructionsButtonContainer").show();
 
 }
-
-function showInstructionInfo(){
-    $("#birdInfoContainer").hide();
-    $('#mapInstructionContainer').show();
-    $("#instructionsButtonContainer").hide();
-}
-
-function load()
-{
-    // load in general introduction and instructions here?
-
-    //moved to its own function so you can do multiple this during loading since this is attached to the body element's onload event
-    showInstructionInfo();
-
-}
     

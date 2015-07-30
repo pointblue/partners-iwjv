@@ -75,7 +75,7 @@
 
     <script type="text/javascript" src="inc/js/imjvmap.js"></script>
 </head>
-<body onload="load();">
+<body>
     <div id="iwjvContainer" ng-controller="Habpop as vm">
         <div id="siteTitleContainer">
             <h1>Inter-Mountain West Joint Venture Mapping Tool</h1>
@@ -87,35 +87,75 @@
             <div id="panel" class="olControlEditingToolbar"></div>
             <div id="mapSidebarRightContainer">
                 <div id="buttonContainer">
-                    <button type="button" id="instr_button"  class="defaultButton" value="instr" onclick="showInstructionInfo();">Instructions</button>
-                    <button type="button" class="defaultButton" value="sasp" onclick="birdInfoClick('sasp');">Sage Sparrow</button>
-                    <button type="button" class="defaultButton" value="sath" onclick="birdInfoClick('sath');">Sage Thrasher</button>
-                    <button type="button" class="defaultButton" value="brsp" onclick="birdInfoClick('brsp');">Brewer's Sparrow</button>
-                    <button type="button" class="defaultButton" value="lbcu" onclick="birdInfoClick('lbcu');">Long-billed Curlew</button>
-                    <button type="button" class="defaultButton" value="grsp" onclick="birdInfoClick('grsp');">Grasshopper Sparrow</button>
+                    <button type="button" id="instr_button"  class="defaultButton" value="instr" ng-click="vm.selectedBirdInfoSpecies = null">Instructions</button>
+                    <button type="button" class="defaultButton" value="sasp" ng-click="vm.showBirdInfo('sasp')">Sage Sparrow</button>
+                    <button type="button" class="defaultButton" value="sath" ng-click="vm.showBirdInfo('sath')">Sage Thrasher</button>
+                    <button type="button" class="defaultButton" value="brsp" ng-click="vm.showBirdInfo('brsp')">Brewer's Sparrow</button>
+                    <button type="button" class="defaultButton" value="lbcu" ng-click="vm.showBirdInfo('lbcu')">Long-billed Curlew</button>
+                    <button type="button" class="defaultButton" value="grsp" ng-click="vm.showBirdInfo('grsp')">Grasshopper Sparrow</button>
                 </div>
-                <div id="birdInfoContainer">
-                    <div id="birdImgInfo"></div>
-                    <div id="photoCredit"></div>
+                <div id="birdInfoContainer" ng-show="!!vm.selectedBirdInfoSpecies">
+                    <div id="birdImgInfo" class="birdInfo birdInfoBackground-{{vm.selectedBirdInfoSpecies}}">
+                        <div ng-show="vm.selectedBirdInfoSpecies === 'brsp'">
+                            <span class="birdInfoTotalPopulation brsp">Brewers Sparrow</span>
+                            <span class="birdInfoHabitatsConditions brsp">
+                                Tall, dense or patchy sagebrush<br>>10% sagebrush cover<br>
+                                Some bare ground with >10% native herbaceous<br>
+                                Minimum block size of 8ha
+                            </span>
+                        </div>
+                        <div ng-show="vm.selectedBirdInfoSpecies === 'grsp'">
+                            <span class="birdInfoTotalPopulation grsp">Grasshopper Sparrow</span>
+                            <span class="birdInfoHabitatsConditions grsp">
+                                Grasslands, preferably tall bunchgrass<br>
+                                Moderate litter levels, low shrub density<br>
+                                <10% woody vegetation
+                            </span>
+                        </div>
+                        <div ng-show="vm.selectedBirdInfoSpecies === 'lbcu'">
+                            <span class="birdInfoTotalPopulation lbcu">Long-billed Curlew</span>
+                            <span class="birdInfoHabitatsConditions lbcu">
+                                Open, patchy sagebrush<br>Grasslands with average heights <30cm<br>
+                                Prefer proximity to shallow wetlands/wet meadows
+                            </span>
+                        </div>
+                        <div ng-show="vm.selectedBirdInfoSpecies === 'sasp'">
+                            <span class="birdInfoTotalPopulation sasp">Sage Sparrow</span>
+                            <span class="birdInfoHabitatsConditions sasp">
+                                Sagebrush cover 15-30%, 50-100 cm tall<br>
+                                Tall, dense  or patchy sagebrush
+                            </span>
+                        </div>
+                        <div ng-show="vm.selectedBirdInfoSpecies === 'sath'">
+                            <span class="birdInfoTotalPopulation sath">Sage Thrasher</span>
+                            <span class="birdInfoHabitatsConditions sath">
+                                    Tall, dense  or patchy sagebrush<br>Less grass cover, some bare ground<br>
+                                Prefers 20-40% sagebrush cover, >55cm tall
+                            </span>
+                        </div>
+                    </div>
+                    <div id="photoCredit">
+                        <span ng-show="vm.selectedBirdInfoSpecies === 'brsp'">Photo by Greg Lavaty</span>
+                        <span ng-show="vm.selectedBirdInfoSpecies === 'grsp'">Photo by Chuck Carlson</span>
+                        <span ng-show="vm.selectedBirdInfoSpecies === 'lbcu'">Photo by Bob Martinka</span>
+                        <span ng-show="vm.selectedBirdInfoSpecies === 'sasp'">Photo by Greg Lavaty</span>
+                        <span ng-show="vm.selectedBirdInfoSpecies === 'sath'">Photo by Greg Lavaty</span>
+                    </div>
                 </div>
-                <div id="mapInstructionContainer">
+                <div id="mapInstructionContainer" ng-show="!vm.selectedBirdInfoSpecies">
                     <h2>Mapping Tool Use</h2>
                     <p>
-                        Click in the map and place a marker <img src="icons/marker.png" style="vertical-align:middle"/> to generate report
+                        Click on the map to place a marker <img src="icons/marker.png" style="vertical-align:middle"/> and generate report
                         for the selected State / Bird Conservation Region (BCR) including habitat composition, populations of bird species,
                         and goals for their future populations.
                     </p>
-                    <p>
-                        Click a bird species <img src="uploads/img/birdButton.png" style=" width:140px; vertical-align:middle"/> button for
-                        information about the species' habitat preferences.
-                    </p>
-                    <p>
-                        The population worksheet estimates the effects of various habitat conservation efforts on regional bird populations.
-                    </p>
+                    <p>Select a bird species button for information about the species' habitat preferences.</p>
+                    <p>The population worksheet estimates the effects of various habitat conservation efforts on regional bird populations.</p>
                     <p>
                         This mapping tool was developed to help resource and land managers develop and implement habitat
                         conservation projects that are both strategic and effective. It allows planners to explore the
-                        impact that various restoration and management plans have on bird populations for BCR's 9, 10 and 16 within the Inter-Mountain West Joint Venture (IWJV) region.
+                        impact that various restoration and management plans have on bird populations for BCR's 9, 10 and 16 within the
+                        Intermountain West Joint Venture (IWJV) region.
                     </p>
                     <p>
                         This mapping tool was developed as a collaborative effort between IWJV, ABC, and Point Blue Conservation Science.
