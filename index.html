@@ -49,6 +49,7 @@
     <script src="app/app.config.js"></script>
     <script src="app/app.run.js"></script>
     <script src="app/stategon.factory.js"></script>
+    <script src="app/estimates.factory.js"></script>
     <script src="app/habpopmap.factory.js"></script>
     <script src="app/conditionnames.factory.js"></script>
     <script src="app/habpop.controller.js"></script>
@@ -177,15 +178,23 @@
                         <td class="PopEstimate numericContainer">{{species.PopEstimate}}</td>
                         <td class="PopObjective numericContainer">{{species.PopObjective}}</td>
                         <td class="ObjectiveIncrease numericContainer">{{species.ObjectiveIncrease}}</td>
-                        <td class="before numericContainer"></td>
-                        <td class="after numericContainer"></td>
+                        <td class="before numericContainer">{{vm.estimate.before[species.SPECIES]}}</td>
+                        <td class="after numericContainer">{{vm.estimate.after[species.SPECIES]}}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <div ng-show="vm.stategon">
                 <h2>Population Worksheet</h2>
-                <div class="worksheetContainer" ng-repeat="habitatSets in vm.stategon.habitats.byconditionset" ng-init="parentIndex = $index">
+                <p>
+                    Enter acres for each habitat you have (before) and will restore (after), then click 'calculate'.
+                    <br>
+                    Estimates appear in before / after columns of Species Population table above.
+                    <br>
+                    For descriptions of the habitats/conditions, click on the links in the worksheet below.
+                </p>
+                <button class="defaultButton" type="button" ng-click="vm.submitWorksheets()" style="float:right;">Calculate</button>
+                <div class="worksheetContainer" ng-repeat="habitatSets in vm.stategon.habitats.byconditionset" ng-init="parentIndex = $index" style="clear: both;">
                     <table class="worksheetTable">
                         <thead>
                         <tr ng-if="$index === 0">
@@ -232,6 +241,7 @@
                         </tbody>
                     </table>
                 </div>
+                <button class="defaultButton" type="button" ng-click="vm.submitWorksheets()" style="float:right;">Calculate</button>
             </div>
         </div>
         <div class="footer">

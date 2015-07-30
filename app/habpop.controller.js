@@ -7,11 +7,14 @@
         .controller('Habpop', Habpop)
     ;
 
-    Habpop.$inject = ['HabpopMap', 'StategonRequest', '$log'];
+    Habpop.$inject = ['HabpopMap', 'StategonRequest', 'EstimatesRequest', '$log'];
 
-    function Habpop(HabpopMap, StategonRequest, $log){
+    function Habpop(HabpopMap, StategonRequest, EstimatesRequest, $log){
         var vm = this;
-        vm.worksheets = [];
+        vm.$log = $log;
+        vm.worksheetModels = {};
+        vm.submitWorksheets = submitWorksheets;
+        vm.estimate = {'before':{},'after':{}};
 
         HabpopMap.setPointDroppedHandler(handlePointDropped);
 
@@ -27,40 +30,22 @@
 
         function loadStategon(stategon){
             $log.debug('loading stategon:', stategon);
-            //create the worksheet model for the stategon
-            vm.worksheetModelSets = createWorksheetModel(stategon);
             vm.stategon = stategon;
-            vm.$log = $log;
+
         }
 
-        function createWorksheetModel(stategon){
-            var habitatSets = stategon['habitats']['byconditionset'].slice(0);
-            var worksheetSets = [];
-            for(var i=0;i<habitatSets.length;i++){
-                worksheetSets.push( [] );
-                for(var j=0;j<habitatSets[i].setData.length;j++){
-                    var conditions = habitatSets[i].setData[j]['CONDITIONS'].split(',');
-                    var habitatModels = [];
-                    for(var k=0;k<conditions.length;k++){
-                        habitatModels.push({
-                            'mastercode':habitatSets[i].setData[j]['MASTERCODE'],
-                            'condition':k+1,
-                            'acres':''
-                        });
-                    }
-                    worksheetSets[i].push({
-                        'before':habitatModels.slice(0),
-                        'after':habitatModels.slice(0)
-                    });
+        function submitWorksheets(){
+            $log.debug('submitting worksheets', vm.worksheetModels);
+            EstimatesRequest.get(vm.worksheetModels)
+                .then(loadEstimate);
 
-                }
-            }
-            $log.debug('worksheet created: ', worksheetSets);
-            return worksheetSets;
+        }
+
+        function loadEstimate(estimate){
+            $log.debug('loading estimate', estimate);
+            vm.estimate = estimate;
         }
 
     }
-
-
 
 })();
