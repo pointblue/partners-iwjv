@@ -67,6 +67,10 @@ h1, h2{
 .worksheetTable input{
     width: 100%;
 }
+.worksheetTable input.ng-invalid{
+    color: red;
+    font-weight: bold;
+}
 tr.odd {
     background-color: rgba(249, 246, 237, 0.8);
 }

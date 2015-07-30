@@ -199,7 +199,8 @@
                 <p>
                     Enter acres for each habitat you have (before) and will restore (after), then click 'calculate'.<br>
                     Estimates appear in before / after columns of Species Population table above.<br>
-                    For descriptions of the habitats/conditions, click on the links in the worksheet below.
+                    For descriptions of the habitats/conditions, click on the links in the worksheet below.<br>
+                    Invalid integers are marked as <span style="font-weight: bold;color:red;">bold and red</span>. These values will not be used in the calculation until they are corrected.
                 </p>
                 <div class="calculateButtonContainer">
                     <button class="defaultButton" type="button" ng-click="vm.submitWorksheets()">Calculate</button>
@@ -226,17 +227,17 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="habitat in habitatSets.setData" ng-init="habitatIndex = $index" ng-class="{odd:($index+1)%2!==0}">
-                                <td><a href="uploads/pdf/{{habitat.LINK}}" target="_blank">{{habitat.ASSOCIATION}}</a></td>
+                                <td><a ng-href="uploads/pdf/{{habitat.LINK}}" target="_blank">{{habitat.ASSOCIATION}}</a></td>
                                 <!-- before columns -->
                                 <td ng-repeat="condition in habitat.setConditionsBefore" class="before">
-                                    <input type="text" ng-model="vm.worksheetModels['before'][habitat.MASTERCODE + '.' + ($index + 1)]"
+                                    <input type="number" ng-model="vm.worksheetModels['before'][habitat.MASTERCODE + '.' + ($index + 1)]"
                                             title="Acres of {{habitat.ASSOCIATION}} as {{habitatSets.setConditions[$index]}} (before)">
                                 </td>
                                 <td ng-if="habitat.CONDITION_TOTALS.length < 2" class="before"></td>
                                 <td ng-if="habitat.CONDITION_TOTALS.length < 3" class="before"></td>
                                 <!-- after columns -->
                                 <td ng-repeat="condition in habitat.setConditionsAfter" class="after">
-                                    <input type="text" ng-model="vm.worksheetModels['after'][habitat.MASTERCODE + '.' + ($index + 1)]"
+                                    <input type="number" ng-model="vm.worksheetModels['after'][habitat.MASTERCODE + '.' + ($index + 1)]"
                                            title="Acres of {{habitat.ASSOCIATION}} as {{habitatSets.setConditions[$index]}} (after)">
                                 </td>
                                 <td ng-if="habitat.CONDITION_TOTALS.length < 2" class="after"></td>
