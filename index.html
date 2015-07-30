@@ -188,9 +188,22 @@
                 <div class="worksheetContainer" ng-repeat="habitatSets in vm.stategon.habitats.byconditionset" ng-init="parentIndex = $index">
                     <table class="worksheetTable">
                         <thead>
+                        <tr ng-if="$index === 0">
+                            <th>Habitat Type</th>
+                            <th colspan="3">
+                                Condition Before
+                                <br>
+                                (Acres)
+                            </th>
+                            <th colspan="3">
+                                Condition After
+                                <br>
+                                (Acres)
+                            </th>
+                            <th></th>
+                        </tr>
                         <tr>
-                            <th ng-if="$index === 0">Habitat Type</th>
-                            <th ng-if="$index !== 0"></th>
+                            <th></th>
                             <!-- before columns -->
                             <th ng-repeat="condition in habitatSets.setConditions">{{condition}}</th>
                             <th ng-if="habitatSets.setConditions.length < 2"></th>
@@ -200,24 +213,18 @@
                             <th ng-if="habitatSets.setConditions.length < 2"></th>
                             <th ng-if="habitatSets.setConditions.length < 3"></th>
                         </tr>
-                        <tr>
-                            <th></th>
-                            <th colspan="3">(Before)</th>
-                            <th colspan="3">(After)</th>
-                            <th></th>
-                        </tr>
+
                         </thead>
                         <tbody>
                         <tr ng-repeat="habitat in habitatSets.setData" ng-init="habitatIndex = $index">
                             <td>{{habitat.ASSOCIATION}}</td>
-                            <td ng-repeat="conditiontotal in habitat.CONDITION_TOTALS track by $index" class="total">
-                                <input type="text" ng-model="worksheetModelSets[parentIndex][habitatIndex]['before'][$index].acres"
-                                       ng-change="vm.$log.debug(worksheetModelSets[parentIndex][habitatIndex]['before'][$index].acres)">
+                            <td ng-repeat="condition in habitat.setConditionsBefore" class="total">
+                                <input type="text" ng-model="vm.worksheetModels['before'][habitat.MASTERCODE + '.' + ($index + 1).toString()]">
                             </td>
                             <td ng-if="habitat.CONDITION_TOTALS.length < 2" class="total"></td>
                             <td ng-if="habitat.CONDITION_TOTALS.length < 3" class="total"></td>
-                            <td ng-repeat="conditiontotal in habitat.CONDITION_TOTALS track by $index" class="total">
-                                <input type="text" ng-model="worksheetModelSets[parentIndex][habitatIndex]['after'][$index].acres">
+                            <td ng-repeat="condition in habitat.setConditionsAfter" class="total">
+                                <input type="text" ng-model="vm.worksheetModels['after'][habitat.MASTERCODE + '.' + ($index + 1).toString()]">
                             </td>
                             <td ng-if="habitat.CONDITION_TOTALS.length < 2" class="total"></td>
                             <td ng-if="habitat.CONDITION_TOTALS.length < 3" class="total"></td>
@@ -226,9 +233,6 @@
                     </table>
                 </div>
             </div>
-
-            <div id="speciesTableContainer" style="clear: both;"></div>
-            <div id="worksheetContainer"></div>
         </div>
         <div class="footer">
             <div id="prbo"><a href="http://www.pointblue.org/" target="_blank" ><img src="images/PB_logo_notag_sm90.jpg"></a> powered by Point Blue Data Solutions</div>

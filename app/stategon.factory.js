@@ -41,11 +41,26 @@
                     var habitatsForThisConditionSet = _.where(stategon['habitats']['data'], {'CONDITIONS':conditionSets[i]});
                     var conditionSetsAsArray = conditionSets[i].split(',');
                     var setConditions = [];
+                    var setConditionsBefore = [];
+                    var setConditionsAfter = [];
                     for(var j=0;j<conditionSetsAsArray.length;j++){
                         var thisCondtionName = conditionNames[ parseInt(conditionSetsAsArray[j])-1 ];
                         setConditions.push(thisCondtionName);
                     }
-                    stategon['habitats']['byconditionset'].push( {'setData':habitatsForThisConditionSet, 'setConditions':setConditions} );
+                    for(j=0;j<setConditions.length;j++){
+                        setConditionsBefore.push({'value':'before' + setConditions[j]});
+                        setConditionsAfter.push({'value':'after' + setConditions[j]});
+                    }
+                    //used to track changes in the dom for before and after input controls
+                    for(j=0;j<habitatsForThisConditionSet.length;j++){
+                        habitatsForThisConditionSet[j].setConditionsBefore = setConditionsBefore;
+                        habitatsForThisConditionSet[j].setConditionsAfter = setConditionsAfter;
+                    }
+
+                    stategon['habitats']['byconditionset'].push({
+                        'setData':habitatsForThisConditionSet,
+                        'setConditions':setConditions,
+                    });
 
                 }
                 return stategon;
