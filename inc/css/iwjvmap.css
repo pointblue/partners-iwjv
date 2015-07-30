@@ -22,6 +22,10 @@ h1, h2{
     width: 1300px;
 }
 
+#iwjvBodyContainer {
+    padding: 25px;
+}
+
 #subtitle {
     height: 30px;
     margin-left: 0px;
@@ -47,81 +51,40 @@ h1, h2{
     z-index:1;
 }
 
-#iwjvBodyContainer{
-    padding: 10px;
-}
-
-/*table element that contains the species data*/
-#speciesTable{
-    margin-left: 25px;
-}
-
-#speciesTable td{
-    padding: 5px 10px;
-}
-/* Column headings of the species table  */
-.speciesTableHeadingRow{
-    font-weight: bold;
-}
-
-/* Single row in the species table */
-.speciesTableRow{
-
-}
-
-/* div element that contains the worksheetTable*/
-#worksheetContainer {
-    display: inline-block;
-    margin-bottom: 150px;
-
-}
-
-#worksheetContainer p {
-    /*   color:#787836;
-       font-weight: bold;*/
-    margin-left: 25px;
-
-
-}
-
-#worksheetContainer button{
-    margin: 10px 0 10px 0;
-}
-
-#worksheetContent{
-    margin-left: 25px;
-}
 /* table elements with worksheet info */
 .worksheetTable{
     border: 0;
 }
 /* heading for worksheet gets more padding */
-.worksheetTable .worksheetHeadingRow td {
+.worksheetTable th {
     padding-top: 10px;
     text-align: center;
 }
 .worksheetTable td {
-    padding: 5px 10px 5px 0;
+    padding: 10px;
 }
 
 .worksheetTable input{
     width: 100%;
 }
-
-.worksheetTable .after, .speciesTableRow .after {
+tr.odd {
+    background-color: rgba(249, 246, 237, 0.8);
+}
+th.after, td.after {
     background-color: rgba(188,190,113,0.3);
     width: 10%;
     /*    background-color: #BCBE71;*/
 }
 
-.worksheetTable .before, .speciesTableRow .before {
+th.before, td.before {
     background-color: rgba(217,171,117,0.5);
     width: 10%;
     /*    background-color: #F7F5ED;*/
 }
 
-.worksheetTable .after.first, .worksheetTable .before.first {
-    padding-left: 10px;
+.calculateButtonContainer {
+    text-align: right;
+    padding: 25px;
 }
 
 .worksheetTable .referenceRow{
@@ -143,20 +106,6 @@ h1, h2{
     text-align: center;
 }
 
-
-
-
-
-/* a single row in the worksheet table with habitat data*/
-.worksheetHabitatRow{
-
-}
-
-/* td element containing habitat name in worksheet table */
-.worksheetHabitatName{
-
-}
-
 .psuedo-div{
     display: block;
 }
@@ -169,6 +118,9 @@ h1, h2{
     text-align: right;
 }
 
+#speciesTable td {
+    padding: 10px;
+}
 
 #title {
     display: none;
@@ -354,29 +306,22 @@ h1, h2{
     margin-left: 200px;
     font-size: 1.0em;
 }
-#stategoninfotable #habitat_info {
+.stategonInfoTable #habitat_info {
     /*width: 100%;    this div not spec enough*/
     /*border: 1px solid #cef;*/
 
     text-align: left;
 }
 
-#stategoninfotable #habitat_info td, th {
+.stategonInfoTable #habitat_info td, th {
     padding: 4px 15px 4px 0;
 }
 
-#stategoninfotable th {
+.stategonInfoTable th {
     text-align: center;
 }
-#stategoninfotable .odd {
-    background-color: rgba(249, 246, 237, 0.8);
-}
-#stategonInfoHeader{
 
-}
-#stategonInfoHeader div{
 
-}
 #stategonInfoTableHeader div{
     margin-left: 25px;
 }
@@ -384,15 +329,6 @@ h1, h2{
     /* margin-left: 600px;*/
     text-align: center;
     font-size: 1.2em;
-}
-/* table element that hold stategon info*/
-#stategoninfotable{
-
-}
-
-.stategonInfoTableRow{
-
-
 }
 
 /* td elements that hold the stategon image */
@@ -408,27 +344,6 @@ td.stategonImage img{
 #ext-gen3 {
     display: none;
 }
-/*
-.olControlEditingToolbar .olControlDrawFeaturePointItemInactive {
-    display: block;
-    background: #EBE9E4 !important;
-    background-image: url("images/draw_poly_inactive.jpg?ver=130214.1") !important;
-    background-repeat: no-repeat !important;
-    background-size:91px 35px !important;
-    width:  91px !important;
-    height: 35px !important;
-}
-.olControlEditingToolbar .olControlDrawFeaturePointItemActive {
-    display: block;
-    background: #EBE9E4 !important;
-    background-image: url("images/draw_poly_active.jpg?ver=130214.1") !important;
-    background-repeat: no-repeat !important;
-    background-size:91px 35px !important;
-    width:  91px !important;
-    height: 35px !important;
-}
-
-*/
 
 .olControlEditingToolbar {
     display: none;
@@ -439,7 +354,7 @@ td.stategonImage img{
     width: 100%;
 }
 .stategonInfoTable td {
-    padding: 5px;
+    padding: 10px;
 }
 .total {
     text-align: center;

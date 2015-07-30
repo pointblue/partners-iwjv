@@ -10,7 +10,7 @@
         // MIGRATION CONFIGARTION
         //
 
-
+        //TODO: Remove this script section when migration is complete
 
         var SITE_PROTOCOL = 'http';            //Typical protocol used to access this site (used for hardlinking)
         var SITE_HOST = 'data.pointblue.org';  //The production server that this tool is running on
@@ -122,19 +122,30 @@
                     </p>
                 </div>
             </div>
+            <!--
+
+            STATEGON INFORMATION (DETAILS)
+
+            -->
             <div id="stategonInformationContainer" ng-show="vm.stategon">
                 <div>
                     <h2>Regional Habitats</h2>
+                    <!--
+                    <a ng-href="http://data.pointblue.org/partners/iwjv/uploads/img/{{vm.stategon.code}}.jpg" target="_blank">
+                        <img ng-src="http://data.pointblue.org/partners/iwjv/uploads/img/{{vm.stategon.code}}.jpg" style="width:250px;float:left;margin-right: 20px;">
+                    </a>
+                    -->
                     Bird Conservation Region: {{vm.stategon.details.bcr}}, {{vm.stategon.details.state}}
                     <br>
                     Total Habitat Acreage: {{vm.stategon.details.acres}}
                     <br>
                     <a ng-href="{{vm.stategon.details.iwjv}}" target="_blank" class="iwjv">Conservation Plan for Bird Conservation Area - PDF</a><br>
-                    <a ng-href="{{vm.stategon.details.swap}}" target="_blank" class="swap">Regional Wildlife Action Plan - PDF</a>
+                    <a ng-href="{{vm.stategon.details.swap}}" target="_blank" class="swap">Regional Wildlife Action Plan - PDF</a><br>
+                    <a ng-href="http://data.pointblue.org/partners/iwjv/uploads/img/{{vm.stategon.code}}.jpg" target="_blank">Region Map</a>
                 </div>
-                <img ng-src="http://data.pointblue.org/partners/iwjv/uploads/img/{{vm.stategon.code}}.jpg" alt="Stategon Info" style="width:500px;float: left;">
-                <div ng-repeat="habitatSets in vm.stategon.habitats.byconditionset">
-                    <table class="stategonInfoTable">
+
+                <div ng-repeat="habitatSets in vm.stategon.habitats.byconditionset" style="clear:both;">
+                    <table class="stategonInfoTable" cellspacing="0">
                         <thead>
                             <tr>
                                 <th ng-if="$index === 0">Habitat Type</th>
@@ -146,7 +157,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="habitat in habitatSets.setData">
+                            <tr ng-repeat="habitat in habitatSets.setData" ng-class="{odd:($index+1)%2!==0}">
                                 <td>{{habitat.ASSOCIATION}}</td>
                                 <td ng-repeat="conditiontotal in habitat.CONDITION_TOTALS track by $index" class="total">{{conditiontotal}}</td>
                                 <td ng-if="habitat.CONDITION_TOTALS.length < 2" class="total"></td>
@@ -157,91 +168,97 @@
                     </table>
                 </div>
             </div>
-            <div ng-show="vm.stategon">
+            <!--
+
+            SPECIES INFORMATION (FOR STATEGON)
+
+            -->
+            <div id="speciesInformationContainer" ng-show="vm.stategon">
                 <h2>Species Populations</h2>
                 <table id="speciesTable" cellspacing="0">
                     <thead>
-                    <tr class="speciesTableHeadingRow">
-                        <th>Species Name</th>
-                        <th>Occupied Acres</th>
-                        <th>Population Estimate</th>
-                        <th>Population Objective</th>
-                        <th>Objective Increase</th>
-                        <th>Before</th>
-                        <th>After</th>
-                    </tr>
+                        <tr>
+                            <th>Species Name</th>
+                            <th>Occupied Acres</th>
+                            <th>Population Estimate</th>
+                            <th>Population Objective</th>
+                            <th>Objective Increase</th>
+                            <th>Before</th>
+                            <th>After</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="species in vm.stategon.speciestable" class="speciesTableRow">
-                        <td class="SpeciesName">{{species.SpeciesName}}</td>
-                        <td class="OccupiedAcres numericContainer">{{species.OccupiedAcres}}</td>
-                        <td class="PopEstimate numericContainer">{{species.PopEstimate}}</td>
-                        <td class="PopObjective numericContainer">{{species.PopObjective}}</td>
-                        <td class="ObjectiveIncrease numericContainer">{{species.ObjectiveIncrease}}</td>
-                        <td class="before numericContainer">{{vm.estimate.before[species.SPECIES]}}</td>
-                        <td class="after numericContainer">{{vm.estimate.after[species.SPECIES]}}</td>
-                    </tr>
+                        <tr ng-repeat="species in vm.stategon.speciestable" class="speciesTableRow" ng-class="{odd:($index+1)%2!==0}">
+                            <td>{{species.SpeciesName}}</td>
+                            <td>{{species.OccupiedAcres}}</td>
+                            <td>{{species.PopEstimate}}</td>
+                            <td>{{species.PopObjective}}</td>
+                            <td>{{species.ObjectiveIncrease}}</td>
+                            <td class="before">{{vm.estimate.before[species.SPECIES]}}</td>
+                            <td class="after">{{vm.estimate.after[species.SPECIES]}}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
-            <div ng-show="vm.stategon">
+            <!--
+
+            POPULATION WORKSHEET
+
+            -->
+            <div id="populationWorksheetsContainer" ng-show="vm.stategon">
                 <h2>Population Worksheet</h2>
                 <p>
-                    Enter acres for each habitat you have (before) and will restore (after), then click 'calculate'.
-                    <br>
-                    Estimates appear in before / after columns of Species Population table above.
-                    <br>
+                    Enter acres for each habitat you have (before) and will restore (after), then click 'calculate'.<br>
+                    Estimates appear in before / after columns of Species Population table above.<br>
                     For descriptions of the habitats/conditions, click on the links in the worksheet below.
                 </p>
-                <button class="defaultButton" type="button" ng-click="vm.submitWorksheets()" style="float:right;">Calculate</button>
+                <div class="calculateButtonContainer">
+                    <button class="defaultButton" type="button" ng-click="vm.submitWorksheets()">Calculate</button>
+                </div>
                 <div class="worksheetContainer" ng-repeat="habitatSets in vm.stategon.habitats.byconditionset" ng-init="parentIndex = $index" style="clear: both;">
-                    <table class="worksheetTable">
+                    <table class="worksheetTable" cellspacing="0">
                         <thead>
-                        <tr ng-if="$index === 0">
-                            <th>Habitat Type</th>
-                            <th colspan="3">
-                                Condition Before
-                                <br>
-                                (Acres)
-                            </th>
-                            <th colspan="3">
-                                Condition After
-                                <br>
-                                (Acres)
-                            </th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <!-- before columns -->
-                            <th ng-repeat="condition in habitatSets.setConditions">{{condition}}</th>
-                            <th ng-if="habitatSets.setConditions.length < 2"></th>
-                            <th ng-if="habitatSets.setConditions.length < 3"></th>
-                            <!-- after columns -->
-                            <th ng-repeat="condition in habitatSets.setConditions">{{condition}}</th>
-                            <th ng-if="habitatSets.setConditions.length < 2"></th>
-                            <th ng-if="habitatSets.setConditions.length < 3"></th>
-                        </tr>
-
+                            <tr ng-if="$index === 0">
+                                <th>Habitat Type</th>
+                                <th colspan="3" class="before">Condition Before<br>(Acres)</th>
+                                <th colspan="3" class="after">Condition After<br>(Acres)</th>
+                            </tr>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <!-- before columns -->
+                                <th ng-repeat="condition in habitatSets.setConditions" class="before">{{condition}}</th>
+                                <th ng-if="habitatSets.setConditions.length < 2" class="before"></th>
+                                <th ng-if="habitatSets.setConditions.length < 3" class="before"></th>
+                                <!-- after columns -->
+                                <th ng-repeat="condition in habitatSets.setConditions" class="after">{{condition}}</th>
+                                <th ng-if="habitatSets.setConditions.length < 2" class="after"></th>
+                                <th ng-if="habitatSets.setConditions.length < 3" class="after"></th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="habitat in habitatSets.setData" ng-init="habitatIndex = $index">
-                            <td>{{habitat.ASSOCIATION}}</td>
-                            <td ng-repeat="condition in habitat.setConditionsBefore" class="total">
-                                <input type="text" ng-model="vm.worksheetModels['before'][habitat.MASTERCODE + '.' + ($index + 1).toString()]">
-                            </td>
-                            <td ng-if="habitat.CONDITION_TOTALS.length < 2" class="total"></td>
-                            <td ng-if="habitat.CONDITION_TOTALS.length < 3" class="total"></td>
-                            <td ng-repeat="condition in habitat.setConditionsAfter" class="total">
-                                <input type="text" ng-model="vm.worksheetModels['after'][habitat.MASTERCODE + '.' + ($index + 1).toString()]">
-                            </td>
-                            <td ng-if="habitat.CONDITION_TOTALS.length < 2" class="total"></td>
-                            <td ng-if="habitat.CONDITION_TOTALS.length < 3" class="total"></td>
-                        </tr>
+                            <tr ng-repeat="habitat in habitatSets.setData" ng-init="habitatIndex = $index" ng-class="{odd:($index+1)%2!==0}">
+                                <td>{{habitat.ASSOCIATION}}</td>
+                                <!-- before columns -->
+                                <td ng-repeat="condition in habitat.setConditionsBefore" class="before">
+                                    <input type="text" ng-model="vm.worksheetModels['before'][habitat.MASTERCODE + '.' + ($index + 1)]"
+                                            title="Acres of {{habitat.ASSOCIATION}} as {{habitatSets.setConditions[$index]}} (before)">
+                                </td>
+                                <td ng-if="habitat.CONDITION_TOTALS.length < 2" class="before"></td>
+                                <td ng-if="habitat.CONDITION_TOTALS.length < 3" class="before"></td>
+                                <!-- after columns -->
+                                <td ng-repeat="condition in habitat.setConditionsAfter" class="after">
+                                    <input type="text" ng-model="vm.worksheetModels['after'][habitat.MASTERCODE + '.' + ($index + 1)]"
+                                           title="Acres of {{habitat.ASSOCIATION}} as {{habitatSets.setConditions[$index]}} (after)">
+                                </td>
+                                <td ng-if="habitat.CONDITION_TOTALS.length < 2" class="after"></td>
+                                <td ng-if="habitat.CONDITION_TOTALS.length < 3" class="after"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-                <button class="defaultButton" type="button" ng-click="vm.submitWorksheets()" style="float:right;">Calculate</button>
+                <div class="calculateButtonContainer">
+                    <button class="defaultButton" type="button" ng-click="vm.submitWorksheets()">Calculate</button>
+                </div>
             </div>
         </div>
         <div class="footer">
