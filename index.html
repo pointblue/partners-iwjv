@@ -2,46 +2,12 @@
 <html ng-app="app">
 <head>
     <title>Intermountain West Joint Venture</title>
-
-    <script type="text/javascript">
-
-
-        //
-        // MIGRATION CONFIGARTION
-        //
-
-        //TODO: Remove this script section when migration is complete
-
-        var SITE_PROTOCOL = 'http';            //Typical protocol used to access this site (used for hardlinking)
-        var SITE_HOST = 'data.pointblue.org';  //The production server that this tool is running on
-        var SITE_ROUTE = '/parnerts/iwjv';     //Path to this tool relative to the SITE_HOST constant
-
-        var API_PROTOCOL = 'http';         //Protocol to be used when making a request to the API (Example: https)
-        var API_HOST = 'data.prbo.org';    //Host server for the api (Example: data.prbo.org)
-        var API_ROUTE = '/api/v1/';        //Route for the api that is being called (Example: /api/v1/) Trailing '/' must be provided if it is necessary to make a successful request.
-        var API_ROUTE_HABPOP = 'habpop/';
-        var API_ROUTE_HABPOP_STATEGONS = 'stategons/';
-        var API_ROUTE_HABPOP_ESTIMATES = 'estimates/';
-
-        var GEO_PROTOCOL = 'http';         //Protocol to be used when making a request to the API (Example: https)
-        var GEO_HOST = 'geo.pointblue.org';    //Host server for the api (Example: data.prbo.org)
-        //Export variables defined in config.php to Javascript
-        var ACTIVE_HOST = "localhost";      //The active value being used in places where SITE_HOST would normally be used. This allows us to dynamically change it when working locally.
-
-        var GEO_FULL_URL = GEO_PROTOCOL + '://' + GEO_HOST;                 //Geoserver full url
-        var API_FULL_URL = API_PROTOCOL + "://" + API_HOST + API_ROUTE;     //data.prbo.org api v1 full url
-        var API_HABPOP_STATEGONS_URL = API_FULL_URL + API_ROUTE_HABPOP + API_ROUTE_HABPOP_STATEGONS;    //habpop stategons api full url
-        var API_HABPOP_ESTIMATES_URL = API_FULL_URL + API_ROUTE_HABPOP + API_ROUTE_HABPOP_ESTIMATES;    //habpop estimates api full url
-    </script>
     <script src="inc/js/ext-3.4.0/adapter/ext/ext-base.js"></script>
     <script src="inc/js/ext-3.4.0/ext-all.js"></script>
     <script src="inc/js/OpenLayers-2.11/OpenLayers.js"></script>
     <script src="inc/js/GeoExt/lib/GeoExt.js" ></script>
     <script src="inc/js/jquery.js"></script>
     <script src="inc/js/underscore.js"></script>
-
-
-    <!-- https://github.com/johnpapa/angular-styleguide -->
     <script src="inc/js/angular.js"></script>
     <script src="app/OpenLayers.module.js"></script>
     <script src="app/underscore.module.js"></script>
@@ -57,23 +23,6 @@
     <script type="text/javascript">var __BASEHOST = window.location.host;</script>
 
     <link type="text/css" rel="stylesheet" href="inc/css/iwjvmap.css">
-    <!--
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-40690497-30']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-
-    </script>
-    -->
-
-    <script type="text/javascript" src="inc/js/imjvmap.js"></script>
 </head>
 <body>
     <div id="iwjvContainer" ng-controller="Habpop as vm">
@@ -306,6 +255,16 @@
             <div id="abc"><a href="http://www.abcbirds.org/" target="_blank" ><img src="./uploads/img/ABC_logo.jpg" /></a></div>
         </div>
     </div>
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-40690497-30']);
+        _gaq.push(['_trackPageview']);
 
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
 </body>
 </html>

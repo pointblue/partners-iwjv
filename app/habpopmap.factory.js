@@ -15,6 +15,8 @@
 
     function HabpopMap(OpenLayers){
 
+        var geoserverUrl = 'http://geo.pointblue.org';
+
         //Notes on the code style for this factory:
         //https://github.com/johnpapa/angular-styleguide#factories
 
@@ -209,7 +211,7 @@
 
 
             vectorLayers.push(new OpenLayers.Layer.WMS(
-                "States", GEO_FULL_URL + "/geoserver/spatial2/wms",
+                "States", geoserverUrl + "/geoserver/spatial2/wms",
                 {
                     LAYERS: 'spatial2:iwjv_states_3857',
                     STYLES: 'whiteline',
@@ -229,7 +231,7 @@
 
 
             vectorLayers.push(new OpenLayers.Layer.WMS(
-                "IWJV Region", GEO_FULL_URL + "/geoserver/spatial2/wms",
+                "IWJV Region", geoserverUrl + "/geoserver/spatial2/wms",
                 {
                     LAYERS: 'spatial2:iwjv_boundary_3857',
                     STYLES: '',
@@ -248,7 +250,7 @@
             ));
 
             vectorLayers.push(new OpenLayers.Layer.WMS(
-                "BCR 9", GEO_FULL_URL + "/geoserver/spatial2/wms",
+                "BCR 9", geoserverUrl + "/geoserver/spatial2/wms",
                 {
                     LAYERS: 'spatial2:bcr_9_3857',
                     STYLES: 'iwjv_bcr',
@@ -267,7 +269,7 @@
             ));
 
             vectorLayers.push(new OpenLayers.Layer.WMS(
-                "BCR 10", GEO_FULL_URL + "/geoserver/spatial2/wms",
+                "BCR 10", geoserverUrl + "/geoserver/spatial2/wms",
                 {
                     LAYERS: 'spatial2:bcr_10_3857',
                     STYLES: '',
@@ -286,7 +288,7 @@
             ));
 
             vectorLayers.push(new OpenLayers.Layer.WMS(
-                "BCR 16", GEO_FULL_URL + "/geoserver/spatial2/wms",
+                "BCR 16", geoserverUrl + "/geoserver/spatial2/wms",
                 {
                     LAYERS: 'spatial2:bcr_16_3857',
                     STYLES: '',
@@ -305,7 +307,7 @@
             ));
 
             vectorLayers.push(new OpenLayers.Layer.WMS(
-                "Brewer Sparrow Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
+                "Brewer Sparrow Range", geoserverUrl + "/geoserver/spatial2/wms",
                 {
                     LAYERS: 'spatial2:brsp_breeding_3857',
                     STYLES: '',
@@ -324,7 +326,7 @@
             ));
 
             vectorLayers.push(new OpenLayers.Layer.WMS(
-                "Grasshopper Sparrow Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
+                "Grasshopper Sparrow Range", geoserverUrl + "/geoserver/spatial2/wms",
                 {
                     LAYERS: 'spatial2:grsp_breeding_3857',
                     STYLES: '',
@@ -343,7 +345,7 @@
             ));
 
             vectorLayers.push(new OpenLayers.Layer.WMS(
-                "Long-billed Curlew Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
+                "Long-billed Curlew Range", geoserverUrl + "/geoserver/spatial2/wms",
                 {
                     LAYERS: 'spatial2:lbcu_breeding_3857',
                     STYLES: '',
@@ -362,7 +364,7 @@
             ));
 
             vectorLayers.push(new OpenLayers.Layer.WMS(
-                "Sage Thrasher Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
+                "Sage Thrasher Range", geoserverUrl + "/geoserver/spatial2/wms",
                 {
                     LAYERS: 'spatial2:sath_breeding_3857',
                     STYLES: '',
@@ -381,7 +383,7 @@
             ));
 
             vectorLayers.push(new OpenLayers.Layer.WMS(
-                "Sage Sparrow Range", GEO_FULL_URL + "/geoserver/spatial2/wms",
+                "Sage Sparrow Range", geoserverUrl + "/geoserver/spatial2/wms",
                 {
                     LAYERS: 'spatial2:sgsp_breeding_3857',
                     STYLES: '',
