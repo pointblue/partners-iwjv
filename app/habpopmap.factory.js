@@ -40,7 +40,8 @@
 
         var factory = {
             'initialize':initialize,
-            'setPointDroppedHandler':setPointDroppedHandler
+            'setPointDroppedHandler':setPointDroppedHandler,
+            'selectLayerBySpecies':birdInfoClickLayerSwitcher
         };
 
         return factory;

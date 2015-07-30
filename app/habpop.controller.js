@@ -58,6 +58,7 @@
         function showBirdInfo(species){
             $log.debug('changing selected bird info species', species);
             vm.selectedBirdInfoSpecies = species;
+            HabpopMap.selectLayerBySpecies(vm.selectedBirdInfoSpecies);
         }
 
     }
