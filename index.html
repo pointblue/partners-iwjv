@@ -87,7 +87,7 @@
             <div id="panel" class="olControlEditingToolbar"></div>
             <div id="mapSidebarRightContainer">
                 <div id="buttonContainer">
-                    <button type="button" id="instr_button"  class="defaultButton" value="instr" ng-click="vm.selectedBirdInfoSpecies = null">Instructions</button>
+                    <button type="button" id="instr_button"  class="defaultButton" value="instr" ng-click="vm.showBirdInfo(null)">Instructions</button>
                     <button type="button" class="defaultButton" value="sasp" ng-click="vm.showBirdInfo('sasp')">Sage Sparrow</button>
                     <button type="button" class="defaultButton" value="sath" ng-click="vm.showBirdInfo('sath')">Sage Thrasher</button>
                     <button type="button" class="defaultButton" value="brsp" ng-click="vm.showBirdInfo('brsp')">Brewer's Sparrow</button>
@@ -277,7 +277,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="habitat in habitatSets.setData" ng-init="habitatIndex = $index" ng-class="{odd:($index+1)%2!==0}">
-                                <td>{{habitat.ASSOCIATION}}</td>
+                                <td><a href="uploads/pdf/{{habitat.LINK}}" target="_blank">{{habitat.ASSOCIATION}}</a></td>
                                 <!-- before columns -->
                                 <td ng-repeat="condition in habitat.setConditionsBefore" class="before">
                                     <input type="text" ng-model="vm.worksheetModels['before'][habitat.MASTERCODE + '.' + ($index + 1)]"
