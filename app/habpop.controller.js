@@ -7,9 +7,9 @@
         .controller('Habpop', Habpop)
     ;
 
-    Habpop.$inject = ['HabpopMap', 'StategonRequest', 'EstimatesRequest', '$log'];
+    Habpop.$inject = ['HabpopMap', 'StategonRequest', 'EstimatesRequest', 'conservationPlans', '$log'];
 
-    function Habpop(HabpopMap, StategonRequest, EstimatesRequest, $log){
+    function Habpop(HabpopMap, StategonRequest, EstimatesRequest, conservationPlans, $log){
         var vm = this;
         vm.$log = $log;
         vm.worksheetModels = {};
@@ -17,6 +17,7 @@
         vm.estimate = {'before':{},'after':{}};
         vm.showBirdInfo = showBirdInfo;
         vm.selectedBirdInfoSpecies = null;
+        vm.conservationPlans = conservationPlans;
 
         HabpopMap.setPointDroppedHandler(handlePointDropped);
 

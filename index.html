@@ -18,6 +18,7 @@
     <script src="app/estimates.factory.js"></script>
     <script src="app/habpopmap.factory.js"></script>
     <script src="app/conditionnames.factory.js"></script>
+    <script src="app/conservationplans.factory.js"></script>
     <script src="app/habpop.controller.js"></script>
 
     <script type="text/javascript">var __BASEHOST = window.location.host;</script>
@@ -109,6 +110,9 @@
                     <p>
                         This mapping tool was developed as a collaborative effort between IWJV, ABC, and Point Blue Conservation Science.
                     </p>
+                    <p>
+                        <a href="http://iwjv.org" target="_blank">More information on sage obligates and the IWJV</a>
+                    </p>
                 </div>
             </div>
             <!--
@@ -128,7 +132,7 @@
                     <br>
                     Total Habitat Acreage: {{vm.stategon.details.acres}}
                     <br>
-                    <a ng-href="{{vm.stategon.details.iwjv}}" target="_blank" class="iwjv">Conservation Plan for Bird Conservation Area - PDF</a><br>
+                    <a ng-href="{{vm.stategon.details.iwjv}}" target="_blank" class="iwjv">{{vm.conservationPlans[vm.stategon.details.iwjv]}} - PDF</a><br>
                     <a ng-href="{{vm.stategon.details.swap}}" target="_blank" class="swap">Regional Wildlife Action Plan - PDF</a><br>
                     <a ng-href="http://data.pointblue.org/partners/iwjv/uploads/img/{{vm.stategon.code}}.jpg" target="_blank">Region Map</a>
                 </div>
