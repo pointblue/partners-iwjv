@@ -266,6 +266,7 @@ th.before, td.before {
 .footer #prbo img{
     float: right;
     margin-top:0px;
+    height: 75px;
 }
 
 .footer #prbo{
@@ -281,7 +282,8 @@ th.before, td.before {
     font-family: futura,arial,helvetica,sans-serif;
     font-size: 1.0em;
     color:#C26D16;
-    float: left;
+    float: right;
+    margin-right: 25px;
 }
 .footer #abc img{
     width:180px;
