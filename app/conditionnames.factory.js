@@ -5,13 +5,14 @@
         .factory('conditionNames', conditionNames);
 
     function conditionNames(){
+        //The index corresponds to their database id
         return [
             "Poor",
             "Fair",
             "Good",
             "Grass",
-            "Woodland (>30%)",
             "Shrub",
+            "Woodland (>30%)",
             "Recently burned",
             "Dryland",
             "Irrigated",

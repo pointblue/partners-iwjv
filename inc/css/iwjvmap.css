@@ -88,7 +88,7 @@ th.before, td.before {
 
 .calculateButtonContainer {
     text-align: right;
-    padding: 25px;
+    padding: 25px 0;
 }
 
 .worksheetTable .referenceRow{
@@ -163,11 +163,12 @@ th.before, td.before {
 #birdInfoContainer button{
     float: left;
 }
-#buttonContainer button{
+.speciesListWrapper {
+    padding: 0 20px;
+}
+.speciesListWrapper button{
     display: block;
-    margin: 5px;
-    margin-left:auto;
-    margin-right:auto;
+    margin-bottom: 5px;
     width: 12em;
 }
 
@@ -178,7 +179,6 @@ th.before, td.before {
 /*Text for intro, bird info, and error messages*/
 #mapSidebarRightContainer {
     font-size: 1.0em;
-    height: 550px;
     margin-left: 755px;
 }
 
@@ -245,8 +245,6 @@ th.before, td.before {
     color: rgb(65,48,0);
     font-size: 0.9em;
     margin-left: 20px;
-    position: relative;
-    top: -18px;
 }
 
 #mapInstructionContainer{

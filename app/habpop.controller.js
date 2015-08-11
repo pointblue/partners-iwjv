@@ -18,6 +18,7 @@
         vm.showBirdInfo = showBirdInfo;
         vm.selectedBirdInfoSpecies = null;
         vm.conservationPlans = conservationPlans;
+        vm.clearAll = resetWorksheetModelsAndEstimate;
 
         HabpopMap.setPointDroppedHandler(handlePointDropped);
 
@@ -30,6 +31,11 @@
                 .then(loadStategon)
                 .then(resetWorksheetModels)
                 .then(resetEstimate);
+        }
+
+        function resetWorksheetModelsAndEstimate(){
+            resetWorksheetModels();
+            resetEstimate();
         }
 
         function resetWorksheetModels(){
