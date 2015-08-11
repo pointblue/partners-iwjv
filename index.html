@@ -131,7 +131,7 @@
                             </div>
                         </div>
                         <div id="photoCredit">
-                            Photo by
+                            <span ng-show="vm.selectedBirdInfoSpecies.length > 0">Photo by</span>
                             <span ng-show="vm.selectedBirdInfoSpecies === 'brsp'">Greg Lavaty</span>
                             <span ng-show="vm.selectedBirdInfoSpecies === 'grsp'">Chuck Carlson</span>
                             <span ng-show="vm.selectedBirdInfoSpecies === 'lbcu'">Bob Martinka</span>

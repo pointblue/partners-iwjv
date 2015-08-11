@@ -12,6 +12,7 @@
     function Habpop(HabpopMap, StategonRequest, EstimatesRequest, conservationPlans, $log){
         var vm = this;
         vm.$log = $log;
+        vm.stategon = undefined;
         vm.worksheetModels = {};
         vm.submitWorksheets = submitWorksheets;
         vm.estimate = {'before':{},'after':{}};
@@ -30,7 +31,16 @@
             StategonRequest.get(geom)
                 .then(loadStategon)
                 .then(resetWorksheetModels)
-                .then(resetEstimate);
+                .then(resetEstimate)
+                .then(checkForStategonLoadFail)
+            ;
+        }
+
+        function checkForStategonLoadFail(){
+            if(vm.stategon === null){
+                //explicitly set to null, so there was an error
+                alert("The area you've selected does not contain HABPOPS data. Please try a different area.");
+            }
         }
 
         function resetWorksheetModelsAndEstimate(){
@@ -47,8 +57,16 @@
         }
 
         function loadStategon(stategon){
-            $log.debug('loading stategon:', stategon);
-            vm.stategon = stategon;
+
+            if(stategon.code.length > 0){
+                $log.debug('loading stategon:', stategon);
+                vm.stategon = stategon;
+            } else {
+                $log.debug('statageon not loaded because it did not have a valid code');
+                vm.stategon = null;
+            }
+
+            return vm.stategon;
         }
 
         function submitWorksheets(){

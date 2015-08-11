@@ -45,8 +45,6 @@ h1, h2{
     float:left;
     position:relative;
     top:5px;
-    width: 750px;
-    height: 500px;
     border: 1px solid black;
     z-index:1;
 }
@@ -178,7 +176,7 @@ th.before, td.before {
 }
 /*Text for intro, bird info, and error messages*/
 #mapSidebarRightContainer {
-    font-size: 1.0em;
+    font-size: 14px;
     margin-left: 755px;
 }
 

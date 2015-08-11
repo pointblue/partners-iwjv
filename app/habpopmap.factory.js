@@ -423,7 +423,7 @@
                 title: "InterMountain West Joint Venture Exploration Tool",
                 renderTo: "gxmap",
                 //   stateId: "mappanel",
-                height: 500,
+                height: 550,
                 width: 750,
                 map: map,
                 center: [-12098270.216376, 4883288.4348961],
