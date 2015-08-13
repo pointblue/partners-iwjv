@@ -16,4 +16,5 @@
 Run `grunt watch` to have the build run every time a `.js` file is modified, added, or removed from the `app/` directory.
 
 ###Manually build the app
-Run `grunt build` to manually build the app.
+Run `grunt build` to manually build the app.  
+Usr `grunt build --verbose` to get more details as the build processes.

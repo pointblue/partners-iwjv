@@ -8,32 +8,32 @@ module.exports = function(grunt){
             },
             dist:{
                 src:[
-                    'inc/js/underscore.js',
-                    'inc/js/angular.js',
-                    'app/data.module.js',
-                    'app/layout.module.js',
-                    'app/webservice.module.js',
-                    'app/core.module.js',
+                    'lib/angular.js',
+                    'lib/underscore.js',
+                    'app/modules/habpops.data.js',
+                    'app/modules/habpops.view.js',
+                    'app/modules/habpops.webservice.js',
+                    'app/modules/habpops.core.js',
                     'app/constants.js',
-                    'app/habpops.config.js',
+                    'app/config.js',
                     'app/**/*.js'
                 ],
-                dest:'app.js'
+                dest:'dist/app.js'
             }
         },
         uglify:{
             options:{
                 sourceMap:true,
-                sourceMapIn:'app.js.map'    //the source map from the 'concat' task
+                sourceMapIn:'dist/app.js.map'    //the source map from the 'concat' task
             },
             dist:{
-                src:'app.js',
-                dest:'app.js'
+                src:'dist/app.js',
+                dest:'dist/app.js'
             }
         },
         watch: {
             scripts: {
-                files: ['app/*.js'],
+                files: ['app/**/*.js'],
                 tasks: ['build']
             }
         }
