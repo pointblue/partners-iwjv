@@ -7,7 +7,7 @@
  */
 (function(){
     angular
-        .module('app')
+        .module('habpops.layout')
         .factory('HabpopMap', HabpopMap)
     ;
 

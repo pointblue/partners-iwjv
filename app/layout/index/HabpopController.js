@@ -3,13 +3,13 @@
  */
 (function(){
     angular
-        .module('app')
-        .controller('Habpop', Habpop)
+        .module('habpops.layout')
+        .controller('HabpopController', HabpopController)
     ;
 
-    Habpop.$inject = ['HabpopMap', 'StategonRequest', 'EstimatesRequest', 'conservationPlans', '$log'];
+    HabpopController.$inject = ['HabpopMap', 'StategonRequest', 'EstimatesRequest', 'conservationPlans', '$log'];
 
-    function Habpop(HabpopMap, StategonRequest, EstimatesRequest, conservationPlans, $log){
+    function HabpopController(HabpopMap, StategonRequest, EstimatesRequest, conservationPlans, $log){
         var vm = this;
         vm.$log = $log;
         vm.stategon = undefined;
@@ -18,6 +18,7 @@
         vm.estimate = {'before':{},'after':{}};
         vm.showBirdInfo = showBirdInfo;
         vm.selectedBirdInfoSpecies = null;
+        vm.showSpecies = false;
         vm.conservationPlans = conservationPlans;
         vm.clearAll = resetWorksheetModelsAndEstimate;
 
@@ -27,7 +28,6 @@
 
         function handlePointDropped(geom){
             //reset the worksheet form
-            console.log('point dropped handler called from habpop controller');
             StategonRequest.get(geom)
                 .then(loadStategon)
                 .then(resetWorksheetModels)

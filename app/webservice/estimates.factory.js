@@ -1,6 +1,6 @@
 (function(){
     angular
-        .module('app')
+        .module('habpops.webservice')
         .factory('EstimatesRequest', EstimatesRequest);
 
     EstimatesRequest.$inject = ['$http', '$log', '$interpolate'];

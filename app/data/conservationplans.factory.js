@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('app')
+        .module('habpops.data')
         .factory('conservationPlans', conservationPlans);
 
     function conservationPlans() {

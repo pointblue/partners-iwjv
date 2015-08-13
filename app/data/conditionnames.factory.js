@@ -1,7 +1,7 @@
 (function(){
 
     angular
-        .module('app')
+        .module('habpops.data')
         .factory('conditionNames', conditionNames);
 
     function conditionNames(){

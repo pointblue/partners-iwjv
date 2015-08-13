@@ -1,6 +1,6 @@
 (function() {
     angular
-        .module('app')
+        .module('habpops.webservice')
         .factory('StategonRequest', StategonRequest)
     ;
     StategonRequest.$inject = ['$http', '$log', '$interpolate', '_', 'conditionNames'];

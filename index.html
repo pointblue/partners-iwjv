@@ -1,31 +1,16 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="habpops.core" ng-strict-di>
 <head>
     <title>Intermountain West Joint Venture</title>
     <link type="text/css" rel="stylesheet" href="inc/css/iwjvmap.css">
-    <script type="text/javascript">var __BASEHOST = window.location.host;</script>
     <script src="inc/js/ext-3.4.0/adapter/ext/ext-base.js"></script>
     <script src="inc/js/ext-3.4.0/ext-all.js"></script>
     <script src="inc/js/OpenLayers-2.11/OpenLayers.js"></script>
     <script src="inc/js/GeoExt/lib/GeoExt.js" ></script>
-    <script src="inc/js/jquery.js"></script>
-    <script src="inc/js/underscore.js"></script>
-    <script src="inc/js/angular.js"></script>
-    <script src="app/OpenLayers.module.js"></script>
-    <script src="app/underscore.module.js"></script>
-    <script src="app/app.module.js"></script>
-    <script src="app/app.config.js"></script>
-    <script src="app/app.run.js"></script>
-    <script src="app/stategon.factory.js"></script>
-    <script src="app/estimates.factory.js"></script>
-    <script src="app/habpopmap.factory.js"></script>
-    <script src="app/conditionnames.factory.js"></script>
-    <script src="app/conservationplans.factory.js"></script>
-    <script src="app/habpop.controller.js"></script>
-
+    <script src="app.js"></script>
 </head>
 <body>
-    <div id="iwjvContainer" ng-controller="Habpop as vm">
+    <div id="iwjvContainer" ng-controller="HabpopController as vm">
         <div id="siteTitleContainer">
             <h1>Inter-Mountain West Joint Venture Mapping Tool</h1>
             <a href="http://iwjv.org/" target="_blank"><img src="./uploads/img/IWJV_logo.png" /></a>
