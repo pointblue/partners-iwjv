@@ -24,11 +24,11 @@ module.exports = function(grunt){
         uglify:{
             options:{
                 sourceMap:true,
-                sourceMapIn:'dist/app.js.map'    //the source map from the 'concat' task
+                sourceMapIn:'app.js.map'    //the source map from the 'concat' task
             },
             dist:{
-                src:'dist/app.js',
-                dest:'dist/app.js'
+                src:'app.js',
+                dest:'app.js'
             }
         },
         watch: {
