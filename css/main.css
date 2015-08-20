@@ -34,10 +34,9 @@ h1, h2{
 }
 
 #subtitle h2{
-    padding: 0px;
+    padding: 0 0 0 80px;
     display:inline;
     color: #F3EDDA;
-    padding-left: 80px;
     font-size: 1.4em;
 }
 #gxmap {
@@ -126,7 +125,7 @@ th.before, td.before {
 
 #title {
     display: none;
-    top:0px;
+    top:0;
     position:absolute;
     width: 850px;
     height: auto;
@@ -196,23 +195,23 @@ th.before, td.before {
 }
 
 .birdInfoBackground-sasp {
-    background-image: url('../../uploads/img/saspInfo.jpg');
+    background-image: url('../uploads/img/saspInfo.jpg');
 }
 
 .birdInfoBackground-sath {
-    background-image: url('../../uploads/img/sathInfo.jpg');
+    background-image: url('../uploads/img/sathInfo.jpg');
 }
 
 .birdInfoBackground-grsp {
-    background-image: url('../../uploads/img/grspInfo.jpg');
+    background-image: url('../uploads/img/grspInfo.jpg');
 }
 
 .birdInfoBackground-brsp {
-    background-image: url('../../uploads/img/brspInfo.jpg');
+    background-image: url('../uploads/img/brspInfo.jpg');
 }
 
 .birdInfoBackground-lbcu {
-    background-image: url('../../uploads/img/lbcuInfo.jpg');
+    background-image: url('../uploads/img/lbcuInfo.jpg');
 }
 
 /*bird info element, total population*/

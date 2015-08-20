@@ -383,7 +383,7 @@
             ));
 
             vectorLayers.push(new OpenLayers.Layer.WMS(
-                "Sage Sparrow Range", geoserverUrl + "/geoserver/spatial2/wms",
+                "Sagebrush Sparrow Range", geoserverUrl + "/geoserver/spatial2/wms",
                 {
                     LAYERS: 'spatial2:sgsp_breeding_3857',
                     STYLES: '',
@@ -440,7 +440,7 @@
             if (spp === 'brsp') layerToTurnOn = "Brewer Sparrow Range";
             if (spp === 'grsp') layerToTurnOn = "Grasshopper Sparrow Range";
             if (spp === 'lbcu') layerToTurnOn = "Long-billed Curlew Range";
-            if (spp === 'sasp') layerToTurnOn = "Sage Sparrow Range";
+            if (spp === 'sasp') layerToTurnOn = "Sagebrush Sparrow Range";
             if (spp === 'sath') layerToTurnOn = "Sage Thrasher Range";
 
             var larray = map.getLayersByName(/\sRange/);   // all bird layers in map
