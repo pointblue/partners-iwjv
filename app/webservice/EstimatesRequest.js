@@ -6,7 +6,7 @@
     EstimatesRequest.$inject = ['$http', '$log', '$interpolate'];
 
     function EstimatesRequest($http, $log, $interpolate){
-        var estimatesApiUrl = 'http://data.prbo.org/api/v1/habpop/estimates/';
+        var estimatesApiUrl = 'http://50.0.115.215/api/v1/habpop/estimates/';
 
         return {
             'get':getEstimate

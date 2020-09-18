@@ -6,7 +6,7 @@
     StategonRequest.$inject = ['$http', '$log', '$interpolate', '_', 'conditionNames'];
 
     function StategonRequest($http, $log, $interpolate, _, conditionNames) {
-        var stategonApiUrl = 'http://data.prbo.org/api/v1/habpop/stategons/';
+        var stategonApiUrl = 'http://50.0.115.215/api/v1/habpop/stategons/';
 
         return {
             'get':getStategon
