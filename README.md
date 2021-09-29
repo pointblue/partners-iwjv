@@ -7,15 +7,13 @@ Clone to: `/WEB_ROOT/partners/iwjv/`
 
 ## Install the build environment
 
- 0. Install the [grunt command line tool](http://gruntjs.com/) on your development machine.
- 0. Bootstrap the project environment with `sudo npm install`.
+ 0. Bootstrap the project environment with `yarn install`.
  
- **Tip**  
- Runt the `grunt` command for a print out of available options (developer maintained message!).  
- This also lets you know if the app has been install correctly. Make sure you ran `sudo npm install`!
+ Run the `grunt` command for a print out of available options (developer maintained message!).  
+ This also lets you know if the app has been install correctly.
 
 ## Deploying the app in production
-`sudo grunt deploy`  
+`yarn run prod`  
 
 This concats all `.js` files and compresses them to the `dist/` folder.
 

@@ -1,55 +1,11 @@
-dev1:
-  host: 104.198.5.60
-  user: blue
+nonprod-php56:
+  user: deployer
   identity_file:
     public_key:  ~/.ssh/id_rsa.pub
     private_key: ~/.ssh/id_rsa
     password:
-  stage: dev
+  host: nonprod-php56 #must be configured in ~/.ssh/config file, should be the internal dns name for ec2 instance
+  stage: nonprod-aws
   deploy_path: /point_blue/deploy/partners-iwjv/
+  launch_url: https://data-test.pointblue.org/partners/iwjv/
   branch: dev
-  shared_dirs:
-    - node_modules
-    - dist
-
-demo1:
-  user: blue
-  identity_file:
-    public_key:  ~/.ssh/id_rsa.pub
-    private_key: ~/.ssh/id_rsa
-    password:
-  host: 104.199.123.92
-  stage: demo
-  deploy_path: /point_blue/deploy/partners-iwjv/
-  branch: master
-  shared_dirs:
-    - node_modules
-    - dist
-
-prod1:
-  user: blue
-  identity_file:
-    public_key:  ~/.ssh/id_rsa.pub
-    private_key: ~/.ssh/id_rsa
-    password:
-  host: data.pointblue.org
-  stage: prod
-  deploy_path: /point_blue/deploy/partners-iwjv/
-  branch: master
-  shared_dirs:
-    - node_modules
-    - dist
-
-
-
-php56:
-  user: ubuntu
-  pem_file: ~/.ssh/pb-aws-pemfile.pem
-  host: php56 #must be configured in ~/.ssh/config file, should be the internal dns name for ec2 instance
-  stage: aws
-  deploy_path: /point_blue/deploy/partners-iwjv
-  branch: master
-  shared_dirs:
-    - node_modules
-    - dist
-
