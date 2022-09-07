@@ -1,4 +1,8 @@
-# Intermountain West Joint Venture
+# Intermountain West Joint Venture  
+
+# Project Status  
+
+This app is currently in transition to becoming a static resource, and is not currently deployed. For more information, see JIRA stories PBI-1834 and PBI-1835.  
 
 ## Setup
 Clone to: `/WEB_ROOT/partners/iwjv/`
