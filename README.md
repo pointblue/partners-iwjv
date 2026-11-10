@@ -2,7 +2,11 @@
 
 # Project Status  
 
-This app is currently in transition to becoming a static resource, and is not currently deployed. For more information, see JIRA stories PBI-1834 and PBI-1835.  
+**DEPRECATED**
+
+This project has not been available on our server since Sep 7, 2022. It was removed because we couldn't afford security updates at that time, but the intention was to replaced the sites with static resource. At this point it's been down for over 4 years. I'm making the decision to archive this repo and move on.  
+
+@mmagana
 
 ## Setup
 Clone to: `/WEB_ROOT/partners/iwjv/`
